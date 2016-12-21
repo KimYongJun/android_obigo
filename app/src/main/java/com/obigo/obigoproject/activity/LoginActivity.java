@@ -35,6 +35,7 @@ import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
     private int a;
+    private int b;
     // 아이디
     @Bind(R.id.user_id)
     EditText idText;
