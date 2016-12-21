@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private int a;
     private int b;
     private int c;
+    private int d;
     // 아이디
     @Bind(R.id.user_id)
     EditText idText;
