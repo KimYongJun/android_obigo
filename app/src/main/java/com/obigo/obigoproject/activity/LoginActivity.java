@@ -1,6 +1,7 @@
 package com.obigo.obigoproject.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -55,8 +56,13 @@ public class LoginActivity extends AppCompatActivity {
 
     // 유저 요청
     private UserPresenter userPresenter;
+
     // registrationId 등록 결과
     private boolean registrationIdResult;
+
+    //로그인 성공 유무
+    private String resultFlag="false";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,21 +73,40 @@ public class LoginActivity extends AppCompatActivity {
         registrationIdResult = false;
         userPresenter = new UserPresenter(this, ConstantsUtil.TEST_USER_ID);
 
-        autoLoginSettings();
+       autoLoginSettings();
     }
+
 
 
     //자동 로그인(id,password 저장 )
     public void autoLoginSettings(){
-        autoSetting = getSharedPreferences("autoSetting",0);
+        autoSetting = getSharedPreferences("autoSetting", Context.MODE_PRIVATE);
+
         editor = autoSetting.edit();
 
         if(autoSetting.getBoolean("Auto_Login_enabled", false)){
             idText.setText(autoSetting.getString("ID", ""));
             passwordText.setText(autoSetting.getString("PW", ""));
             _auto_login_check.setChecked(true);
-        }
 
+            final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+                    R.style.AppTheme_Dark_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Logging in to your account...");
+            progressDialog.show();
+
+            new android.os.Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+
+                          // onLoginSuccess();
+
+                            progressDialog.dismiss();
+                        }
+                    }, 2000);
+
+
+        }
         _auto_login_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -103,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
 
@@ -117,7 +143,12 @@ public class LoginActivity extends AppCompatActivity {
 //            return;
 //        }
 
-        loginButton.setEnabled(false);
+       // loginButton.setEnabled(false);
+
+        //userId, userPassword 서버에 조회 요청
+        String userId = idText.getText().toString();
+        String userPassword = passwordText.getText().toString();
+        userPresenter.login(userId,userPassword);
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
@@ -125,8 +156,6 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Logging in to your account...");
         progressDialog.show();
 
-        String userId = idText.getText().toString();
-        String userPassword = passwordText.getText().toString();
 
         /**
          * 로그인 인증을 위한 로직, Server로 데이터를 보냄
@@ -136,7 +165,13 @@ public class LoginActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
 
-                        onLoginSuccess();
+                        loginResult();
+                        if (resultFlag =="Success Login"){
+                            onLoginSuccess();
+                        }else{
+                            Toast.makeText(getApplicationContext(), resultFlag, Toast.LENGTH_SHORT).show();
+                        }
+
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }
@@ -155,8 +190,10 @@ public class LoginActivity extends AppCompatActivity {
         String registrationId = FirebaseInstanceId.getInstance().getToken();
         userPresenter.insertRegistrationId(new RegistrationIdVO(ConstantsUtil.TEST_USER_ID, registrationId));
 
-        loginButton.setEnabled(true);
+       // loginButton.setEnabled(true);
         finish();
+
+
 
         // intent로 데이터를 보내줌
         Intent intent = new Intent(this, CarListActivity.class);
@@ -192,4 +229,19 @@ public class LoginActivity extends AppCompatActivity {
 
         return valid;
     }
+
+    public void dispatchLoginResult(String resultFlag){
+        this.resultFlag =resultFlag;
+    }
+
+    public void loginResult() {
+
+        if (resultFlag == "false") {
+            resultFlag = "Try Again";
+        } else {
+            resultFlag = "Success Login";
+        }
+
+    }
+
 }

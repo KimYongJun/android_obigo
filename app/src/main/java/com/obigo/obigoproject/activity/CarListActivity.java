@@ -48,10 +48,12 @@ public class CarListActivity extends MenuActivity {
     // 차량 이름 리스트
     private String[] carNameList;
 
+
     // Retrofit 차량 요청
     private UserVehiclePresenter userVehiclePresenter;
     // 차량 리스트
     private List<UserVehicleVO> userVehicleList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class CarListActivity extends MenuActivity {
         // 차량 요청 객체 생성
         userVehiclePresenter = new UserVehiclePresenter(this, ConstantsUtil.TEST_USER_ID);
         userVehiclePresenter.getUserVehicleList();
+
 
         initAdapter();
     }

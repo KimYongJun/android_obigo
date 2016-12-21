@@ -1,6 +1,7 @@
 package com.obigo.obigoproject.activity;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -58,6 +59,9 @@ public class RequestActivity extends MenuActivity {
     private List<String> modelNameList;
     private List<String> modelCodeList;
 
+    SharedPreferences autoSetting;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("REQUEST");
@@ -104,6 +108,7 @@ public class RequestActivity extends MenuActivity {
         color.setText("");
         location.setText("");
         vin.setText("");
+
     }
 
     //UserRequest 요청 버튼
@@ -153,4 +158,6 @@ public class RequestActivity extends MenuActivity {
     public void dispatchRequestInfo(String resultFlag) {
         this.resultFlag = resultFlag;
     }
+
+
 }

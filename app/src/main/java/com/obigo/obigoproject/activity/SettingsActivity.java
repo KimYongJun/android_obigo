@@ -14,9 +14,12 @@ import android.preference.RingtonePreference;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.preference.AppCompatPreferenceActivity;
+
+import butterknife.Bind;
 
 /**
  * Created by O BI HE ROCK on 2016-12-06
@@ -31,6 +34,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
      */
+
+    @Bind(R.id.logoutBtn)
+    Button mButtonLogout;
+
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
@@ -143,5 +150,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public boolean onIsMultiPane() {
         return isXLargeTablet(this);
     }
+
 
 }

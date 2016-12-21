@@ -9,8 +9,10 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.obigo.obigoproject.R;
+import com.obigo.obigoproject.activity.LoginActivity;
 import com.obigo.obigoproject.presenter.UserPresenter;
 import com.obigo.obigoproject.util.ConstantsUtil;
+import com.obigo.obigoproject.util.SharedPreferenceLogout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,8 +32,12 @@ public class LogoutButtonPreference extends android.preference.Preference {
     private Context mContext;
     @Bind(R.id.logoutBtn)
     Button mButtonLogout;
+
     UserPresenter userPresenter;
     String registrationId = FirebaseInstanceId.getInstance().getToken();
+    SharedPreferenceLogout sharedPreferenceLogout = new SharedPreferenceLogout(this);
+
+    LoginActivity loginActivity;
 
 
     // constructor
@@ -68,6 +74,9 @@ public class LogoutButtonPreference extends android.preference.Preference {
         //현재는 registrationid를 지우는것까지 완성 추후에 로그인페이지로 이동해야함
         //StartActivity를 사용할수 없기 때문에 대체할것을 찾아야함.
         userPresenter.deleteRegistrationId(registrationId);
+        sharedPreferenceLogout.logoutInfo();
+
+
         Toast.makeText(mContext, "you click Logout", Toast.LENGTH_SHORT).show();
     }
 

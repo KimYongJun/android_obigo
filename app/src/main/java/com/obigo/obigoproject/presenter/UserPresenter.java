@@ -28,12 +28,11 @@ public class UserPresenter {
     private LogoutButtonPreference logoutButtonPreference;
     private String userId;
     private UserVO userVO;
-
-
+    private String resultFlag;
 
     public UserPresenter(LoginActivity loginActivity, String userId) {
         this.loginActivity = loginActivity;
-        this.userId =userId;
+        this.userId = userId;
         this.userService = ServiceManager.getInstance().getUserService();
     }
 
@@ -48,6 +47,29 @@ public class UserPresenter {
         this.logoutButtonPreference =logoutButtonPreference;
     }
 
+    public void login(String userId,String password){
+        System.out.println("여기요1");
+        Call<String> call = userService.login(userId,password);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("여기요2");
+                    resultFlag = response.body();
+                    loginActivity.dispatchLoginResult(resultFlag);
+                    Log.i("login success : ", resultFlag);
+                }else {
+                    Log.i("error : ", response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.i("에러 : ", t.getMessage());
+            }
+        });
+
+    }
 
     //서버 Registration 정보 넘겨주기 (서버에 registrationId 등록 요청)
     public void insertRegistrationId(RegistrationIdVO registrationIdVO) {
@@ -78,6 +100,7 @@ public class UserPresenter {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     Log.i("succes : ", response.body().toString());
+
                 }
             }
 
