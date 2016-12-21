@@ -73,6 +73,6 @@ public class CarDetailActivity extends AppCompatActivity {
         locationTextView.setText(userVehicleVO.getLocation());
         mileageTextView.setText(userVehicleVO.getMileage());
         activeDtcCountTextView.setText(Integer.toString(userVehicleVO.getActiveDtcCount()));
-        System.out.println("하하하2");
+        System.out.println("하하하3");
     }
 }
