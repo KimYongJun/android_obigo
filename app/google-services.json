@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "310659812258",
+    "firebase_url": "https://project-3831a.firebaseio.com",
+    "project_id": "project-3831a",
+    "storage_bucket": "project-3831a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310659812258:android:690a39c1f0bb2bac",
+        "android_client_info": {
+          "package_name": "com.obigo.obigoproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310659812258-8hqeek1rksg39lf2ciuq5m233jp0l5i8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7GSwP57dhOVpUzZWTPPdFy_KTcLcjPho"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

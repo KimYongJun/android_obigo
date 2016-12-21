@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Created by O BI HE ROCK on 2016-12-06
+    김용준, 최현욱
+    request page @+id naming 변경
+    model_code, model_color, location, vin
+
+    reset, register button 활성화해야함.
+-->
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/car_request"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="1"
+    tools:context="com.obigo.obigoproject.activity.RequestActivity">
+
+    <!--     <com.gregacucnik.EditTextView
+             android:id="@+id/model_code"
+             android:layout_width="match_parent"
+             android:layout_height="55dp"
+             app:ettIcon="@drawable/request_car_black"
+             app:ettIconEmpty="@drawable/request_car_gray"
+             app:ettIconInEditMode="@drawable/request_car_blue"
+             app:ettMarginTopBottom="16dp"
+             app:ettEmptyTexStyle="normal"
+             app:ettShowHint="true"
+             app:ettMaxLines="2"
+             app:ettEmptyText="Model Name&#8230;"
+             android:layout_weight="0.13"
+             android:layout_marginTop="60dp"/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginLeft="40dp"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Model Name"/>
+
+        <Spinner
+            android:id="@+id/model_code"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content">
+
+        </Spinner>
+    </LinearLayout>
+
+
+    <com.gregacucnik.EditTextView
+        android:id="@+id/model_color"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        app:ettEmptyTexStyle="normal"
+        app:ettEmptyText="Model Color&#8230;"
+        app:ettIcon="@drawable/request_color_black"
+        app:ettIconEmpty="@drawable/request_color_gray"
+        app:ettIconInEditMode="@drawable/request_color_blue"
+        app:ettMaxLines="2"
+        app:ettShowHint="true"/>
+
+    <com.gregacucnik.EditTextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        android:inputType="textCapSentences|textMultiLine"
+        app:ettEmptyTexStyle="normal"
+        app:ettEmptyText="Location&#8230;"
+        app:ettIcon="@drawable/request_location_black"
+        app:ettIconEmpty="@drawable/request_location_gray"
+        app:ettIconInEditMode="@drawable/request_location_blue"
+        app:ettMaxLines="2"
+        app:ettShowHint="true"/>
+
+    <com.gregacucnik.EditTextView
+        android:id="@+id/vin"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        android:inputType="textCapSentences|textMultiLine"
+        app:ettEmptyTexStyle="normal"
+        app:ettEmptyText="VIN&#8230;"
+        app:ettIcon="@drawable/request_vin_black"
+        app:ettIconEmpty="@drawable/request_vin_gray"
+        app:ettIconInEditMode="@drawable/request_vin_blue"
+        app:ettMaxLines="2"
+        app:ettShowHint="true"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/resetBtn"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:text="reset"
+            />
+
+        <Button
+            android:id="@+id/sendBtn"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

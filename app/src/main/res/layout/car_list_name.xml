@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Created by O BI HE ROCK on 2016-12-01
+    김용준, 최현욱
+    carlist_name page
+-->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:id="@+id/message_text"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_gravity="top|left"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="350dp"
+        android:textColor="#808080"/>
+
+</FrameLayout>

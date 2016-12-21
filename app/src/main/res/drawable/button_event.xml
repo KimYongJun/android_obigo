@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!--Settings page에서 Logout,UserInfo 버튼을 누렀을때 이벤트 효과를 주기위한 xml-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+          android:drawable="@drawable/button_cyan"/>
+    <item android:drawable="@drawable/button_blue"/>
+</selector>

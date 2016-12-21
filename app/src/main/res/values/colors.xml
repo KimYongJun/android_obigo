@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FFA9B0</color>
+
+    <color name="primary">#030303</color>
+    <color name="primary_dark">#000000</color>
+    <color name="primary_darker">#8b8787</color>
+    <color name="accent">#FFFFFF</color>
+
+    <color name="black">#000000</color>
+    <color name="jet">#222222</color>
+    <color name="oil">#333333</color>
+    <color name="monsoon">#777777</color>
+    <color name="jumbo">#888888</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#AAAAAA</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="material_white">#f9f9f9</color>
+
+    <!-- Message List Color -->
+    <color name="message_background">#f7f7f7</color>
+    <color name="message_click">#ff2570ba</color>
+
+    <!-- UserInfo Dialog-->
+    <color name="window_background">#00000000</color>
+    <color name="black_de">#DE000000</color>
+    <color name="card_shadow">#10000000</color>
+    <color name="card_background">#ffffff</color>
+
+</resources>

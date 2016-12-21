@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Created by O BI HE ROCK on 2016-12-01
+    김용준, 최현욱
+    carlist page
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fafafa">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginBottom="88dp"
+            android:layout_marginTop="50dp">
+
+            <ImageView
+                android:id="@+id/current_icon_image"
+                android:layout_width="300dp"
+                android:layout_height="350dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="78dp"
+                android:layout_marginTop="30dp"/>
+
+            <ImageView
+                android:id="@+id/next_icon_image"
+                android:layout_width="300dp"
+                android:layout_height="350dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="78dp"
+                android:layout_marginTop="30dp" />
+
+        </FrameLayout>
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="26dp"
+            android:layout_marginTop="168dp"
+            android:paddingBottom="20dp"
+            android:paddingTop="30dp"
+            app:fillColor="#2CA5E0"
+            app:pageColor="#ffffff"
+            app:radius="6dp"
+            app:strokeColor="#2CA5E0"
+            app:strokeWidth="2dp" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/car_list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Created by O BI HE ROCK on 2016-12-01
+    김용준, 최현욱
+    우측 하단 Menu Button
+    추후 모든 page에 include를 사용하여 적용할 예정
+ -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.obigo.menu.BoomMenuButton
+        android:id="@+id/bottom_boom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        app:boom_inActionBar="false"
+        />
+
+</FrameLayout>
