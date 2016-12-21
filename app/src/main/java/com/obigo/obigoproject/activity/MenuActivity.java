@@ -2,6 +2,7 @@ package com.obigo.obigoproject.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,9 +11,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.obigo.menu.BoomMenuButton;
 import com.obigo.menu.Types.BoomType;
 import com.obigo.menu.Types.ButtonType;
@@ -20,6 +25,8 @@ import com.obigo.menu.Types.DimType;
 import com.obigo.menu.Types.PlaceType;
 import com.obigo.menu.Util;
 import com.obigo.obigoproject.R;
+import com.obigo.obigoproject.presenter.UserPresenter;
+import com.obigo.obigoproject.util.ConstantsUtil;
 
 import butterknife.ButterKnife;
 
@@ -41,6 +48,13 @@ public class MenuActivity extends AppCompatActivity implements
     private View menuActionBarView;
     private View mBottomView;
     private boolean isInit = false;
+
+    //Logout
+    UserPresenter userPresenter;
+    private Menu logout;
+    String registrationId = FirebaseInstanceId.getInstance().getToken();
+    SharedPreferences autoSetting;
+    SharedPreferences.Editor editor;
 
     // Actionbar title
     private String title;
@@ -78,6 +92,11 @@ public class MenuActivity extends AppCompatActivity implements
 
         boomMenuButton = ButterKnife.findById(mBottomView, R.id.bottom_boom);
         boomInfo = ButterKnife.findById(menuActionBarView, R.id.info);
+
+        //로그아웃버튼
+        logout = (Menu) findViewById(R.id.logoutBtn);
+
+        userPresenter = new UserPresenter(this,ConstantsUtil.TEST_USER_ID);
     }
 
     @Override
@@ -213,5 +232,34 @@ public class MenuActivity extends AppCompatActivity implements
             boomInfo.dismiss();
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.logoutBtn){
+            Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+            userPresenter.deleteRegistrationId(registrationId);
+
+            autoSetting = getSharedPreferences("autoSetting", 0);
+            editor = autoSetting.edit();
+
+            editor.remove("autoSetting");
+            editor.clear();
+            editor.commit();
+
+            startActivity(new Intent(this, LoginActivity.class));
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
 
 }

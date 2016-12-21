@@ -3,7 +3,7 @@ package com.obigo.obigoproject.presenter;
 import android.util.Log;
 
 import com.obigo.obigoproject.activity.LoginActivity;
-import com.obigo.obigoproject.preference.LogoutButtonPreference;
+import com.obigo.obigoproject.activity.MenuActivity;
 import com.obigo.obigoproject.preference.UserInfoButtonPreference;
 import com.obigo.obigoproject.service.ServiceManager;
 import com.obigo.obigoproject.service.UserService;
@@ -26,6 +26,7 @@ public class UserPresenter {
     private LoginActivity loginActivity;
     private UserInfoButtonPreference userInfoButtonPreference;
     private LogoutButtonPreference logoutButtonPreference;
+    private MenuActivity menuActivity;
     private String userId;
     private UserVO userVO;
     private String resultFlag;
@@ -41,10 +42,10 @@ public class UserPresenter {
         this.userId = userId;
         this.userService = ServiceManager.getInstance().getUserService();
     }
-    public UserPresenter(LogoutButtonPreference logoutButtonPreference,String userId){
+    public UserPresenter(MenuActivity menuActivity, String userId){
         this.userId = userId;
         this.userService = ServiceManager.getInstance().getUserService();
-        this.logoutButtonPreference =logoutButtonPreference;
+        this.menuActivity = menuActivity;
     }
 
     public void login(String userId,String password){

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.gregacucnik.EditTextView;
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.UserRequestPresenter;
+import com.obigo.obigoproject.util.ConstantsUtil;
 import com.obigo.obigoproject.vo.UserRequestVO;
 
 import java.util.List;
@@ -120,7 +121,7 @@ public class RequestActivity extends MenuActivity {
                         " , " + "location : " + location.getText().toString() + " , " + "vin : " +
                         vin.getText().toString(), Toast.LENGTH_SHORT).show();
 
-        userRequestPresenter.insertUserRequest(new UserRequestVO("ssung", modelCodeList.get(modelHoldNumber), color.getText().toString(),
+        userRequestPresenter.insertUserRequest(new UserRequestVO(ConstantsUtil.TEST_USER_ID, modelCodeList.get(modelHoldNumber), color.getText().toString(),
                 location.getText().toString(), vin.getText().toString()));
 
         //로딩화면 보여주기

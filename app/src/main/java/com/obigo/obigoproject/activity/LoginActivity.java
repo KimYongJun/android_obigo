@@ -1,7 +1,6 @@
 package com.obigo.obigoproject.activity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -80,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //자동 로그인(id,password 저장 )
     public void autoLoginSettings(){
-        autoSetting = getSharedPreferences("autoSetting", Context.MODE_PRIVATE);
+        autoSetting = getSharedPreferences("autoSetting",0);
 
         editor = autoSetting.edit();
 
@@ -99,12 +98,11 @@ public class LoginActivity extends AppCompatActivity {
                     new Runnable() {
                         public void run() {
 
-                          // onLoginSuccess();
+                           onLoginSuccess();
 
                             progressDialog.dismiss();
                         }
                     }, 2000);
-
 
         }
         _auto_login_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -120,9 +118,6 @@ public class LoginActivity extends AppCompatActivity {
                     editor.commit();
                 }else{
 
-					/*editor.remove("ID");
-					editor.remove("PW");
-					editor.remove("Auto_Login_enabled");*/
                     editor.clear();
                     editor.commit();
                 }
@@ -190,10 +185,8 @@ public class LoginActivity extends AppCompatActivity {
         String registrationId = FirebaseInstanceId.getInstance().getToken();
         userPresenter.insertRegistrationId(new RegistrationIdVO(ConstantsUtil.TEST_USER_ID, registrationId));
 
-       // loginButton.setEnabled(true);
+        // loginButton.setEnabled(true);
         finish();
-
-
 
         // intent로 데이터를 보내줌
         Intent intent = new Intent(this, CarListActivity.class);
@@ -234,6 +227,7 @@ public class LoginActivity extends AppCompatActivity {
         this.resultFlag =resultFlag;
     }
 
+
     public void loginResult() {
 
         if (resultFlag == "false") {
@@ -241,7 +235,6 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             resultFlag = "Success Login";
         }
-
     }
 
 }
