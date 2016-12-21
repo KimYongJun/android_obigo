@@ -4,11 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android_obigo_project.iml" filepath="$PROJECT_DIR$/android_obigo_project.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/menu/menu.iml" filepath="$PROJECT_DIR$/menu/menu.iml" />
       <module fileurl="file://$PROJECT_DIR$/menu/menu.iml" filepath="$PROJECT_DIR$/menu/menu.iml" />
       <module fileurl="file://$PROJECT_DIR$/obigo_android-master.iml" filepath="$PROJECT_DIR$/obigo_android-master.iml" />
-      <module fileurl="file://$PROJECT_DIR$/requestview/requestview.iml" filepath="$PROJECT_DIR$/requestview/requestview.iml" />
       <module fileurl="file://$PROJECT_DIR$/requestview/requestview.iml" filepath="$PROJECT_DIR$/requestview/requestview.iml" />
     </modules>
   </component>
