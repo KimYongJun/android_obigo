@@ -23,7 +23,7 @@ public interface UserService {
     Call<String> insertRegistrationId(@Body RegistrationIdVO registrationIdVO);
 
     //로그인
-    @POST("login/")
+    @GET("login/")
     Call<String>login(@Query("userid") String userId,@Query("password") String password);
 
     //유저정보 호출

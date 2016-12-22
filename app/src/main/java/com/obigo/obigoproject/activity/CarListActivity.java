@@ -21,6 +21,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
+
+
 /**
  * Created by O BI HE ROCK on 2016-11-28
  * 김용준, 최현욱
@@ -57,14 +60,14 @@ public class CarListActivity extends MenuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("CAR LIST");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_list);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setTitle("CAR LIST");
         ButterKnife.bind(this);
 
         // 차량 요청 객체 생성
-        userVehiclePresenter = new UserVehiclePresenter(this, ConstantsUtil.TEST_USER_ID);
+        userVehiclePresenter = new UserVehiclePresenter(this, USER_ID);
         userVehiclePresenter.getUserVehicleList();
 
 

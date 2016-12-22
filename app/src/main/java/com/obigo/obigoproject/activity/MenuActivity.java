@@ -26,9 +26,10 @@ import com.obigo.menu.Types.PlaceType;
 import com.obigo.menu.Util;
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.UserPresenter;
-import com.obigo.obigoproject.util.ConstantsUtil;
 
 import butterknife.ButterKnife;
+
+import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
 
 /**
  * Created by O BI HE ROCK on 2016-11-29
@@ -96,7 +97,7 @@ public class MenuActivity extends AppCompatActivity implements
         //로그아웃버튼
         logout = (Menu) findViewById(R.id.logoutBtn);
 
-        userPresenter = new UserPresenter(this,ConstantsUtil.TEST_USER_ID);
+        userPresenter = new UserPresenter(this, USER_ID);
     }
 
     @Override
@@ -233,33 +234,35 @@ public class MenuActivity extends AppCompatActivity implements
         }
     }
 
+    //옵션 메뉴 생성 (Logout 버튼)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    //옵션 메뉴 선택 (Logout 버튼 클릭)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.logoutBtn){
-            Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Logout..", Toast.LENGTH_SHORT).show();
             userPresenter.deleteRegistrationId(registrationId);
 
             autoSetting = getSharedPreferences("autoSetting", 0);
             editor = autoSetting.edit();
 
+            //저장되어 있는 Shared Preference 삭제
             editor.remove("autoSetting");
             editor.clear();
             editor.commit();
 
             startActivity(new Intent(this, LoginActivity.class));
-
         }
         return super.onOptionsItemSelected(item);
     }
 
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
 
 }

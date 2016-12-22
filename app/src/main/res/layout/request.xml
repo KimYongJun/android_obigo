@@ -50,7 +50,7 @@
             android:text="Model Name"/>
 
         <Spinner
-            android:id="@+id/model_code"
+            android:id="@+id/model_name"
             android:layout_width="200dp"
             android:layout_height="wrap_content">
 

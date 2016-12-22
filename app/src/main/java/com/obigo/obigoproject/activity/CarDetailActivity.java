@@ -54,6 +54,7 @@ public class CarDetailActivity extends AppCompatActivity {
         // 차량 데이터를 CarListActivity에서 전송 받음
         Intent intent = getIntent();
         userVehicleVO = (UserVehicleVO) intent.getSerializableExtra("carDetailInfo");
+
         // 차량 데이터 초기화
         initVariable();
     }
@@ -73,6 +74,5 @@ public class CarDetailActivity extends AppCompatActivity {
         locationTextView.setText(userVehicleVO.getLocation());
         mileageTextView.setText(userVehicleVO.getMileage());
         activeDtcCountTextView.setText(Integer.toString(userVehicleVO.getActiveDtcCount()));
-        System.out.println("하하하19");
     }
 }

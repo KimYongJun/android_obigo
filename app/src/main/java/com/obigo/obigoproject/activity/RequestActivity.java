@@ -1,7 +1,6 @@
 package com.obigo.obigoproject.activity;
 
 import android.app.ProgressDialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 import com.gregacucnik.EditTextView;
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.UserRequestPresenter;
-import com.obigo.obigoproject.util.ConstantsUtil;
 import com.obigo.obigoproject.vo.UserRequestVO;
 
 import java.util.List;
@@ -23,6 +21,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.obigo.obigoproject.R.layout.request;
+import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
+
 
 /**
  * Created by O BI HE ROCK on 2016-12-06
@@ -37,13 +37,17 @@ import static com.obigo.obigoproject.R.layout.request;
 
 public class RequestActivity extends MenuActivity {
 
+    //모델 명,색상,지역명,VIN
+    @Bind(R.id.model_name)
+    Spinner modelName;
     @Bind(R.id.model_color)
-    EditTextView color;
+    EditTextView modelColor;
     @Bind(R.id.location)
     EditTextView location;
     @Bind(R.id.vin)
     EditTextView vin;
 
+    //reset버튼, Send버튼
     @Bind(R.id.resetBtn)
     Button reset;
     @Bind(R.id.sendBtn)
@@ -52,16 +56,12 @@ public class RequestActivity extends MenuActivity {
     private UserRequestPresenter userRequestPresenter;
     private String resultFlag = "false";
 
-
-    //스피너 (모델 이름 리스트 선택)
-    private Spinner modelName;
+    //모델 이름 리스트 번호
     int modelHoldNumber;
 
     private List<String> modelNameList;
     private List<String> modelCodeList;
 
-    SharedPreferences autoSetting;
-    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +79,7 @@ public class RequestActivity extends MenuActivity {
 
         ButterKnife.bind(this);
 
-        modelName = (Spinner) findViewById(R.id.model_code);
         userRequestPresenter = new UserRequestPresenter(this, modelName);
-
-
         initModelCode();
     }
 
@@ -106,7 +103,7 @@ public class RequestActivity extends MenuActivity {
     //리셋 버튼
     @OnClick(R.id.resetBtn)
     public void resetData() {
-        color.setText("");
+        modelColor.setText("");
         location.setText("");
         vin.setText("");
 
@@ -117,11 +114,11 @@ public class RequestActivity extends MenuActivity {
     public void requestUserCar() {
         //추후에 Toast 메시지 지우기 (test용)
         Toast.makeText(getApplicationContext(),
-                "code : " + modelNameList.get(modelHoldNumber) + " , " + "color : " + color.getText().toString() +
+                "code : " + modelNameList.get(modelHoldNumber) + " , " + "color : " + modelColor.getText().toString() +
                         " , " + "location : " + location.getText().toString() + " , " + "vin : " +
                         vin.getText().toString(), Toast.LENGTH_SHORT).show();
 
-        userRequestPresenter.insertUserRequest(new UserRequestVO(ConstantsUtil.TEST_USER_ID, modelCodeList.get(modelHoldNumber), color.getText().toString(),
+        userRequestPresenter.insertUserRequest(new UserRequestVO(USER_ID, modelCodeList.get(modelHoldNumber), modelColor.getText().toString(),
                 location.getText().toString(), vin.getText().toString()));
 
         //로딩화면 보여주기
@@ -159,6 +156,5 @@ public class RequestActivity extends MenuActivity {
     public void dispatchRequestInfo(String resultFlag) {
         this.resultFlag = resultFlag;
     }
-
 
 }
