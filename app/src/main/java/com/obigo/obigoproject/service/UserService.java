@@ -22,6 +22,10 @@ public interface UserService {
     @POST("registrationid/")
     Call<String> insertRegistrationId(@Body RegistrationIdVO registrationIdVO);
 
+    //Bundle Version Check
+    @GET("bundleversioncheck/")
+    Call<String> bundleVesionCheck(@Query("bundleVersion")String bundleVersion);
+
     //로그인
     @GET("login/")
     Call<String>login(@Query("userid") String userId,@Query("password") String password);

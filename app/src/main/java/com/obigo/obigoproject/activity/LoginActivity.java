@@ -61,8 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean registrationIdResult;
 
     //로그인 성공 실패 결과
-    private String resultFlag;
-
+    private String loginResultFlag;
 
 
     @Override
@@ -71,9 +70,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         ButterKnife.bind(this);
 
-
         registrationIdResult = false;
-        resultFlag = "false";
+        loginResultFlag = "false";
 
         userPresenter = new UserPresenter(this);
 
@@ -149,12 +147,12 @@ public class LoginActivity extends AppCompatActivity {
         String userPassword = passwordText.getText().toString();
         userPresenter.login(userId, userPassword);
 
+
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Logging in to your account...");
         progressDialog.show();
-
 
         /**
          * 로그인 인증을 위한 로직, Server로 데이터를 보냄
@@ -164,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
 
-                        if (resultFlag == "true") {
+                        if (loginResultFlag == "true") {
                             onLoginSuccess();
                         } else {
                             onLoginFailed();
@@ -191,6 +189,7 @@ public class LoginActivity extends AppCompatActivity {
         // 사용자 registrationId 등록
         String registrationId = FirebaseInstanceId.getInstance().getToken();
         userPresenter.insertRegistrationId(new RegistrationIdVO(USER_ID, registrationId));
+
 
         loginButton.setEnabled(true);
         finish();//뒤로가기 했을때 로그인 페이지는 보여주지않음
@@ -230,8 +229,9 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
-    public void dispatchLoginResult(String resultFlag) {
-        this.resultFlag = resultFlag;
+
+    public void dispatchLoginResult(String loginResultFlag) {
+        this.loginResultFlag = loginResultFlag;
     }
 
 
