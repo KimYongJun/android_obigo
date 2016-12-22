@@ -3,7 +3,7 @@ package com.obigo.obigoproject.presenter;
 import android.util.Log;
 
 import com.obigo.obigoproject.activity.LoginActivity;
-import com.obigo.obigoproject.preference.LogoutButtonPreference;
+import com.obigo.obigoproject.activity.MenuActivity;
 import com.obigo.obigoproject.preference.UserInfoButtonPreference;
 import com.obigo.obigoproject.service.ServiceManager;
 import com.obigo.obigoproject.service.UserService;
@@ -24,15 +24,18 @@ public class UserPresenter {
     private UserService userService;
 
     private LoginActivity loginActivity;
+    private MenuActivity menuActivity;
     private UserInfoButtonPreference userInfoButtonPreference;
-    private LogoutButtonPreference logoutButtonPreference;
+
+    //유저 정보
     private String userId;
     private UserVO userVO;
+
+    //서버 요청 성공 유무
     private String resultFlag;
 
-    public UserPresenter(LoginActivity loginActivity, String userId) {
+    public UserPresenter(LoginActivity loginActivity) {
         this.loginActivity = loginActivity;
-        this.userId = userId;
         this.userService = ServiceManager.getInstance().getUserService();
     }
 
@@ -41,20 +44,19 @@ public class UserPresenter {
         this.userId = userId;
         this.userService = ServiceManager.getInstance().getUserService();
     }
-    public UserPresenter(LogoutButtonPreference logoutButtonPreference,String userId){
+    public UserPresenter(MenuActivity menuActivity, String userId){
         this.userId = userId;
         this.userService = ServiceManager.getInstance().getUserService();
-        this.logoutButtonPreference =logoutButtonPreference;
+        this.menuActivity = menuActivity;
     }
 
+    //로그인 (서버에 userId,password 조회)
     public void login(String userId,String password){
-        System.out.println("여기요1");
         Call<String> call = userService.login(userId,password);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    System.out.println("여기요2");
                     resultFlag = response.body();
                     loginActivity.dispatchLoginResult(resultFlag);
                     Log.i("login success : ", resultFlag);
@@ -86,7 +88,7 @@ public class UserPresenter {
             // 서버와 접속 실패
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.i("에러 : ", t.getMessage());
+                Log.i("error : ", t.getMessage());
             }
         });
     }

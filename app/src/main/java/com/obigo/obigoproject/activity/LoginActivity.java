@@ -1,7 +1,6 @@
 package com.obigo.obigoproject.activity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,12 +14,13 @@ import android.widget.Toast;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.UserPresenter;
-import com.obigo.obigoproject.util.ConstantsUtil;
 import com.obigo.obigoproject.vo.RegistrationIdVO;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
 
 /**
  * Created by O BI HE ROCK on 2016-11-28
@@ -60,8 +60,9 @@ public class LoginActivity extends AppCompatActivity {
     // registrationId 등록 결과
     private boolean registrationIdResult;
 
-    //로그인 성공 유무
-    private String resultFlag="false";
+    //로그인 성공 실패 결과
+    private String resultFlag;
+
 
 
     @Override
@@ -70,21 +71,23 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         ButterKnife.bind(this);
 
-        registrationIdResult = false;
-        userPresenter = new UserPresenter(this, ConstantsUtil.TEST_USER_ID);
 
-       autoLoginSettings();
+        registrationIdResult = false;
+        resultFlag = "false";
+
+        userPresenter = new UserPresenter(this);
+
+        autoLoginSettings();
     }
 
 
-
     //자동 로그인(id,password 저장 )
-    public void autoLoginSettings(){
-        autoSetting = getSharedPreferences("autoSetting", Context.MODE_PRIVATE);
+    public void autoLoginSettings() {
 
+        autoSetting = getSharedPreferences("autoSetting", 0);
         editor = autoSetting.edit();
 
-        if(autoSetting.getBoolean("Auto_Login_enabled", false)){
+        if (autoSetting.getBoolean("Auto_Login_enabled", false)) {
             idText.setText(autoSetting.getString("ID", ""));
             passwordText.setText(autoSetting.getString("PW", ""));
             _auto_login_check.setChecked(true);
@@ -99,18 +102,18 @@ public class LoginActivity extends AppCompatActivity {
                     new Runnable() {
                         public void run() {
 
-                          // onLoginSuccess();
+                            onLoginSuccess();
 
                             progressDialog.dismiss();
                         }
                     }, 2000);
 
-
         }
         _auto_login_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
+                    //Check 되면 ID,PW Shared Preference에 저장
                     String ID = idText.getText().toString();
                     String PW = passwordText.getText().toString();
 
@@ -118,11 +121,8 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("PW", PW);
                     editor.putBoolean("Auto_Login_enabled", true);
                     editor.commit();
-                }else{
+                } else {
 
-					/*editor.remove("ID");
-					editor.remove("PW");
-					editor.remove("Auto_Login_enabled");*/
                     editor.clear();
                     editor.commit();
                 }
@@ -132,23 +132,22 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
     // 로그인 버튼 클릭
     @OnClick(R.id.btn_login)
     public void login() {
 
         // 로그인 정규식 체크
-//        if (!validate()) {
-//            onLoginFailed();
-//            return;
-//        }
+  /*    if (!validate()) {
+          onLoginFailed();
+          return;
+      }*/
 
-       // loginButton.setEnabled(false);
+        loginButton.setEnabled(false);
 
         //userId, userPassword 서버에 조회 요청
         String userId = idText.getText().toString();
         String userPassword = passwordText.getText().toString();
-        userPresenter.login(userId,userPassword);
+        userPresenter.login(userId, userPassword);
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
@@ -165,14 +164,13 @@ public class LoginActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
 
-                        loginResult();
-                        if (resultFlag =="Success Login"){
+                        if (resultFlag == "true") {
                             onLoginSuccess();
-                        }else{
-                            Toast.makeText(getApplicationContext(), resultFlag, Toast.LENGTH_SHORT).show();
+                        } else {
+                            onLoginFailed();
                         }
 
-                        // onLoginFailed();
+
                         progressDialog.dismiss();
                     }
                 }, 2000);
@@ -186,16 +184,18 @@ public class LoginActivity extends AppCompatActivity {
 
     // 로그인 성공
     public void onLoginSuccess() {
+
+        //로그인 성공시 ID EditText에 입력한 값을 Static하게 쓰기
+        USER_ID = idText.getText().toString();
+
         // 사용자 registrationId 등록
         String registrationId = FirebaseInstanceId.getInstance().getToken();
-        userPresenter.insertRegistrationId(new RegistrationIdVO(ConstantsUtil.TEST_USER_ID, registrationId));
+        userPresenter.insertRegistrationId(new RegistrationIdVO(USER_ID, registrationId));
 
-       // loginButton.setEnabled(true);
-        finish();
+        loginButton.setEnabled(true);
+        finish();//뒤로가기 했을때 로그인 페이지는 보여주지않음
 
 
-
-        // intent로 데이터를 보내줌
         Intent intent = new Intent(this, CarListActivity.class);
         startActivity(intent);
     }
@@ -230,18 +230,9 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
-    public void dispatchLoginResult(String resultFlag){
-        this.resultFlag =resultFlag;
+    public void dispatchLoginResult(String resultFlag) {
+        this.resultFlag = resultFlag;
     }
 
-    public void loginResult() {
-
-        if (resultFlag == "false") {
-            resultFlag = "Try Again";
-        } else {
-            resultFlag = "Success Login";
-        }
-
-    }
 
 }

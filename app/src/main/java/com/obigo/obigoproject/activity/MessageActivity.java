@@ -9,10 +9,11 @@ import android.widget.ListView;
 
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.MessagePresenter;
-import com.obigo.obigoproject.util.ConstantsUtil;
 import com.obigo.obigoproject.vo.MessageVO;
 
 import java.util.List;
+
+import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
 
 /**
  * Created by O BI HE ROCK on 2016-12-01
@@ -31,14 +32,14 @@ public class MessageActivity extends MenuActivity implements OnItemClickListener
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setTitle("MESSAGE");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_list);
-        setTitle("MESSAGE");
 
         listView = (ListView) findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
 
-        messagePresenter = new MessagePresenter(this, ConstantsUtil.TEST_USER_ID, listView);
+        messagePresenter = new MessagePresenter(this, USER_ID, listView);
         messagePresenter.getMessageList();
     }
 

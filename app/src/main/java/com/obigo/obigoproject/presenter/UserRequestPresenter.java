@@ -25,20 +25,25 @@ import retrofit2.Response;
  */
 
 public class UserRequestPresenter {
+
     private UserRequestService userRequestService;
     private RequestActivity requestActivity;
-    private String resultFlag;
+
+    //차량 정보
     private List<VehicleVO> vehicleList;
     private List<String> modelNameList = new ArrayList<>();
     private List<String> modelCodeList = new ArrayList<>();
+
+    //스피너(차종 선택)
     private ArrayAdapter<String> spinnerArrayAdapter;
-    private Spinner code;
+    private Spinner modelCode;
 
+    private String resultFlag;
 
-    public UserRequestPresenter(RequestActivity requestActivity, Spinner code) {
+    public UserRequestPresenter(RequestActivity requestActivity, Spinner modelCode) {
         this.requestActivity = requestActivity;
         this.userRequestService = ServiceManager.getInstance().getUserRequestService();
-        this.code = code;
+        this.modelCode = modelCode;
     }
 
     //차량리스 정보 요청
@@ -58,7 +63,7 @@ public class UserRequestPresenter {
 
                     spinnerArrayAdapter = new ArrayAdapter<String>(requestActivity, R.layout.spinner_item_position, modelNameList);
                     spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item_position);
-                    code.setAdapter(spinnerArrayAdapter);
+                    modelCode.setAdapter(spinnerArrayAdapter);
 
                 } else {
                     Log.i("error : ", response.errorBody().toString());

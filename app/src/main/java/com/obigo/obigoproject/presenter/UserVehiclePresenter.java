@@ -21,6 +21,7 @@ import retrofit2.Response;
 public class UserVehiclePresenter {
     private UserVehicleService userVehicleService;
     private CarListActivity carListActivity;
+
     private String userId;
     private List<UserVehicleVO> userVehicleList;
 

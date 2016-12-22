@@ -11,15 +11,7 @@
     <PreferenceCategory
         android:layout="@layout/preference_category"
         android:title="User">
-        <SwitchPreference
-            android:defaultValue="true"
-            android:key="switch_pref"
-            android:summary="make auto login"
-            android:title="Auto Login" />
-        <com.obigo.obigoproject.preference.LogoutButtonPreference
-            android:defaultValue="false"
-            android:key="logout"
-            android:title="Logout" />
+
         <com.obigo.obigoproject.preference.UserInfoButtonPreference
             android:defaultValue="false"
             android:key="userinfo"
@@ -41,17 +33,6 @@
             android:title="Bundle Developer" />
     </PreferenceCategory>
 
-
-    <PreferenceCategory
-        android:layout="@layout/preference_category"
-        android:title="Message">
-
-        <SwitchPreference
-            android:defaultValue="true"
-            android:key="switch_pref"
-            android:summary="message alarm  receive setting"
-            android:title="Message Alarm" />
-    </PreferenceCategory>
 
     <PreferenceCategory
         android:layout="@layout/preference_category"
