@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.BundlePresenter;
-import com.obigo.obigoproject.vo.ResourceVO;
+import com.obigo.obigoproject.util.ResourceVO;
 
 import java.util.List;
 
