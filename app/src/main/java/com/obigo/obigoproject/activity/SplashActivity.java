@@ -43,7 +43,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_splash);
 
-        bundleVersionCheckFlag ="false";
+        bundleVersionCheckFlag = "false";
         bundlePresenter = new BundlePresenter(this);
 
         bundleVersionCheck();
@@ -54,19 +54,19 @@ public class SplashActivity extends Activity {
     }
 
     //서버에 bundleVersionCheck 요청
-    public void bundleVersionCheck(){
+    public void bundleVersionCheck() {
 
         autoSetting = getSharedPreferences("bundleVersion", 0);
         editor = autoSetting.edit();
 
         //디바이스 내에 BundleVersion 불러오기
-        if(autoSetting.getString("BUNDLE_VERSION","") == ""){
+        if (autoSetting.getString("BUNDLE_VERSION", "") == "") {
             editor.putString("BUNDLE_VERSION", "1.0");
             editor.commit();
-            bundleVersion = autoSetting.getString("BUNDLE_VERSION","");
+            bundleVersion = autoSetting.getString("BUNDLE_VERSION", "");
 
-        }else {
-            bundleVersion =autoSetting.getString("BUNDLE_VERSION","");
+        } else {
+            bundleVersion = autoSetting.getString("BUNDLE_VERSION", "");
         }
 
         //서버에서 BundleVersion 체크
@@ -75,11 +75,11 @@ public class SplashActivity extends Activity {
     }
 
     //BundleVersion 체크 후 다르면 업데이트 시도
-    public void bundleVersionCheckResult(){
+    public void bundleVersionCheckResult() {
 
-        if(bundleVersionCheckFlag  =="true"){
+        if (bundleVersionCheckFlag == "true") {
             Toast.makeText(getBaseContext(), "번들버전 같아요", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             //번들 버전 다르면 여기서 버전 업데이트 작업 해줘야함
             //번들 없데이트후에  editor.putString("BUNDLE_VERSION", "1.0") 이용해서 버전 갱신시켜주기
             Toast.makeText(getBaseContext(), "번들버전 달라요", Toast.LENGTH_SHORT).show();
@@ -87,11 +87,11 @@ public class SplashActivity extends Activity {
         }
     }
 
-    public void dispatchBundleVersionCheck(String bundleVersionCheckFlag){
-        this.bundleVersionCheckFlag =bundleVersionCheckFlag;
+    public void dispatchBundleVersionCheck(String bundleVersionCheckFlag) {
+        this.bundleVersionCheckFlag = bundleVersionCheckFlag;
     }
 
-    public void dispatchBundleUpdate(List<ResourceVO> resourceList){
+    public void dispatchBundleUpdate(List<ResourceVO> resourceList) {
         this.resourceList = resourceList;
     }
 
