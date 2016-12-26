@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.obigo.obigoproject.activity.LoginActivity;
 import com.obigo.obigoproject.activity.MenuActivity;
-import com.obigo.obigoproject.activity.SplashActivity;
 import com.obigo.obigoproject.preference.UserInfoButtonPreference;
 import com.obigo.obigoproject.service.ServiceManager;
 import com.obigo.obigoproject.service.UserService;
@@ -24,7 +23,7 @@ public class UserPresenter {
     // 사용자 서비스 요청
     private UserService userService;
 
-    private SplashActivity splashActivity;
+
     private LoginActivity loginActivity;
     private MenuActivity menuActivity;
     private UserInfoButtonPreference userInfoButtonPreference;
@@ -36,14 +35,9 @@ public class UserPresenter {
     //로그인 성공 실패 결과
     private String loginResultFlag;
 
-    //BundleVersion 체크 동일 여부
-    private String bundleVersionCheckFlag;
 
 
-    public UserPresenter(SplashActivity splashActivity){
-        this.splashActivity =splashActivity;
-        this.userService =ServiceManager.getInstance().getUserService();
-    }
+
 
     public UserPresenter(LoginActivity loginActivity) {
         this.loginActivity = loginActivity;
@@ -61,27 +55,7 @@ public class UserPresenter {
         this.menuActivity = menuActivity;
     }
 
-    //Bundle Version 체크
-    public void bundleVersionCheck(String bundleVersion){
-        Call<String> call = userService.bundleVesionCheck(bundleVersion);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()) {
-                    bundleVersionCheckFlag = response.body();
-                    splashActivity.dispatchBundleVersionCheck(bundleVersionCheckFlag);
-                    Log.i("BundleVersion : ", bundleVersionCheckFlag);
-                }else {
-                    Log.i("error : ", response.errorBody().toString());
-                }
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.i("error : ", t.getMessage());
-            }
-        });
-    }
 
     //로그인 (서버에 userId,password 조회)
     public void login(String userId,String password){

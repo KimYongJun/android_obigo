@@ -8,7 +8,10 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import com.obigo.obigoproject.R;
-import com.obigo.obigoproject.presenter.UserPresenter;
+import com.obigo.obigoproject.presenter.BundlePresenter;
+import com.obigo.obigoproject.vo.ResourceVO;
+
+import java.util.List;
 
 /**
  * Created by O BI HE ROCK on 2016-11-28
@@ -19,7 +22,7 @@ import com.obigo.obigoproject.presenter.UserPresenter;
 
 public class SplashActivity extends Activity {
     private Handler handler;
-    private UserPresenter userPresenter;
+    private BundlePresenter bundlePresenter;
 
     //bundleVersion 저장
     SharedPreferences autoSetting;
@@ -31,6 +34,9 @@ public class SplashActivity extends Activity {
     //BundleVersion 체크 동일 여부
     private String bundleVersionCheckFlag;
 
+    //Bundle 업데이트 받을 파일
+    private List<ResourceVO> resourceList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,7 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.main_splash);
 
         bundleVersionCheckFlag ="false";
-        userPresenter = new UserPresenter(this);
+        bundlePresenter = new BundlePresenter(this);
 
         bundleVersionCheck();
 
@@ -64,7 +70,7 @@ public class SplashActivity extends Activity {
         }
 
         //서버에서 BundleVersion 체크
-        userPresenter.bundleVersionCheck(bundleVersion);
+        bundlePresenter.bundleVersionCheck(bundleVersion);
 
     }
 
@@ -77,11 +83,16 @@ public class SplashActivity extends Activity {
             //번들 버전 다르면 여기서 버전 업데이트 작업 해줘야함
             //번들 없데이트후에  editor.putString("BUNDLE_VERSION", "1.0") 이용해서 버전 갱신시켜주기
             Toast.makeText(getBaseContext(), "번들버전 달라요", Toast.LENGTH_SHORT).show();
+            bundlePresenter.bundleUpdate();
         }
     }
 
     public void dispatchBundleVersionCheck(String bundleVersionCheckFlag){
         this.bundleVersionCheckFlag =bundleVersionCheckFlag;
+    }
+
+    public void dispatchBundleUpdate(List<ResourceVO> resourceList){
+        this.resourceList = resourceList;
     }
 
 
