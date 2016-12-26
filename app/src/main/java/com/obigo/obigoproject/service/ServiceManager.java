@@ -16,12 +16,15 @@ public enum ServiceManager {
     private UserRequestService userRequestService;
     // 메시지 서비스
     private MessageService messageService;
+    // 번들 서비스
+    private BundleService bundleService;
 
     ServiceManager() {
         userService = RetrofitServiceGenericFactory.createService(UserService.class);
         userVehicleService = RetrofitServiceGenericFactory.createService(UserVehicleService.class);
         userRequestService = RetrofitServiceGenericFactory.createService(UserRequestService.class);
         messageService = RetrofitServiceGenericFactory.createService(MessageService.class);
+        bundleService = RetrofitServiceGenericFactory.createService(BundleService.class);
     }
 
     public UserService getUserService() {
@@ -39,6 +42,8 @@ public enum ServiceManager {
     public MessageService getMessageService() {
         return messageService;
     }
+
+    public BundleService getBundleService(){return  bundleService;}
 
     public static ServiceManager getInstance() {
         return INSTANCE;

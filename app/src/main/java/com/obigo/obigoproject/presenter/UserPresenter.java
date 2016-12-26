@@ -23,6 +23,7 @@ public class UserPresenter {
     // 사용자 서비스 요청
     private UserService userService;
 
+
     private LoginActivity loginActivity;
     private MenuActivity menuActivity;
     private UserInfoButtonPreference userInfoButtonPreference;
@@ -31,8 +32,12 @@ public class UserPresenter {
     private String userId;
     private UserVO userVO;
 
-    //서버 요청 성공 유무
-    private String resultFlag;
+    //로그인 성공 실패 결과
+    private String loginResultFlag;
+
+
+
+
 
     public UserPresenter(LoginActivity loginActivity) {
         this.loginActivity = loginActivity;
@@ -50,6 +55,8 @@ public class UserPresenter {
         this.menuActivity = menuActivity;
     }
 
+
+
     //로그인 (서버에 userId,password 조회)
     public void login(String userId,String password){
         Call<String> call = userService.login(userId,password);
@@ -57,9 +64,9 @@ public class UserPresenter {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    resultFlag = response.body();
-                    loginActivity.dispatchLoginResult(resultFlag);
-                    Log.i("login success : ", resultFlag);
+                    loginResultFlag = response.body();
+                    loginActivity.dispatchLoginResult(loginResultFlag);
+                    Log.i("login success : ", loginResultFlag);
                 }else {
                     Log.i("error : ", response.errorBody().toString());
                 }
@@ -67,11 +74,12 @@ public class UserPresenter {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.i("에러 : ", t.getMessage());
+                Log.i("error : ", t.getMessage());
             }
         });
 
     }
+
 
     //서버 Registration 정보 넘겨주기 (서버에 registrationId 등록 요청)
     public void insertRegistrationId(RegistrationIdVO registrationIdVO) {
