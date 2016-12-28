@@ -9,10 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.gregacucnik.EditTextView;
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.UserRequestPresenter;
 import com.obigo.obigoproject.vo.UserRequestVO;
+import com.obigo.requestview.EditTextView;
 
 import java.util.List;
 
@@ -22,6 +22,8 @@ import butterknife.OnClick;
 
 import static com.obigo.obigoproject.R.layout.request;
 import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
+
+
 
 
 /**

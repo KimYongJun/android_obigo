@@ -58,7 +58,7 @@
     </LinearLayout>
 
 
-    <com.gregacucnik.EditTextView
+    <com.obigo.requestview.EditTextView
         android:id="@+id/model_color"
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -71,7 +71,7 @@
         app:ettMaxLines="2"
         app:ettShowHint="true"/>
 
-    <com.gregacucnik.EditTextView
+    <com.obigo.requestview.EditTextView
         android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -85,7 +85,7 @@
         app:ettMaxLines="2"
         app:ettShowHint="true"/>
 
-    <com.gregacucnik.EditTextView
+    <com.obigo.requestview.EditTextView
         android:id="@+id/vin"
         android:layout_width="match_parent"
         android:layout_height="55dp"
