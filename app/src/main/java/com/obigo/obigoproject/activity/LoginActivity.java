@@ -174,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                 }, 2000);
     }
 
-    // 뒤로가기
+    //       뒤로가기
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
