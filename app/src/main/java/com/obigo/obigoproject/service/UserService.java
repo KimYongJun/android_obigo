@@ -33,6 +33,6 @@ public interface UserService {
 
     //로그아웃 버튼 누르면 registrationId (서버에 삭제 요청)
     //DELETE 는 @Body를 쓸수 없기에 @Query를 이용
-    @DELETE("deleteregistrationid/")
+    @DELETE("logout/")
     Call<String> deleteRegistrationId(@Query("registrationId") String registrationId );
 }
