@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.obigo.obigoproject"
         minSdkVersion 9
-        targetSdkVersion 24
+        targetSdkVersion 17
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -44,8 +44,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     // view flipper
     compile 'com.viewpagerindicator:library:2.4.1'
-    // request input
-   // compile 'com.gregacucnik:edittextview:1.6'
+
     // image loader
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 

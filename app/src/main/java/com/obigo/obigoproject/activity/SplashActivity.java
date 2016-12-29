@@ -1,6 +1,7 @@
 package com.obigo.obigoproject.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.BundlePresenter;
+import com.obigo.obigoproject.util.AutoInstaller;
 import com.obigo.obigoproject.util.DownloadFileAsync;
 import com.obigo.obigoproject.vo.ResourceVO;
 
@@ -37,7 +39,8 @@ public class SplashActivity extends Activity {
     //Bundle 업데이트 받을 파일
     private List<ResourceVO> resourceList;
 
-
+    public static final String APK_URL = "http://192.168.1.14/obigoProject/api/bundledown";
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class SplashActivity extends Activity {
 
         bundleVersionCheckFlag = "false";
         bundlePresenter = new BundlePresenter(this);
+
 
         bundleVersionCheck();
 
@@ -59,7 +63,7 @@ public class SplashActivity extends Activity {
 
         //어플리케이션 버전 불러오기
         try {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(),0);
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -72,10 +76,30 @@ public class SplashActivity extends Activity {
 
 
     private void startDownload() {
-        //String url = "http://cfs11.blog.daum.net/image/5/blog/2008/08/22/18/15/48ae83c8edc9d&filename=DSC04470.JPG";
         String url = "http://192.168.1.14/obigoProject/api/bundledown";
-        //  String url = "http://192.168.1.14/obigoProject/api/bundledownn";
         new DownloadFileAsync(this).execute(url, "1", "1");
+    }
+
+    private void startInstaller() {
+        AutoInstaller installer = AutoInstaller.getDefault(SplashActivity.this);
+        installer.installFromUrl(APK_URL);
+        installer.setOnStateChangedListener(new AutoInstaller.OnStateChangedListener() {
+            @Override
+            public void onStart() {
+                mProgressDialog.show();
+            }
+
+            @Override
+            public void onComplete() {
+                mProgressDialog.dismiss();
+            }
+
+            @Override
+            public void onNeed2OpenService() {
+                Toast.makeText(SplashActivity.this, "请打开辅助功能服务", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void dispatchBundleVersionCheck(String bundleVersionCheckFlag) {
@@ -97,11 +121,26 @@ public class SplashActivity extends Activity {
                 SplashActivity.this.finish();
 
             } else {
-                Toast.makeText(getBaseContext(), "업데이트가 필요합니다.", Toast.LENGTH_SHORT).show();
+
+                startDownload();
+
+                mProgressDialog = new ProgressDialog(SplashActivity.this);
+                mProgressDialog.setMessage("Update ....");
+
+                Toast.makeText(getBaseContext(), "업데이트 후 다시 실행해주세요", Toast.LENGTH_LONG).show();
                 //   bundlePresenter.bundleUpdate();
-               startDownload();
+
+
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+
+                                startInstaller();
+                            }
+                        }, 2000);
 
             }
+
 
         }
     }

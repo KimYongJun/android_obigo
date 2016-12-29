@@ -12,11 +12,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-/**
- * Created by O BI HE ROCK on 2016-12-28
- * 김용준, 최현욱
- * APK 버전을 체크해서 다르다면 서버에서 APK파일을 다운 받을때 필요함
- */
+
 public class DownloadFileAsync extends AsyncTask<String, String, String> {
 
     private ProgressDialog mDlg;
@@ -50,9 +46,12 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
             int lenghtOfFile = conexion.getContentLength();
             Log.d("ANDRO_ASYNC", "Lenght of file: " + lenghtOfFile);
 
-            //APK 파일 저장
+
             InputStream input = new BufferedInputStream(url.openStream());
-            	OutputStream output = new FileOutputStream("/storage/emulated/0/update.apk");
+            OutputStream output = new FileOutputStream("/storage/emulated/0/update.apk");
+            // OutputStream output = new FileOutputStream("/data/data/" + "com.example.sampleprogress/files" + "/apple.png");
+            //OutputStream output = new FileOutputStream("/data/user/0/" + "com.example.sampleprogress/files" + "/apple.png");
+            //OutputStream output = new FileOutputStream("/res/drawable/test1223.jpg");
 
 
             byte data[] = new byte[1024];
@@ -69,6 +68,8 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
             output.close();
             input.close();
 
+            // 작업이 진행되면서 호출하며 화면의 업그레이드를 담당하게 된다
+            //publishProgress("progress", 1, "Task " + 1 + " number");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -93,6 +94,7 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String unused) {
         mDlg.dismiss();
-
+        //Toast.makeText(mContext, Integer.toString(result) + " total sum",
+        //Toast.LENGTH_SHORT).show();
     }
 }
