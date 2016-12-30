@@ -2,7 +2,9 @@ package com.obigo.obigoproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +45,8 @@ public class MessageDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_detail);
         ButterKnife.bind(this);
+        setTitle("MESSAGE");
+        setupActionBar();
 
         // 메시지 정보를 전달받음
         Intent intent = getIntent();
@@ -60,6 +64,26 @@ public class MessageDetailActivity extends AppCompatActivity {
         _message_detail_date.setText(messageVO.getSendDate());
         Glide.with(this).load(ConstantsUtil.SERVER_API_URL_REAL + ConstantsUtil.SERVER_MESSAGE_IMAGE_URL +
                 messageVO.getUploadFile()).into(_message_detail_image);
+    }
+
+    //CarDetail Page에 Bar등록
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    // 뒤로가기 버튼 눌렀을때 이전 페이지로 돌아가는데 필요한 메서드
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

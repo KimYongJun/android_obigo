@@ -20,7 +20,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by wuhaojie on 2016/7/25 22:17.
+ * Created by O BI HE ROCK on 2016-12-29
+ * 김용준, 최현욱
+ * 다운받은 APK 파일 설치
  */
 public class AutoInstaller extends Handler {
 
@@ -118,55 +120,7 @@ public class AutoInstaller extends Handler {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(uri, "application/vnd.android.package-archive");
         mContext.startActivity(intent);
-  /*      if (!isAccessibilitySettingsOn(mContext)) {
-            toAccessibilityService();
-            sendEmptyMessage(3);
-        }*/
     }
-
-    /*private void toAccessibilityService() {
-        Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
-        mContext.startActivity(intent);
-    }
-
-
-    private boolean isAccessibilitySettingsOn(Context mContext) {
-        int accessibilityEnabled = 0;
-        //  final String service = mContext.getPackageName() + "/" + InstallAccessibilityService.class.getCanonicalName();
-        try {
-            accessibilityEnabled = Settings.Secure.getInt(
-                    mContext.getApplicationContext().getContentResolver(),
-                    android.provider.Settings.Secure.ACCESSIBILITY_ENABLED);
-            Log.v(TAG, "accessibilityEnabled = " + accessibilityEnabled);
-        } catch (Settings.SettingNotFoundException e) {
-            Log.e(TAG, "Error finding setting, default accessibility to not found: "
-                    + e.getMessage());
-        }
-        TextUtils.SimpleStringSplitter mStringColonSplitter = new TextUtils.SimpleStringSplitter(':');
-
-        if (accessibilityEnabled == 1) {
-            Log.v(TAG, "***ACCESSIBILITY IS ENABLED*** -----------------");
-            String settingValue = Settings.Secure.getString(
-                    mContext.getApplicationContext().getContentResolver(),
-                    Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
-            if (settingValue != null) {
-                mStringColonSplitter.setString(settingValue);
-                while (mStringColonSplitter.hasNext()) {
-                    String accessibilityService = mStringColonSplitter.next();
-
-                 *//*   Log.v(TAG, "-------------- > accessibilityService :: " + accessibilityService + " " + service);
-                    if (accessibilityService.equalsIgnoreCase(service)) {
-                        Log.v(TAG, "We've found the correct setting - accessibility is switched on!");
-                        return true;
-                    }*//*
-                }
-            }
-        } else {
-            Log.v(TAG, "***ACCESSIBILITY IS DISABLED***");
-        }
-
-        return false;
-    }*/
 
     public void install(final String filePath) {
         if (TextUtils.isEmpty(filePath) || !filePath.endsWith(".apk"))

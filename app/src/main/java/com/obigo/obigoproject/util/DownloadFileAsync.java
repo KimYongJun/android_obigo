@@ -12,7 +12,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-
+/**
+ * Created by O BI HE ROCK on 2016-12-29
+ * 김용준, 최현욱
+ * 서버에서 APK 다운로드 해서 Storage에 저장
+ */
 public class DownloadFileAsync extends AsyncTask<String, String, String> {
 
     private ProgressDialog mDlg;
@@ -49,10 +53,6 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
 
             InputStream input = new BufferedInputStream(url.openStream());
             OutputStream output = new FileOutputStream("/storage/emulated/0/update.apk");
-            // OutputStream output = new FileOutputStream("/data/data/" + "com.example.sampleprogress/files" + "/apple.png");
-            //OutputStream output = new FileOutputStream("/data/user/0/" + "com.example.sampleprogress/files" + "/apple.png");
-            //OutputStream output = new FileOutputStream("/res/drawable/test1223.jpg");
-
 
             byte data[] = new byte[1024];
 
@@ -94,7 +94,5 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String unused) {
         mDlg.dismiss();
-        //Toast.makeText(mContext, Integer.toString(result) + " total sum",
-        //Toast.LENGTH_SHORT).show();
     }
 }

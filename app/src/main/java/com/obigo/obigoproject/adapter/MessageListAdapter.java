@@ -44,7 +44,6 @@ public class MessageListAdapter extends ArrayAdapter<MessageVO> {
         this.messageList = messageList;
 
         options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.message_stub)
                 .showImageForEmptyUri(R.drawable.message_empty)
                 .showImageOnFail(R.drawable.message_error)
                 .cacheInMemory(true)
@@ -95,15 +94,20 @@ public class MessageListAdapter extends ArrayAdapter<MessageVO> {
                 && messageVO.getSendDate().trim().length() > 0) {
             holder.messageDate.setText(Html.fromHtml(messageVO.getSendDate()));
         }
+
+        // ProgressBar 처리
+        final ProgressBar pbar = holder.messageBar;
+
         if (holder.messageImage != null) {
             if (null != messageVO.getUploadFile()
                     && messageVO.getUploadFile().trim().length() > 0) {
-                final ProgressBar pbar = holder.messageBar;
 
                 imageLoader.init(ImageLoaderConfiguration
                         .createDefault(messageActivity));
+
+                // 해당 이미지 파일 불러오기
                 imageLoader.displayImage(ConstantsUtil.SERVER_API_URL_REAL + ConstantsUtil.SERVER_MESSAGE_IMAGE_URL
-                        + messageList.get(position).getUploadFile(), holder.messageImage, options, new ImageLoadingListener() {
+                        + messageVO.getUploadFile(), holder.messageImage, options, new ImageLoadingListener() {
                     @Override
                     public void onLoadingStarted(String imageUri, View view) {
                         pbar.setVisibility(View.INVISIBLE);
@@ -126,7 +130,9 @@ public class MessageListAdapter extends ArrayAdapter<MessageVO> {
                 });
 
             } else {
-                holder.messageImage.setImageResource(R.mipmap.ic_launcher);
+                // 데이터가 존재하지 않는다면 empty 이미지로 대체
+                holder.messageImage.setImageResource(R.drawable.message_empty);
+                pbar.setVisibility(view.INVISIBLE);
             }
         }
         return view;

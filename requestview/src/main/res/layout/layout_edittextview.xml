@@ -39,7 +39,7 @@
             android:textColor="#000"
             android:text="----" />
 
-        <com.gregacucnik.ETT_EditText
+        <com.obigo.requestview.ETT_EditText
             android:id="@+id/ettEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

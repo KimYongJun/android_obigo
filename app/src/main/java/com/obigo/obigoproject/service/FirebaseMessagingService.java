@@ -4,6 +4,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -11,7 +13,10 @@ import android.support.v4.app.NotificationCompat;
 import com.google.firebase.messaging.RemoteMessage;
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.activity.MessageActivity;
+import com.obigo.obigoproject.util.ConstantsUtil;
 import com.obigo.obigoproject.util.WakeUpScreenUtil;
+
+import java.net.URL;
 
 /**
  * Created by O BI HE ROCK on 2016-12-14
@@ -28,12 +33,13 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     public void onMessageReceived(RemoteMessage remoteMessage) {
         String title = remoteMessage.getData().get("title");
         String content = remoteMessage.getData().get("content");
+        String upload = remoteMessage.getData().get("upload");
 
-        sendNotification(title, content);
+        sendNotification(title, content, upload);
     }
 
     // 메시지를 받음
-    private void sendNotification(String title, String content) {
+    private void sendNotification(String title, String content, String upload) {
         // 화면이 켜지는 작업 - 10초 유지
         WakeUpScreenUtil.acquire(getApplicationContext(), 10000);
 
@@ -42,6 +48,15 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
+
+        Bitmap bigPicture = null;
+
+        try {
+            URL url = new URL(ConstantsUtil.SERVER_API_URL_REAL + ConstantsUtil.SERVER_MESSAGE_IMAGE_URL + upload);
+            bigPicture = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
@@ -52,10 +67,17 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 
+        if (!upload.equals("")) {
+            notificationBuilder.setStyle(new NotificationCompat.BigPictureStyle()
+                    .bigPicture(bigPicture));
+        }
+
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         // ID of notification
         notificationManager.notify(0, notificationBuilder.build());
     }
+
+
 }

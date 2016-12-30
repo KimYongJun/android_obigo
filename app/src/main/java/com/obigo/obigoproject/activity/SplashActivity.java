@@ -17,6 +17,8 @@ import com.obigo.obigoproject.vo.ResourceVO;
 
 import java.util.List;
 
+import static android.widget.Toast.makeText;
+
 
 /**
  * Created by O BI HE ROCK on 2016-11-28
@@ -39,7 +41,7 @@ public class SplashActivity extends Activity {
     //Bundle 업데이트 받을 파일
     private List<ResourceVO> resourceList;
 
-    public static final String APK_URL = "http://192.168.1.14/obigoProject/api/bundledown";
+    public static final String APK_URL = "http://192.168.1.7/obigoProject/api/bundledown";
     private ProgressDialog mProgressDialog;
 
     @Override
@@ -76,8 +78,7 @@ public class SplashActivity extends Activity {
 
 
     private void startDownload() {
-        String url = "http://192.168.1.14/obigoProject/api/bundledown";
-        new DownloadFileAsync(this).execute(url, "1", "1");
+        new DownloadFileAsync(this).execute(APK_URL, "1", "1");
     }
 
     private void startInstaller() {
@@ -96,7 +97,7 @@ public class SplashActivity extends Activity {
 
             @Override
             public void onNeed2OpenService() {
-                Toast.makeText(SplashActivity.this, "请打开辅助功能服务", Toast.LENGTH_SHORT).show();
+                makeText(SplashActivity.this, "접근성 수정", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -128,7 +129,6 @@ public class SplashActivity extends Activity {
                 mProgressDialog.setMessage("Update ....");
 
                 Toast.makeText(getBaseContext(), "업데이트 후 다시 실행해주세요", Toast.LENGTH_LONG).show();
-                //   bundlePresenter.bundleUpdate();
 
 
                 new android.os.Handler().postDelayed(

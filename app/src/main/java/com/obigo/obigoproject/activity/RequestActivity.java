@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.UserRequestPresenter;
 import com.obigo.obigoproject.vo.UserRequestVO;
-import com.obigo.requestview.EditTextView;
 
 import java.util.List;
 
@@ -22,8 +21,6 @@ import butterknife.OnClick;
 
 import static com.obigo.obigoproject.R.layout.request;
 import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
-
-
 
 
 /**
@@ -43,11 +40,11 @@ public class RequestActivity extends MenuActivity {
     @Bind(R.id.model_name)
     Spinner modelName;
     @Bind(R.id.model_color)
-    EditTextView modelColor;
+    Spinner modelColor;
     @Bind(R.id.location)
-    EditTextView location;
+    Spinner location;
     @Bind(R.id.vin)
-    EditTextView vin;
+    EditText vin;
 
     //reset버튼, Send버튼
     @Bind(R.id.resetBtn)
@@ -61,6 +58,7 @@ public class RequestActivity extends MenuActivity {
     //모델 이름 리스트 번호
     int modelHoldNumber;
 
+
     private List<String> modelNameList;
     private List<String> modelCodeList;
 
@@ -70,14 +68,6 @@ public class RequestActivity extends MenuActivity {
         setTitle("REQUEST");
         super.onCreate(savedInstanceState);
         setContentView(request);
-        final LinearLayout llContainer = (LinearLayout) findViewById(R.id.car_request);
-
-        llContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                llContainer.requestFocus();
-            }
-        });
 
         ButterKnife.bind(this);
 
@@ -100,13 +90,17 @@ public class RequestActivity extends MenuActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
     }
+
 
     //리셋 버튼
     @OnClick(R.id.resetBtn)
     public void resetData() {
-        modelColor.setText("");
-        location.setText("");
+
+        modelName.setSelection(0);
+        modelColor.setSelection(0);
+        location.setSelection(0);
         vin.setText("");
 
     }
@@ -114,30 +108,38 @@ public class RequestActivity extends MenuActivity {
     //UserRequest 요청 버튼
     @OnClick(R.id.sendBtn)
     public void requestUserCar() {
-        //추후에 Toast 메시지 지우기 (test용)
-        Toast.makeText(getApplicationContext(),
-                "code : " + modelNameList.get(modelHoldNumber) + " , " + "color : " + modelColor.getText().toString() +
-                        " , " + "location : " + location.getText().toString() + " , " + "vin : " +
-                        vin.getText().toString(), Toast.LENGTH_SHORT).show();
+        //modleName,location에서 Select 선택했을시 (VIN 정규식 or 예외처리 추가 하기)
+        if((modelColor.getSelectedItem().toString().equals("Select")) || (location.getSelectedItem().toString().equals("Select"))){
+            Toast.makeText(getApplicationContext(),"정확히 입력해 주세요",Toast.LENGTH_SHORT).show();
+        }if(vin.length() != 10){
+            Toast.makeText(getApplicationContext(),"VIN 번호는 10자리를 입력해 주세요",Toast.LENGTH_SHORT).show();
+        } else {
 
-        userRequestPresenter.insertUserRequest(new UserRequestVO(USER_ID, modelCodeList.get(modelHoldNumber), modelColor.getText().toString(),
-                location.getText().toString(), vin.getText().toString()));
+            //추후에 Toast 메시지 지우기 (test용)
+            Toast.makeText(getApplicationContext(),
+                    "code : " + modelNameList.get(modelHoldNumber) + " , " + "color : " + modelColor.getSelectedItem().toString() +
+                            " , " + "location : " + location.getSelectedItem().toString() + " , " + "vin : " +
+                            vin.getText().toString(), Toast.LENGTH_SHORT).show();
 
-        //로딩화면 보여주기
-        final ProgressDialog progressDialog = new ProgressDialog(RequestActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Loding...");
-        progressDialog.show();
+            userRequestPresenter.insertUserRequest(new UserRequestVO(USER_ID, modelCodeList.get(modelHoldNumber), modelColor.getSelectedItem().toString(),
+                    location.getSelectedItem().toString(), vin.getText().toString()));
 
-        //값을 서버에서 송수신 하는데 걸리는 시간을 지연 시키기
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        requestResult();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+            //로딩화면 보여주기
+            final ProgressDialog progressDialog = new ProgressDialog(RequestActivity.this,
+                    R.style.AppTheme_Dark_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Loding...");
+            progressDialog.show();
+
+            //값을 서버에서 송수신 하는데 걸리는 시간을 지연 시키기
+            new android.os.Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            requestResult();
+                            progressDialog.dismiss();
+                        }
+                    }, 3000);
+        }
     }
 
     public void requestResult() {

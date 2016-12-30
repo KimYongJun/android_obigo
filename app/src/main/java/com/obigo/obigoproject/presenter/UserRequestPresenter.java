@@ -46,7 +46,7 @@ public class UserRequestPresenter {
         this.modelCode = modelCode;
     }
 
-    //차량리스 정보 요청
+    //차량리스트 정보 요청
     public void getVehicleList() {
         Call<List<VehicleVO>> call = userRequestService.getVehicleList();
         call.enqueue(new Callback<List<VehicleVO>>() {

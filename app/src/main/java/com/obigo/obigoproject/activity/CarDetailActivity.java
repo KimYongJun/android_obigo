@@ -2,7 +2,9 @@ package com.obigo.obigoproject.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,6 +52,8 @@ public class CarDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_detail);
         ButterKnife.bind(this);
+        setTitle("CAR INFO");
+        setupActionBar();
 
         // 차량 데이터를 CarListActivity에서 전송 받음
         Intent intent = getIntent();
@@ -75,4 +79,24 @@ public class CarDetailActivity extends AppCompatActivity {
         mileageTextView.setText(userVehicleVO.getMileage());
         activeDtcCountTextView.setText(Integer.toString(userVehicleVO.getActiveDtcCount()));
     }
+    //CarDetail Page에 Bar등록
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    // 뒤로가기 버튼 눌렀을때 이전 페이지로 돌아가는데 필요한 메서드
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

@@ -8,5 +8,5 @@
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:textColor="#7d462e"
+    android:textColor="#0d0d0d"
     android:padding="12dp" />

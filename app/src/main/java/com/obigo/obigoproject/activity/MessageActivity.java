@@ -32,7 +32,7 @@ public class MessageActivity extends MenuActivity implements OnItemClickListener
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setTitle("MESSAGE");
+        setTitle("MESSAGE LIST");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_list);
 
