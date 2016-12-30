@@ -51,6 +51,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         Bitmap bigPicture = null;
 
+        System.out.println(upload);
+
         try {
             URL url = new URL(ConstantsUtil.SERVER_API_URL_REAL + ConstantsUtil.SERVER_MESSAGE_IMAGE_URL + upload);
             bigPicture = BitmapFactory.decodeStream(url.openConnection().getInputStream());
@@ -67,7 +69,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 
-        if (!upload.equals("")) {
+        if (upload != null) {
             notificationBuilder.setStyle(new NotificationCompat.BigPictureStyle()
                     .bigPicture(bigPicture));
         }
