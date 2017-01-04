@@ -94,7 +94,7 @@ public class RequestActivity extends MenuActivity {
     }
 
 
-    //리셋 버튼
+    // Reset 버튼
     @OnClick(R.id.resetBtn)
     public void resetData() {
 
