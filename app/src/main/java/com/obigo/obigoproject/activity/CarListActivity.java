@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide;
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.adapter.CarListAdapter;
 import com.obigo.obigoproject.presenter.UserVehiclePresenter;
-import com.obigo.obigoproject.util.ConstantsUtil;
 import com.obigo.obigoproject.vo.UserVehicleVO;
 import com.viewpagerindicator.PageIndicator;
 
@@ -21,6 +20,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_API_URL;
+import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_VEHICLE_IMAGE_URL;
 import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
 
 
@@ -96,7 +97,7 @@ public class CarListActivity extends MenuActivity {
 
                     fadeinImage.bringToFront();
                     // 이미지 넣기
-                    Glide.with(getApplicationContext()).load(ConstantsUtil.SERVER_API_URL_REAL + ConstantsUtil.SERVER_VEHICLE_IMAGE_URL +
+                    Glide.with(getApplicationContext()).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL +
                             userVehicleList.get(lastPage).getModelImage()).into(fadeinImage);
                     fadeinImage.clearAnimation();
                     fadeoutImage.clearAnimation();
@@ -165,7 +166,7 @@ public class CarListActivity extends MenuActivity {
 
         // 이미지 파일 리스트 넣기
         for (int i = 0; i < userVehicleList.size(); i++) {
-            icons[i] = ConstantsUtil.SERVER_API_URL_REAL + ConstantsUtil.SERVER_VEHICLE_IMAGE_URL +
+            icons[i] = SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL +
                     userVehicleList.get(i).getModelImage();
         }
 
@@ -178,7 +179,7 @@ public class CarListActivity extends MenuActivity {
 
         // userVehicleList data가 있을 경우 처음 이미지 고정 데이터 넣기
         if(userVehicleList.size() > 0) {
-            Glide.with(this).load(ConstantsUtil.SERVER_API_URL_REAL + ConstantsUtil.SERVER_VEHICLE_IMAGE_URL
+            Glide.with(this).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL
                     + userVehicleList.get(0).getModelImage()).into(currentCarListImage);
         }
 

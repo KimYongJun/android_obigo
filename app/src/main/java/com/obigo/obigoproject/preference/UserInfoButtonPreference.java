@@ -72,22 +72,13 @@ public class UserInfoButtonPreference extends android.preference.Preference {
         //다이얼로그에 유저정보 띄우기
         final MaterialDialog materialDialog = new MaterialDialog(this.mContext);
         materialDialog.setMessage(
-                "User Name     :    " + userVO.getName() +
-                        "                                                               " +
-                        "                                                               " +
-                        "                                                               " +
-                        "                                                               " +
-                        "                                                               " +
+                        "\r\n" + "\r\n" +
+                        "User Name     :    " + userVO.getName() +
+                        "\r\n" + "\r\n" + "\r\n" +
                         "Email            :    " + userVO.geteMail() +
-                        "                                                               " +
-                        "                                                               " +
-                        "                                                               " +
-                        "                                                               " +
-                        "                                                               " +
+                        "\r\n" + "\r\n" + "\r\n" +
                         "Phone            :    " + userVO.getPhone() +
-                        "                                                               " +
-                        "                                                               " +
-                        "                                                               "
+                        "\r\n" + "\r\n"
 
         )
                 .setPositiveButton(android.R.string.yes,

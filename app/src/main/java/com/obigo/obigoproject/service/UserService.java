@@ -22,8 +22,7 @@ public interface UserService {
     @POST("registrationid/")
     Call<String> insertRegistrationId(@Body RegistrationIdVO registrationIdVO);
 
-
-    //로그인
+     //로그인
     @GET("login/")
     Call<String>login(@Query("userid") String userId,@Query("password") String password);
 

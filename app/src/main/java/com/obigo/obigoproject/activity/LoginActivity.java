@@ -20,6 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.obigo.obigoproject.util.ConstantsUtil.UNCHECK_USER_ID;
 import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
 
 /**
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //로그인 성공 실패 결과
     private String loginResultFlag;
+
 
 
     @Override
@@ -185,6 +187,9 @@ public class LoginActivity extends AppCompatActivity {
 
         //로그인 성공시 ID EditText에 입력한 값을 Static하게 쓰기
         USER_ID = idText.getText().toString();
+
+        //AUTO 로그인 체크 안하고 로그인 했을때 유지할 ID
+        UNCHECK_USER_ID = USER_ID;
 
         // 사용자 registrationId 등록
         String registrationId = FirebaseInstanceId.getInstance().getToken();

@@ -13,11 +13,9 @@ import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.BundlePresenter;
 import com.obigo.obigoproject.util.AutoInstaller;
 import com.obigo.obigoproject.util.DownloadFileAsync;
-import com.obigo.obigoproject.vo.ResourceVO;
-
-import java.util.List;
 
 import static android.widget.Toast.makeText;
+import static com.obigo.obigoproject.util.ConstantsUtil.APK_URL;
 
 
 /**
@@ -38,10 +36,7 @@ public class SplashActivity extends Activity {
     //BundleVersion 체크 동일 여부
     private String bundleVersionCheckFlag;
 
-    //Bundle 업데이트 받을 파일
-    private List<ResourceVO> resourceList;
 
-    public static final String APK_URL = "http://192.168.1.7/obigoProject/api/bundledown";
     private ProgressDialog mProgressDialog;
 
     @Override
@@ -51,7 +46,6 @@ public class SplashActivity extends Activity {
 
         bundleVersionCheckFlag = "false";
         bundlePresenter = new BundlePresenter(this);
-
 
         bundleVersionCheck();
 
@@ -106,11 +100,6 @@ public class SplashActivity extends Activity {
     public void dispatchBundleVersionCheck(String bundleVersionCheckFlag) {
         this.bundleVersionCheckFlag = bundleVersionCheckFlag;
     }
-
-    public void dispatchBundleUpdate(List<ResourceVO> resourceList) {
-        this.resourceList = resourceList;
-    }
-
 
     private class splashhandler implements Runnable {
         public void run() {

@@ -18,10 +18,12 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.obigo.obigoproject.R;
-import com.obigo.obigoproject.util.ConstantsUtil;
 import com.obigo.obigoproject.vo.MessageVO;
 
 import java.util.List;
+
+import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_API_URL;
+import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_MESSAGE_IMAGE_URL;
 
 /**
  * Created by O BI HE ROCK on 2016-12-14
@@ -84,7 +86,7 @@ public class MessageListAdapter extends ArrayAdapter<MessageVO> {
 
         if (holder.messageTitle != null && null != messageVO.getTitle()
                 && messageVO.getTitle().trim().length() > 0) {
-            holder.messageTitle.setText(Html.fromHtml(messageVO.getTitle()));
+            holder.messageTitle.setText("["+Html.fromHtml(messageVO.getTitle())+"]");
         }
         if (holder.messageContent != null && null != messageVO.getContent()
                 && messageVO.getContent().trim().length() > 0) {
@@ -106,7 +108,7 @@ public class MessageListAdapter extends ArrayAdapter<MessageVO> {
                         .createDefault(messageActivity));
 
                 // 해당 이미지 파일 불러오기
-                imageLoader.displayImage(ConstantsUtil.SERVER_API_URL_REAL + ConstantsUtil.SERVER_MESSAGE_IMAGE_URL
+                imageLoader.displayImage(SERVER_API_URL + SERVER_MESSAGE_IMAGE_URL
                         + messageVO.getUploadFile(), holder.messageImage, options, new ImageLoadingListener() {
                     @Override
                     public void onLoadingStarted(String imageUri, View view) {

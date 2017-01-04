@@ -21,7 +21,7 @@ public class RetrofitServiceGenericFactory {
     private static Retrofit getRetofitObject() {
         return
                 new Retrofit.Builder()
-                        .baseUrl(ConstantsUtil.SERVER_API_URL_REAL)
+                        .baseUrl(ConstantsUtil.SERVER_API_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
     }

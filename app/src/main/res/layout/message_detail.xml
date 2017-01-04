@@ -6,29 +6,35 @@
     android:orientation="vertical"
     android:weightSum="1">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="120dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:id="@+id/message_detail_title"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+
+            android:text="[title]"
+            />
         <ImageView
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:id="@+id/message_detail_image"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/image_border"
-            android:background="@drawable/logo"
+            app:srcCompat="@mipmap/ic_launcher"
             />
 
-    <TextView
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:id="@+id/message_detail_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:text="[title]"
-        />
+
+    </LinearLayout>
 
     <TextView
+        android:background="@drawable/image_border"
         android:layout_marginTop="5dp"
         android:layout_gravity="center"
         android:layout_width="338dp"

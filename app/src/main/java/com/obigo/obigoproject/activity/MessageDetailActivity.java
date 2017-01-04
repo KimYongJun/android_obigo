@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.obigo.obigoproject.R;
-import com.obigo.obigoproject.util.ConstantsUtil;
 import com.obigo.obigoproject.vo.MessageVO;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_API_URL;
+import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_MESSAGE_IMAGE_URL;
 
 /**
  * Created by O BI HE ROCK on 2016-12-13.
@@ -59,10 +61,10 @@ public class MessageDetailActivity extends AppCompatActivity {
 
     // 전달받은 메시지 정보를 입력
     private void initVariable(MessageVO messageVO) {
-        _message_detail_title.setText(messageVO.getTitle());
+        _message_detail_title.setText("["+messageVO.getTitle()+"]");
         _message_detail_content.setText(messageVO.getContent());
         _message_detail_date.setText(messageVO.getSendDate());
-        Glide.with(this).load(ConstantsUtil.SERVER_API_URL_REAL + ConstantsUtil.SERVER_MESSAGE_IMAGE_URL +
+        Glide.with(this).load(SERVER_API_URL + SERVER_MESSAGE_IMAGE_URL +
                 messageVO.getUploadFile()).into(_message_detail_image);
     }
 

@@ -5,9 +5,6 @@ import android.util.Log;
 import com.obigo.obigoproject.activity.SplashActivity;
 import com.obigo.obigoproject.service.BundleService;
 import com.obigo.obigoproject.service.ServiceManager;
-import com.obigo.obigoproject.vo.ResourceVO;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,25 +50,4 @@ public class BundlePresenter {
         });
     }
 
-    //Bundle Update
-    public void bundleUpdate(){
-        Call<List<ResourceVO>> call = bundleService.bundleUpdate();
-        call.enqueue(new Callback<List<ResourceVO>>() {
-            @Override
-            public void onResponse(Call<List<ResourceVO>> call, Response<List<ResourceVO>> response) {
-                if (response.isSuccessful()) {
-                    List<ResourceVO> resourceList = response.body();
-                    splashActivity.dispatchBundleUpdate(resourceList);
-                    Log.i("Resource List  ", resourceList.toString());
-                }else {
-                    Log.i("error : ", response.errorBody().toString());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<ResourceVO>> call, Throwable t) {
-                Log.i("error : ", t.getMessage());
-            }
-        });
-    }
 }

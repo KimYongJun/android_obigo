@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.obigo.obigoproject.R;
-import com.obigo.obigoproject.util.ConstantsUtil;
 import com.obigo.obigoproject.vo.UserVehicleVO;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_API_URL;
+import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_VEHICLE_IMAGE_URL;
 
 /**
  * Created by O BI HE ROCK on 2016-12-13
@@ -67,7 +69,7 @@ public class CarDetailActivity extends AppCompatActivity {
     // 전달 받은 차량정보를 입력
     private void initVariable() {
         // Glide로 이미지를 받음
-        Glide.with(this).load(ConstantsUtil.SERVER_API_URL_REAL + ConstantsUtil.SERVER_VEHICLE_IMAGE_URL + userVehicleVO.getModelImage()).into(carDetailImage);
+        Glide.with(this).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL + userVehicleVO.getModelImage()).into(carDetailImage);
 
         modelNameTextView.setText(userVehicleVO.getModelName());
         modelCodeTextView.setText(userVehicleVO.getModelCode());
