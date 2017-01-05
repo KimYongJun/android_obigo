@@ -3,7 +3,6 @@ package com.obigo.obigoproject.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,7 +30,6 @@ public class SplashActivity extends Activity {
 
     //디바이스 내부 앱 bundleVersion
     private String bundleVersion;
-    private PackageInfo packageInfo;
 
     //BundleVersion 체크 동일 여부
     private String bundleVersionCheckFlag;
@@ -59,11 +57,10 @@ public class SplashActivity extends Activity {
 
         //어플리케이션 버전 불러오기
         try {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            bundleVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        bundleVersion = packageInfo.versionName;
 
         //서버에서 BundleVersion 체크
         bundlePresenter.bundleVersionCheck(bundleVersion);
