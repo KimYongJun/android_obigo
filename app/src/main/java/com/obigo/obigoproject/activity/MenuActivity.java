@@ -64,6 +64,8 @@ public class MenuActivity extends AppCompatActivity implements
         this.title = title;
     }
 
+    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -206,16 +208,24 @@ public class MenuActivity extends AppCompatActivity implements
     public void onClick(int buttonIndex) {
         switch (buttonIndex) {
             case 0:
-                startActivity(new Intent(this, CarListActivity.class));
+                intent =new Intent(this,CarListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
                 break;
             case 1:
-                startActivity(new Intent(this, MessageActivity.class));
+                intent=new Intent(this,MessageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
                 break;
             case 2:
-                startActivity(new Intent(this, RequestActivity.class));
+                intent =new Intent(this,RequestActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
                 break;
             case 3:
-                startActivity(new Intent(this, SettingsActivity.class));
+                intent =new Intent(this,SettingsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
                 break;
         }
     }

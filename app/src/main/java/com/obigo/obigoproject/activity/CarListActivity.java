@@ -3,10 +3,12 @@ package com.obigo.obigoproject.activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.obigo.obigoproject.R;
@@ -16,6 +18,8 @@ import com.obigo.obigoproject.vo.UserVehicleVO;
 import com.viewpagerindicator.PageIndicator;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,6 +62,9 @@ public class CarListActivity extends MenuActivity {
     // 차량 리스트
     private List<UserVehicleVO> userVehicleList;
 
+    //뒤로가기
+    private boolean isSecond = false;  // 두번째 클릭인지 체크
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,4 +196,58 @@ public class CarListActivity extends MenuActivity {
         viewPager.setOffscreenPageLimit(1);
         indicator.setViewPager(viewPager);
     }
+
+    @Override
+    protected void onStop() {
+
+        System.out.println("스톱");
+        super.onStop();
+        getDelegate().onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        System.out.println("파괴");
+        super.onDestroy();
+        getDelegate().onDestroy();
+    }
+
+    // back 키 이벤트
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            if(isSecond == false) { // 첫번째인 경우
+                Toast.makeText(this, "뒤로 버튼을 한번 더 누르면 종료합니다.", Toast.LENGTH_LONG).show();
+                isSecond = true;
+                //Back키가 2초내에 두번 눌렸는지 감지
+                TimerTask second = new TimerTask() {
+                    @Override
+                    public void run() {
+                        autoSetting = getSharedPreferences("autoSetting", 0);
+                        String preferenceUserId =autoSetting.getString("ID", "");
+
+                        //자동 로그인 아닌 경우 종료시 registrationId 삭제
+                        if(preferenceUserId =="") {
+                            userPresenter.deleteRegistrationId(registrationId);
+                        }
+                        System.out.println("종료되는거니?");
+                        timer.cancel();
+                        timer = null;
+                        isSecond = false;
+                    }
+                };
+                if(timer != null){
+                    timer.cancel();
+                    timer = null;
+                }
+                timer = new Timer();
+                timer.schedule(second, 2000);
+            }else{
+                super.onBackPressed();
+            }
+        }
+        return true;
+    }
+
+
+
 }

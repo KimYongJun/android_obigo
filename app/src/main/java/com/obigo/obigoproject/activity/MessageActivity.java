@@ -56,7 +56,7 @@ public class MessageActivity extends MenuActivity implements OnItemClickListener
 
         // 세부사항 데이터 전달
         Intent intent = new Intent(MessageActivity.this, MessageDetailActivity.class);
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         // 메시지 객체 전달
         intent.putExtra("MessageDetailInfo", message);
         startActivity(intent);

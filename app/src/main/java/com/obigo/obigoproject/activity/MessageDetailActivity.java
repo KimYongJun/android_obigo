@@ -80,11 +80,11 @@ public class MessageDetailActivity extends AppCompatActivity {
     // 뒤로가기 버튼 눌렀을때 이전 페이지로 돌아가는데 필요한 메서드
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
+
+        Intent intent=new Intent(this,MessageActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+
         return super.onOptionsItemSelected(item);
     }
 
