@@ -199,8 +199,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setEnabled(true);
         finish();//뒤로가기 했을때 로그인 페이지는 보여주지않음
 
-
-        Intent intent = new Intent(this, CarListActivity.class);
+        Intent intent =new Intent(this,CarListActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
