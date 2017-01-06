@@ -61,11 +61,17 @@ public class MessageDetailActivity extends AppCompatActivity {
 
     // 전달받은 메시지 정보를 입력
     private void initVariable(MessageVO messageVO) {
-        _message_detail_title.setText("["+messageVO.getTitle()+"]");
+        _message_detail_title.setText(messageVO.getTitle());
         _message_detail_content.setText(messageVO.getContent());
         _message_detail_date.setText(messageVO.getSendDate());
-        Glide.with(this).load(SERVER_API_URL + SERVER_MESSAGE_IMAGE_URL +
-                messageVO.getUploadFile()).into(_message_detail_image);
+
+        if( messageVO.getUploadFile().equals("")){
+            Glide.with(this).load(R.drawable.logo).into(_message_detail_image);
+        }else{
+
+            Glide.with(this).load(SERVER_API_URL + SERVER_MESSAGE_IMAGE_URL +
+                    messageVO.getUploadFile()).into(_message_detail_image);
+        }
     }
 
     //CarDetail Page에 Bar등록

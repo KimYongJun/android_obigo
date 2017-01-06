@@ -86,7 +86,7 @@ public class MessageListAdapter extends ArrayAdapter<MessageVO> {
 
         if (holder.messageTitle != null && null != messageVO.getTitle()
                 && messageVO.getTitle().trim().length() > 0) {
-            holder.messageTitle.setText("["+Html.fromHtml(messageVO.getTitle())+"]");
+            holder.messageTitle.setText(Html.fromHtml(messageVO.getTitle()));
         }
         if (holder.messageContent != null && null != messageVO.getContent()
                 && messageVO.getContent().trim().length() > 0) {

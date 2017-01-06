@@ -23,6 +23,9 @@ public class ConstantsUtil extends AppCompatActivity {
     //자동 로그인이 아닐 경우 유지할 ID
     public static String UNCHECK_USER_ID;
 
+    //Application BundleVersion
+    public static String bundleVersion ="1.0";
+
 
 
 }
