@@ -23,13 +23,14 @@
 
     <TextView
         android:id="@+id/message_title"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
+        android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/message_date"
         android:layout_toRightOf="@+id/message_image"
         android:maxLines="1"
-        android:text="title"
+        android:ellipsize="end"
+        android:text="[titleasdasdsadsadasdasdasdasdasdasa]"
         android:textColor="@android:color/black"
         android:textSize="15dip"
         android:textStyle="bold" />
@@ -47,17 +48,6 @@
         android:textColor="@android:color/black"
         android:textSize="13dip" />
 
-    <TextView
-        android:id="@+id/message_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dip"
-        android:text="date"
-        android:textColor="@android:color/black"
-        android:textSize="12dip" />
-
     <ProgressBar
         android:id="@+id/message_bar"
         style="?android:attr/progressBarStyleSmall"
@@ -68,5 +58,16 @@
         android:layout_alignRight="@+id/message_image"
         android:layout_alignEnd="@+id/message_image"
         android:layout_marginEnd="31dp" />
+
+    <TextView
+        android:id="@+id/message_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="date"
+        android:textColor="@android:color/black"
+        android:textSize="8dp"
+        android:layout_alignBottom="@+id/message_image"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>
