@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 
 import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_API_URL;
 import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_VEHICLE_IMAGE_URL;
-
 /**
  * Created by O BI HE ROCK on 2016-12-13
  * 김용준, 최현욱
