@@ -3,8 +3,6 @@ package com.obigo.obigoproject.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
@@ -16,6 +14,7 @@ import com.obigo.obigoproject.util.DownloadFileAsync;
 
 import static android.widget.Toast.makeText;
 import static com.obigo.obigoproject.util.ConstantsUtil.APK_URL;
+import static com.obigo.obigoproject.util.ConstantsUtil.bundleVersion;
 
 
 /**
@@ -28,10 +27,6 @@ import static com.obigo.obigoproject.util.ConstantsUtil.APK_URL;
 public class SplashActivity extends Activity {
     private Handler handler;
     private BundlePresenter bundlePresenter;
-
-    //디바이스 내부 앱 bundleVersion
-    private String bundleVersion;
-    private PackageInfo packageInfo;
 
     //BundleVersion 체크 동일 여부
     private String bundleVersionCheckFlag;
@@ -56,14 +51,6 @@ public class SplashActivity extends Activity {
 
     //서버에 bundleVersionCheck 요청
     public void bundleVersionCheck() {
-
-        //어플리케이션 버전 불러오기
-        try {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        bundleVersion = packageInfo.versionName;
 
         //서버에서 BundleVersion 체크
         bundlePresenter.bundleVersionCheck(bundleVersion);

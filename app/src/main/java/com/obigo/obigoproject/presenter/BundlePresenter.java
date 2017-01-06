@@ -23,13 +23,13 @@ public class BundlePresenter {
     //BundleVersion 체크 동일 여부
     private String bundleVersionCheckFlag;
 
-    public BundlePresenter(SplashActivity splashActivity){
-        this.splashActivity =splashActivity;
+    public BundlePresenter(SplashActivity splashActivity) {
+        this.splashActivity = splashActivity;
         this.bundleService = ServiceManager.getInstance().getBundleService();
     }
 
     //Bundle Version 체크
-    public void bundleVersionCheck(String bundleVersion){
+    public void bundleVersionCheck(String bundleVersion) {
         Call<String> call = bundleService.bundleVersionCheck(bundleVersion);
         call.enqueue(new Callback<String>() {
             @Override
@@ -38,7 +38,7 @@ public class BundlePresenter {
                     bundleVersionCheckFlag = response.body();
                     splashActivity.dispatchBundleVersionCheck(bundleVersionCheckFlag);
                     Log.i("BundleVersion : ", bundleVersionCheckFlag);
-                }else {
+                } else {
                     Log.i("error : ", response.errorBody().toString());
                 }
             }

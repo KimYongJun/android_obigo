@@ -23,11 +23,13 @@
         android:title="SOFTWARE INFO">
 
         <Preference
-            android:summary="1.0"
-            android:title="Bundle Version" />
+            android:title="Bundle Version"
+            android:summary="1.0"/>
+
         <Preference
+            android:title="Bundle Name"
             android:summary="Obigo_First"
-            android:title="Bundle Name" />
+           />
         <Preference
             android:summary="Obigo"
             android:title="Bundle Developer" />
