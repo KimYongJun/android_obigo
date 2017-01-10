@@ -56,12 +56,16 @@ public class UserRequestPresenter {
                 if (response.isSuccessful()) {
                     vehicleList = response.body();
                     Log.i("vehicleList : ", UserRequestPresenter.this.vehicleList.toString());
-                    for (int i = 0; i < vehicleList.size(); i++) {
-                        modelNameList.add(i, vehicleList.get(i).getModelName());
-                        modelCodeList.add(i, vehicleList.get(i).getModelCode());
+
+                    if (vehicleList.size() == 0){
+                        modelNameList.add(0,"등록된 차량이 없습니다.");
+                    }else {
+                        for (int i = 0; i < vehicleList.size(); i++) {
+                            modelNameList.add(i, vehicleList.get(i).getModelName());
+                            modelCodeList.add(i, vehicleList.get(i).getModelCode());
+                        }
                     }
                     requestActivity.dispatchVehicleInfo(modelNameList, modelCodeList);
-                    // 널일때 아무것도 없습니다 예외처리하기 -최현욱일
                     spinnerArrayAdapter = new ArrayAdapter<String>(requestActivity, R.layout.spinner_item_position, modelNameList);
                     spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item_position);
                     modelCode.setAdapter(spinnerArrayAdapter);
@@ -89,7 +93,7 @@ public class UserRequestPresenter {
                 if (response.isSuccessful()) {
                     resultFlag = response.body();
                     requestActivity.dispatchRequestInfo(resultFlag);
-                    Log.i("succes : ", resultFlag);
+                    Log.i("success : ", resultFlag);
                 } else {
                     Log.i("error : ", response.errorBody().toString());
                 }

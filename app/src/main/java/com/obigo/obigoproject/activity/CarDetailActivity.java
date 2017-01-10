@@ -9,7 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.obigo.obigoproject.R;
+import com.obigo.obigoproject.presenter.ExceptionPresenter;
+import com.obigo.obigoproject.vo.LogVO;
 import com.obigo.obigoproject.vo.UserVehicleVO;
 
 import butterknife.Bind;
@@ -17,6 +22,8 @@ import butterknife.ButterKnife;
 
 import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_API_URL;
 import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_VEHICLE_IMAGE_URL;
+import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
+
 /**
  * Created by O BI HE ROCK on 2016-12-13
  * 김용준, 최현욱
@@ -46,6 +53,8 @@ public class CarDetailActivity extends AppCompatActivity {
     @Bind(R.id.detail_active_dtc_count) TextView activeDtcCountTextView;
     // 차량 정보 (CarListActivity에서 데이터를 Intent로 받음)
     private UserVehicleVO userVehicleVO;
+    // Retrofit 에러 보내기
+    private ExceptionPresenter exceptionPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +68,9 @@ public class CarDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userVehicleVO = (UserVehicleVO) intent.getSerializableExtra("carDetailInfo");
 
+        //에러 서버에 보내기 객체 생성
+        exceptionPresenter = new ExceptionPresenter(this);
+
         // 차량 데이터 초기화
         initVariable();
     }
@@ -67,8 +79,20 @@ public class CarDetailActivity extends AppCompatActivity {
     // 전달 받은 차량정보를 입력
     private void initVariable() {
         // Glide로 이미지를 받음
-        // 최현욱일
-        Glide.with(this).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL + userVehicleVO.getDetailImage()).into(carDetailImage);
+        Glide.with(this).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL + userVehicleVO.getDetailImage()).listener(new RequestListener<String, GlideDrawable>() {
+            @Override
+            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                LogVO logVO = new LogVO(USER_ID, "잘못된 파일 : " +  model);
+
+                exceptionPresenter.errorUserVehicle(logVO);
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                return false;
+            }
+        }).into(carDetailImage);
 
         modelNameTextView.setText(userVehicleVO.getModelName());
         modelCodeTextView.setText(userVehicleVO.getModelCode());

@@ -155,12 +155,11 @@ public class CarListActivity extends MenuActivity {
                             fadeinImage.setVisibility(View.VISIBLE);
                         }
 
-                        // 사용하지 않는 메소드
                         @Override
                         public void onAnimationEnd(Animation animation) {
                         }
 
-                        // 사용하지 않는 메소드
+
                         @Override
                         public void onAnimationRepeat(Animation animation) {
                         }
@@ -171,13 +170,11 @@ public class CarListActivity extends MenuActivity {
                 }
             }
 
-            // 사용하지 않는 메소드
             @Override
             public void onPageSelected(int position) {
 
             }
 
-            // 사용하지 않는 메소드
             @Override
             public void onPageScrollStateChanged(int state) {
             }
@@ -206,10 +203,23 @@ public class CarListActivity extends MenuActivity {
         }
 
         // userVehicleList data가 있을 경우 처음 이미지 고정 데이터 넣기
-        // 최현욱일
         if (userVehicleList.size() > 0) {
             Glide.with(this).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL
-                    + userVehicleList.get(0).getModelImage()).into(currentCarListImage);
+                    + userVehicleList.get(0).getModelImage())
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            LogVO logVO = new LogVO(USER_ID, "잘못된 파일 : " +  model);
+
+                            exceptionPresenter.errorUserVehicle(logVO);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    }).into(currentCarListImage);
         }
 
         nextCarListImage.setVisibility(View.GONE);

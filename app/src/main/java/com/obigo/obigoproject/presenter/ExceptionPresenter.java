@@ -2,6 +2,7 @@ package com.obigo.obigoproject.presenter;
 
 import android.util.Log;
 
+import com.obigo.obigoproject.activity.CarDetailActivity;
 import com.obigo.obigoproject.activity.CarListActivity;
 import com.obigo.obigoproject.service.ExceptionService;
 import com.obigo.obigoproject.service.ServiceManager;
@@ -19,10 +20,15 @@ import retrofit2.Response;
 public class ExceptionPresenter {
     private ExceptionService exceptionService;
     private CarListActivity carListActivity;
+    private CarDetailActivity carDetailActivity;
 
     public ExceptionPresenter(CarListActivity carListActivity){
         this.carListActivity =carListActivity;
         this.exceptionService = ServiceManager.getInstance().getExceptionService();
+    }
+    public ExceptionPresenter(CarDetailActivity carDetailActivity){
+        this.carDetailActivity =carDetailActivity;
+        this.exceptionService =ServiceManager.getInstance().getExceptionService();
     }
 
     public void errorUserVehicle(LogVO logVO){
