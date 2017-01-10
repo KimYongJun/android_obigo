@@ -41,14 +41,16 @@ import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
 
 public class MenuActivity extends AppCompatActivity implements
         BoomMenuButton.OnSubButtonClickListener {
+    // 메뉴 버튼
     private BoomMenuButton boomMenuButton;
     private BoomMenuButton boomMenuButtonInActionBar;
     private BoomMenuButton boomInfo;
-
     private Context mContext;
     private View menuActionBarView;
     private View mBottomView;
     private boolean isInit = false;
+    // Actionbar title
+    private String title;
 
     //Logout
     UserPresenter userPresenter;
@@ -57,14 +59,9 @@ public class MenuActivity extends AppCompatActivity implements
     SharedPreferences autoSetting;
     SharedPreferences.Editor editor;
 
-    // Actionbar title
-    private String title;
-
     public void setTitle(String title) {
         this.title = title;
     }
-
-    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,6 +168,7 @@ public class MenuActivity extends AppCompatActivity implements
                 .init(boomMenuButtonInActionBar);
     }
 
+    // 최현욱일 - 버전에 따른 이미지 변경
     // 버튼 BoomType 조정
     private BoomType getBoomType() {
         return BoomType.PARABOLA;
@@ -206,24 +204,26 @@ public class MenuActivity extends AppCompatActivity implements
      */
     @Override
     public void onClick(int buttonIndex) {
+        Intent intent = null;
+
         switch (buttonIndex) {
             case 0:
-                intent =new Intent(this,CarListActivity.class);
+                intent = new Intent(this,CarListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 break;
             case 1:
-                intent=new Intent(this,MessageActivity.class);
+                intent= new Intent(this,MessageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 break;
             case 2:
-                intent =new Intent(this,RequestActivity.class);
+                intent = new Intent(this,RequestActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 break;
             case 3:
-                intent =new Intent(this,SettingsActivity.class);
+                intent = new Intent(this,SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 break;
@@ -270,9 +270,6 @@ public class MenuActivity extends AppCompatActivity implements
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
 
 }

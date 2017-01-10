@@ -36,7 +36,6 @@ import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
  */
 
 public class LoginActivity extends AppCompatActivity {
-
     // 아이디
     @Bind(R.id.user_id)
     EditText idText;
@@ -46,25 +45,18 @@ public class LoginActivity extends AppCompatActivity {
     // 로그인 버튼
     @Bind(R.id.btn_login)
     Button loginButton;
-
     //체크박스
     @Bind(R.id.auto_login_check)
     CheckBox _auto_login_check;
-
     //id,password 저장
     SharedPreferences autoSetting;
     SharedPreferences.Editor editor;
-
     // 유저 요청
     private UserPresenter userPresenter;
-
     // registrationId 등록 결과
     private boolean registrationIdResult;
-
     //로그인 성공 실패 결과
     private String loginResultFlag;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
 
     //자동 로그인(id,password 저장 )
     public void autoLoginSettings() {
-
         autoSetting = getSharedPreferences("autoSetting", 0);
         editor = autoSetting.edit();
 
@@ -92,22 +83,12 @@ public class LoginActivity extends AppCompatActivity {
             passwordText.setText(autoSetting.getString("PW", ""));
             _auto_login_check.setChecked(true);
 
-            final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                    R.style.AppTheme_Dark_Dialog);
-            progressDialog.setIndeterminate(true);
-            progressDialog.setMessage("Logging in to your account...");
-            progressDialog.show();
+            //userId, userPassword 서버에 조회 요청
+            String userId = idText.getText().toString();
+            String userPassword = passwordText.getText().toString();
+            userPresenter.login(userId, userPassword);
 
-            new android.os.Handler().postDelayed(
-                    new Runnable() {
-                        public void run() {
-
-                            onLoginSuccess();
-
-                            progressDialog.dismiss();
-                        }
-                    }, 2000);
-
+            onResult();
         }
         _auto_login_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -122,25 +103,20 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean("Auto_Login_enabled", true);
                     editor.commit();
                 } else {
-
                     editor.clear();
                     editor.commit();
                 }
             }
         });
-
     }
-
 
     // 로그인 버튼 클릭
     @OnClick(R.id.btn_login)
     public void login() {
-
         // 로그인 정규식 체크
-  /*    if (!validate()) {
-          onLoginFailed();
-          return;
-      }*/
+        if (!validate()) {
+            return;
+        }
 
         loginButton.setEnabled(false);
 
@@ -149,42 +125,35 @@ public class LoginActivity extends AppCompatActivity {
         String userPassword = passwordText.getText().toString();
         userPresenter.login(userId, userPassword);
 
+        onResult();
+    }
 
+
+    //서버에 ID,PASSWORD 조회후 onLoginSuccess or onLoginFailed를 호출
+    public void onResult(){
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Logging in to your account...");
         progressDialog.show();
 
-        /**
-         * 로그인 인증을 위한 로직, Server로 데이터를 보냄
-         * 여기서 Bundle check, update / registration_id를 등록함
-         */
+
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-
                         if (loginResultFlag == "true") {
                             onLoginSuccess();
                         } else {
                             onLoginFailed();
                         }
-
-
                         progressDialog.dismiss();
                     }
                 }, 2000);
     }
 
-    //       뒤로가기
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }
 
     // 로그인 성공
     public void onLoginSuccess() {
-
         //로그인 성공시 ID EditText에 입력한 값을 Static하게 쓰기
         USER_ID = idText.getText().toString();
 
@@ -195,49 +164,45 @@ public class LoginActivity extends AppCompatActivity {
         String registrationId = FirebaseInstanceId.getInstance().getToken();
         userPresenter.insertRegistrationId(new RegistrationIdVO(USER_ID, registrationId));
 
-
         loginButton.setEnabled(true);
         finish();//뒤로가기 했을때 로그인 페이지는 보여주지않음
 
-        Intent intent =new Intent(this,CarListActivity.class);
+        Intent intent = new Intent(this, CarListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     // 로그인 실패
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_LONG).show();
         loginButton.setEnabled(true);
     }
 
+
+
     // 로그인 정규식 체크
     public boolean validate() {
-        boolean valid = true;
-
         String id = idText.getText().toString();
         String password = passwordText.getText().toString();
 
-        if (id.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(id).matches()) {
-            idText.setError("enter a valid id address");
-            valid = false;
-        } else {
-            idText.setError(null);
+        if (id.isEmpty()) {
+            idText.setError("Enter a vaild ID");
+            Toast.makeText(getBaseContext(), "Enter a vaild ID", Toast.LENGTH_LONG).show();
+            return false;
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            passwordText.setError("between 4 and 10 alphanumeric characters");
-            valid = false;
-        } else {
-            passwordText.setError(null);
+        if (password.isEmpty()) {
+            passwordText.setError("Enter a vaild Password");
+            Toast.makeText(getBaseContext(), "Enter a vaild Password", Toast.LENGTH_LONG).show();
+            return false;
         }
 
-        return valid;
+        return true;
     }
 
-
+    // 로그인 성공 유무
     public void dispatchLoginResult(String loginResultFlag) {
         this.loginResultFlag = loginResultFlag;
     }
-
 
 }

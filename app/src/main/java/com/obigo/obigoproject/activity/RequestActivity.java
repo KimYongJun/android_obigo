@@ -35,7 +35,6 @@ import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
  */
 
 public class RequestActivity extends MenuActivity {
-
     //모델 명,색상,지역명,VIN
     @Bind(R.id.model_name)
     Spinner modelName;
@@ -45,7 +44,6 @@ public class RequestActivity extends MenuActivity {
     Spinner location;
     @Bind(R.id.vin)
     EditText vin;
-
     //reset버튼, Send버튼
     @Bind(R.id.resetBtn)
     Button reset;
@@ -75,7 +73,7 @@ public class RequestActivity extends MenuActivity {
         initModelCode();
     }
 
-    //스피너 뷰 (모델이름 리스트)
+    // Spiner view (모델 이름 리스트)
     public void initModelCode() {
         userRequestPresenter.getVehicleList();
 
@@ -93,45 +91,34 @@ public class RequestActivity extends MenuActivity {
 
     }
 
-
     // Reset 버튼
     @OnClick(R.id.resetBtn)
     public void resetData() {
-
         modelName.setSelection(0);
         modelColor.setSelection(0);
         location.setSelection(0);
         vin.setText("");
-
     }
 
     //UserRequest 요청 버튼
     @OnClick(R.id.sendBtn)
     public void requestUserCar() {
-        //modleName,location에서 Select 선택했을시 (VIN 정규식 or 예외처리 추가 하기)
-        if((modelColor.getSelectedItem().toString().equals("Select")) || (location.getSelectedItem().toString().equals("Select"))){
+        if ((modelColor.getSelectedItem().toString().equals("Select")) || (location.getSelectedItem().toString().equals("Select"))) {
             Toast.makeText(getApplicationContext(),"정확히 입력해 주세요",Toast.LENGTH_SHORT).show();
-        }if(vin.length() != 10){
-            Toast.makeText(getApplicationContext(),"VIN 번호는 10자리를 입력해 주세요",Toast.LENGTH_SHORT).show();
+        } if (vin.length() != 10) {
+            Toast.makeText(getApplicationContext(), "VIN 번호는 10자리를 입력해 주세요", Toast.LENGTH_SHORT).show();
         } else {
-
-            //추후에 Toast 메시지 지우기 (test용)
-            Toast.makeText(getApplicationContext(),
-                    "code : " + modelNameList.get(modelHoldNumber) + " , " + "color : " + modelColor.getSelectedItem().toString() +
-                            " , " + "location : " + location.getSelectedItem().toString() + " , " + "vin : " +
-                            vin.getText().toString(), Toast.LENGTH_SHORT).show();
-
             userRequestPresenter.insertUserRequest(new UserRequestVO(USER_ID, modelCodeList.get(modelHoldNumber), modelColor.getSelectedItem().toString(),
                     location.getSelectedItem().toString(), vin.getText().toString()));
 
-            //로딩화면 보여주기
+            // 로딩화면 보여주기
             final ProgressDialog progressDialog = new ProgressDialog(RequestActivity.this,
                     R.style.AppTheme_Dark_Dialog);
             progressDialog.setIndeterminate(true);
             progressDialog.setMessage("Loding...");
             progressDialog.show();
 
-            //값을 서버에서 송수신 하는데 걸리는 시간을 지연 시키기
+            // 값을 서버에서 송수신 하는데 걸리는 시간을 지연 시키기
             new android.os.Handler().postDelayed(
                     new Runnable() {
                         public void run() {
@@ -143,7 +130,6 @@ public class RequestActivity extends MenuActivity {
     }
 
     public void requestResult() {
-
         if (resultFlag == "false") {
             resultFlag = "Try Again";
         } else {

@@ -13,13 +13,12 @@ import retrofit2.Response;
 /**
  * Created by O BI HE ROCK on 2016-12-22
  * 김용준, 최현욱
+ * Bundle 정보와 파일을 전달 받음
  */
 
 public class BundlePresenter {
-
     private BundleService bundleService;
     private SplashActivity splashActivity;
-
     //BundleVersion 체크 동일 여부
     private String bundleVersionCheckFlag;
 
@@ -45,7 +44,7 @@ public class BundlePresenter {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.i("error : ", t.getMessage());
+                System.out.println("서버와 연결이 되지 않습니다.");
             }
         });
     }

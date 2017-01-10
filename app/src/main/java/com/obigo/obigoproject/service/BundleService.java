@@ -10,9 +10,7 @@ import retrofit2.http.Query;
  */
 
 public interface BundleService {
-
-    //Bundle Version Check
+    // Bundle Version Check
     @GET("bundleversioncheck/")
     Call<String> bundleVersionCheck(@Query("bundleVersion")String bundleVersion);
-
 }

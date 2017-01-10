@@ -62,8 +62,5 @@ dependencies {
 
     // menu button module
     compile project(':menu')
-
-    // requestview module
-    compile project(':requestview')
 }
 

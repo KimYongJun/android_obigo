@@ -44,7 +44,6 @@ public class CarDetailActivity extends AppCompatActivity {
     @Bind(R.id.detail_mileage) TextView mileageTextView;
     // 고장 코드
     @Bind(R.id.detail_active_dtc_count) TextView activeDtcCountTextView;
-
     // 차량 정보 (CarListActivity에서 데이터를 Intent로 받음)
     private UserVehicleVO userVehicleVO;
 
@@ -68,7 +67,8 @@ public class CarDetailActivity extends AppCompatActivity {
     // 전달 받은 차량정보를 입력
     private void initVariable() {
         // Glide로 이미지를 받음
-        Glide.with(this).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL + userVehicleVO.getModelImage()).into(carDetailImage);
+        // 최현욱일
+        Glide.with(this).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL + userVehicleVO.getDetailImage()).into(carDetailImage);
 
         modelNameTextView.setText(userVehicleVO.getModelName());
         modelCodeTextView.setText(userVehicleVO.getModelCode());

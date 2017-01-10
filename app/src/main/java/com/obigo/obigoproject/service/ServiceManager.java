@@ -18,6 +18,8 @@ public enum ServiceManager {
     private MessageService messageService;
     // 번들 서비스
     private BundleService bundleService;
+    //예외(에러) 서비스
+    private ExceptionService exceptionService;
 
     ServiceManager() {
         userService = RetrofitServiceGenericFactory.createService(UserService.class);
@@ -25,6 +27,7 @@ public enum ServiceManager {
         userRequestService = RetrofitServiceGenericFactory.createService(UserRequestService.class);
         messageService = RetrofitServiceGenericFactory.createService(MessageService.class);
         bundleService = RetrofitServiceGenericFactory.createService(BundleService.class);
+        exceptionService = RetrofitServiceGenericFactory.createService(ExceptionService.class);
     }
 
     public UserService getUserService() {
@@ -44,6 +47,8 @@ public enum ServiceManager {
     }
 
     public BundleService getBundleService(){return  bundleService;}
+
+    public ExceptionService getExceptionService(){return exceptionService;}
 
     public static ServiceManager getInstance() {
         return INSTANCE;

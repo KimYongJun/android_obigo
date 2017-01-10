@@ -21,22 +21,19 @@ import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
 /**
  * Created by O BI HE ROCK on 2016-12-06
  * 김용준, 최현욱
- * user_info button
- * <p>
+ * UserInfo Button in Setting page
+ *
  * onCreateView()는 Fragment에 실제 사용할 뷰를 만드는 작업을 하는 메소드이다.
  * LayoutInflater를 인자로 받아서 layout으로 설정한 XML을 연결하거나
  * bundle에 의한 작업을 하는 메소드이다.
  */
 
-//Settings Page  UserInfo Button
 public class UserInfoButtonPreference extends android.preference.Preference {
+    @Bind(R.id.userInfoBtn)
+    Button mButtonUserInfo;
     private Context mContext;
     UserVO userVO;
     UserPresenter userPresenter;
-
-    @Bind(R.id.userInfoBtn)
-    Button mButtonUserInfo;
-
 
     public UserInfoButtonPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -54,7 +51,6 @@ public class UserInfoButtonPreference extends android.preference.Preference {
     //뷰(버튼) 생성
     @Override
     protected View onCreateView(android.view.ViewGroup parent) {
-
         final LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View layout = layoutInflater.inflate(R.layout.preference_button_userinfo, parent, false);
         ButterKnife.bind(this, layout);
@@ -69,7 +65,7 @@ public class UserInfoButtonPreference extends android.preference.Preference {
     @OnClick(R.id.userInfoBtn)
     public void showUserInfo() {
 
-        //다이얼로그에 유저정보 띄우기
+        // 다이얼로그에 유저정보 띄우기
         final MaterialDialog materialDialog = new MaterialDialog(this.mContext);
         materialDialog.setMessage(
                         "\r\n" + "\r\n" +
@@ -89,7 +85,6 @@ public class UserInfoButtonPreference extends android.preference.Preference {
                             }
                         });
         materialDialog.show();
-
     }
 
     public void dispatchUserInfo(UserVO userVO) {

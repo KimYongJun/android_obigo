@@ -2,6 +2,7 @@ package com.obigo.obigoproject.presenter;
 
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.activity.MessageActivity;
@@ -25,7 +26,6 @@ import retrofit2.Response;
 public class MessagePresenter {
     private ListView listView;
     private MessageListAdapter messageListAdapter;
-    // 메시지 리스트 요청
     private MessageService messageService;
     private MessageActivity messageActivity;
     // 메시지 정보
@@ -65,7 +65,7 @@ public class MessagePresenter {
             // 서버와 접속 실패
             @Override
             public void onFailure(Call<List<MessageVO>> call, Throwable t) {
-                Log.i("에러 : ", t.getMessage());
+                Toast.makeText(messageActivity.getBaseContext(), "서버와 연결이 되지 않습니다.", Toast.LENGTH_LONG).show();
             }
         });
     }

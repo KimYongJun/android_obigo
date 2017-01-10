@@ -1,6 +1,7 @@
 package com.obigo.obigoproject.presenter;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.obigo.obigoproject.activity.CarListActivity;
 import com.obigo.obigoproject.service.ServiceManager;
@@ -16,6 +17,7 @@ import retrofit2.Response;
 /**
  * Created by O BI HE ROCK on 2016-12-12
  * 김용준, 최현욱
+ * 사용자 챠량 정보를 전달 받음
  */
 
 public class UserVehiclePresenter {
@@ -45,13 +47,12 @@ public class UserVehiclePresenter {
                 } else {
                     Log.i("error : ", response.errorBody().toString());
                 }
-
             }
 
             // 서버와 접속 실패
             @Override
             public void onFailure(Call<List<UserVehicleVO>> call, Throwable t) {
-                Log.i("에러 : ", t.getMessage());
+                Toast.makeText(carListActivity.getBaseContext(), "서버와 연결이 되지 않습니다.", Toast.LENGTH_LONG).show();
             }
         });
     }

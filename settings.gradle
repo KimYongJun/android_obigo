@@ -1,1 +1,1 @@
-include ':app', ':menu', ':requestview'
+include ':app', ':menu'

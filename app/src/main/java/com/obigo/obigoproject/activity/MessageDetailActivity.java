@@ -65,10 +65,10 @@ public class MessageDetailActivity extends AppCompatActivity {
         _message_detail_content.setText(messageVO.getContent());
         _message_detail_date.setText(messageVO.getSendDate());
 
-        if( messageVO.getUploadFile().equals("")){
+        // 최현욱일 - 버전에 따른 이미지 변경
+        if (messageVO.getUploadFile().equals("")) {
             Glide.with(this).load(R.drawable.logo).into(_message_detail_image);
-        }else{
-
+        } else {
             Glide.with(this).load(SERVER_API_URL + SERVER_MESSAGE_IMAGE_URL +
                     messageVO.getUploadFile()).into(_message_detail_image);
         }
@@ -86,8 +86,7 @@ public class MessageDetailActivity extends AppCompatActivity {
     // 뒤로가기 버튼 눌렀을때 이전 페이지로 돌아가는데 필요한 메서드
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        Intent intent=new Intent(this,MessageActivity.class);
+        Intent intent= new Intent(this,MessageActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
 

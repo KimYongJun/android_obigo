@@ -54,7 +54,6 @@ public class MessageListAdapter extends ArrayAdapter<MessageVO> {
                 .build();
 
         imageLoader = ImageLoader.getInstance();
-
     }
 
     @Override
@@ -73,8 +72,9 @@ public class MessageListAdapter extends ArrayAdapter<MessageVO> {
             holder = (ViewHolder) view.getTag();
         }
 
-        if ((messageList == null) || ((position + 1) > messageList.size()))
+        if ((messageList == null) || ((position + 1) > messageList.size())) {
             return view;
+        }
 
         messageVO = messageList.get(position);
 

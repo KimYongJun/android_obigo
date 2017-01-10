@@ -10,13 +10,15 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 /**
- * Created by BIT on 2016-12-28.
+ * Created by O BI HE ROCK on 2016-01-03
+ * 김용준, 최현욱
+ * adb shell 루트 권한 부여
  */
 
 public class RootPermitUtil {
     public static final String TAG = "Utils";
 
-
+    //안드로이드 adb shell 루트 권한을 부여받고 Install 진행
     @Deprecated
     public static boolean isRooted() {
         Process process = null;
@@ -43,6 +45,7 @@ public class RootPermitUtil {
         return false;
     }
 
+    // 파일 경로 존재 유무 확인
     public static boolean checkRooted() {
         boolean result = false;
         try {
