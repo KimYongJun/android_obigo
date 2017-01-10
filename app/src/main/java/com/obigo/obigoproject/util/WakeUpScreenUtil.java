@@ -4,10 +4,11 @@ import android.content.Context;
 import android.os.PowerManager;
 
 /**
- * 스크린을 ON한다. 젤리빈 4.2부터는 getWindows() 권장
  * Created by O BI HE ROCK on 2016-12-20
  * 김용준, 최현욱
+ * 스크린을 ON한다. 젤리빈 4.2부터는 getWindows() 권장
  */
+
 public class WakeUpScreenUtil {
     private static PowerManager.WakeLock wakeLock;
 

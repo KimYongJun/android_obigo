@@ -20,7 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by O BI HE ROCK on 2016-12-29
+ * Created by O BI HE ROCK on 2016-01-03
  * 김용준, 최현욱
  * 다운받은 APK 파일 설치
  */

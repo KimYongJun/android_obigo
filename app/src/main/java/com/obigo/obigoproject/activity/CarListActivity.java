@@ -11,9 +11,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.adapter.CarListAdapter;
+import com.obigo.obigoproject.presenter.ExceptionPresenter;
 import com.obigo.obigoproject.presenter.UserVehiclePresenter;
+import com.obigo.obigoproject.vo.LogVO;
 import com.obigo.obigoproject.vo.UserVehicleVO;
 import com.viewpagerindicator.PageIndicator;
 
@@ -55,13 +60,12 @@ public class CarListActivity extends MenuActivity {
     private String[] icons;
     // 차량 이름 리스트
     private String[] carNameList;
-
-
     // Retrofit 차량 요청
     private UserVehiclePresenter userVehiclePresenter;
     // 차량 리스트
     private List<UserVehicleVO> userVehicleList;
-
+    // Retrofit 에러 보내기
+    private ExceptionPresenter exceptionPresenter;
     //뒤로가기
     private boolean isSecond = false;  // 두번째 클릭인지 체크
     private Timer timer;
@@ -78,6 +82,8 @@ public class CarListActivity extends MenuActivity {
         userVehiclePresenter = new UserVehiclePresenter(this, USER_ID);
         userVehiclePresenter.getUserVehicleList();
 
+        //에러 서버에 보내기 객체 생성
+        exceptionPresenter = new ExceptionPresenter(this);
 
         initAdapter();
     }
@@ -105,7 +111,23 @@ public class CarListActivity extends MenuActivity {
                     fadeinImage.bringToFront();
                     // 이미지 넣기
                     Glide.with(getApplicationContext()).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL +
-                            userVehicleList.get(lastPage).getModelImage()).into(fadeinImage);
+                            userVehicleList.get(lastPage).getModelImage())
+                            .listener(new RequestListener<String, GlideDrawable>() {
+                                @Override
+                                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                    LogVO logVO = new LogVO(USER_ID, "잘못된 파일 : " +  model);
+
+                                    exceptionPresenter.errorUserVehicle(logVO);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                    return false;
+                                }
+                            })
+                            .into(fadeinImage);
+
                     fadeinImage.clearAnimation();
                     fadeoutImage.clearAnimation();
 
@@ -149,7 +171,6 @@ public class CarListActivity extends MenuActivity {
                 }
             }
 
-
             // 사용하지 않는 메소드
             @Override
             public void onPageSelected(int position) {
@@ -185,7 +206,8 @@ public class CarListActivity extends MenuActivity {
         }
 
         // userVehicleList data가 있을 경우 처음 이미지 고정 데이터 넣기
-        if(userVehicleList.size() > 0) {
+        // 최현욱일
+        if (userVehicleList.size() > 0) {
             Glide.with(this).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL
                     + userVehicleList.get(0).getModelImage()).into(currentCarListImage);
         }
@@ -197,25 +219,10 @@ public class CarListActivity extends MenuActivity {
         indicator.setViewPager(viewPager);
     }
 
-    @Override
-    protected void onStop() {
-
-        System.out.println("스톱");
-        super.onStop();
-        getDelegate().onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        System.out.println("파괴");
-        super.onDestroy();
-        getDelegate().onDestroy();
-    }
-
     // back 키 이벤트
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            if(isSecond == false) { // 첫번째인 경우
+            if (isSecond == false) { // 첫번째인 경우
                 Toast.makeText(this, "뒤로 버튼을 한번 더 누르면 종료합니다.", Toast.LENGTH_LONG).show();
                 isSecond = true;
                 //Back키가 2초내에 두번 눌렸는지 감지
@@ -223,31 +230,27 @@ public class CarListActivity extends MenuActivity {
                     @Override
                     public void run() {
                         autoSetting = getSharedPreferences("autoSetting", 0);
-                        String preferenceUserId =autoSetting.getString("ID", "");
+                        String preferenceUserId = autoSetting.getString("ID", "");
 
                         //자동 로그인 아닌 경우 종료시 registrationId 삭제
-                        if(preferenceUserId =="") {
+                        if (preferenceUserId == "") {
                             userPresenter.deleteRegistrationId(registrationId);
                         }
-                        System.out.println("종료되는거니?");
                         timer.cancel();
                         timer = null;
                         isSecond = false;
                     }
                 };
-                if(timer != null){
+                if (timer != null) {
                     timer.cancel();
                     timer = null;
                 }
                 timer = new Timer();
                 timer.schedule(second, 2000);
-            }else{
+            } else {
                 super.onBackPressed();
             }
         }
         return true;
     }
-
-
-
 }

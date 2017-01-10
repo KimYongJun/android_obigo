@@ -3,6 +3,7 @@ package com.obigo.obigoproject.presenter;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.activity.RequestActivity;
@@ -60,7 +61,7 @@ public class UserRequestPresenter {
                         modelCodeList.add(i, vehicleList.get(i).getModelCode());
                     }
                     requestActivity.dispatchVehicleInfo(modelNameList, modelCodeList);
-
+                    // 널일때 아무것도 없습니다 예외처리하기 -최현욱일
                     spinnerArrayAdapter = new ArrayAdapter<String>(requestActivity, R.layout.spinner_item_position, modelNameList);
                     spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item_position);
                     modelCode.setAdapter(spinnerArrayAdapter);
@@ -72,7 +73,7 @@ public class UserRequestPresenter {
 
             @Override
             public void onFailure(Call<List<VehicleVO>> call, Throwable t) {
-                Log.i("에러 : ", t.getMessage());
+                Toast.makeText(requestActivity.getBaseContext(), "서버와 연결이 되지 않습니다.", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -97,7 +98,7 @@ public class UserRequestPresenter {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.i("에러 : ", t.getMessage());
+                Toast.makeText(requestActivity.getBaseContext(), "서버와 연결이 되지 않습니다.", Toast.LENGTH_LONG).show();
             }
         });
     }

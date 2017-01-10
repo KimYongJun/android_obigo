@@ -19,7 +19,6 @@ import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
  * Created by O BI HE ROCK on 2016-12-01
  * 김용준, 최현욱
  * 메시지 리스트를 보여주는 페이지 - user_id, page_index
- * scroll, add_button 구현 예정
  */
 
 public class MessageActivity extends MenuActivity implements OnItemClickListener {
@@ -43,11 +42,6 @@ public class MessageActivity extends MenuActivity implements OnItemClickListener
         messagePresenter.getMessageList();
     }
 
-
-    public void dispatchMessageInfo(List<MessageVO> messageList) {
-        this.messageList = messageList;
-    }
-
     // 특정 메시지 클릭
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -60,5 +54,10 @@ public class MessageActivity extends MenuActivity implements OnItemClickListener
         // 메시지 객체 전달
         intent.putExtra("MessageDetailInfo", message);
         startActivity(intent);
+    }
+
+    // 메시지 정보
+    public void dispatchMessageInfo(List<MessageVO> messageList) {
+        this.messageList = messageList;
     }
 }
