@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.obigo.menu.BoomMenuButton;
@@ -208,22 +207,22 @@ public class MenuActivity extends AppCompatActivity implements
 
         switch (buttonIndex) {
             case 0:
-                intent = new Intent(this,CarListActivity.class);
+                intent = new Intent(this, CarListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 break;
             case 1:
-                intent= new Intent(this,MessageActivity.class);
+                intent = new Intent(this, MessageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 break;
             case 2:
-                intent = new Intent(this,RequestActivity.class);
+                intent = new Intent(this, RequestActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 break;
             case 3:
-                intent = new Intent(this,SettingsActivity.class);
+                intent = new Intent(this, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 break;
@@ -254,8 +253,7 @@ public class MenuActivity extends AppCompatActivity implements
     //옵션 메뉴 선택 (Logout 버튼 클릭)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.id.logoutBtn){
-            Toast.makeText(this, "Logout..", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.logoutBtn) {
             userPresenter.deleteRegistrationId(registrationId);
 
             autoSetting = getSharedPreferences("autoSetting", 0);
@@ -267,6 +265,7 @@ public class MenuActivity extends AppCompatActivity implements
             editor.commit();
 
             startActivity(new Intent(this, LoginActivity.class));
+            MenuActivity.this.finish();
         }
         return super.onOptionsItemSelected(item);
     }

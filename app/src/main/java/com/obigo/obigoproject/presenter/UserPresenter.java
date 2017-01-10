@@ -87,10 +87,8 @@ public class UserPresenter {
                 }
             }
 
-            // 서버와 접속 실패
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(loginActivity.getBaseContext(), "서버와 연결이 되지 않습니다.", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -109,10 +107,8 @@ public class UserPresenter {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(menuActivity.getBaseContext(), "서버와 연결이 되지 않습니다.", Toast.LENGTH_LONG).show();
             }
         });
-
      }
 
     // 유저정보 요청

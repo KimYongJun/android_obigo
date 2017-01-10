@@ -20,7 +20,7 @@ import com.obigo.obigoproject.util.WakeUpScreenUtil;
 
 import java.net.URL;
 
-import static com.obigo.obigoproject.util.ConstantsUtil.UNCHECK_USER_ID;
+import static com.obigo.obigoproject.util.ConstantsUtil.AUTO_USER_ID;
 import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
 
 /**
@@ -52,21 +52,18 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         // 화면이 켜지는 작업 - 10초 유지
         WakeUpScreenUtil.acquire(getApplicationContext(), 10000);
 
-        //Shared Preference에 저장되어 있는 ID값 불러오기
-        autoSetting = getSharedPreferences("autoSetting", 0);
-        USER_ID = autoSetting.getString("ID", "");
+
 
         // 메시지를 클릭하면 메시지 리스트로 이동
         Intent intent;
 
-        if (USER_ID != "") {
+        if (AUTO_USER_ID != "") {
             //자동로그인힌 경우
             intent = new Intent(this, MessageActivity.class);
 
         } else {
-            if (UNCHECK_USER_ID != null) {
+            if (USER_ID != null) {
                 //자동로그인에 Check 하지 않았고 유지할 ID가 있는 경우
-                USER_ID = UNCHECK_USER_ID;
                 intent = new Intent(this, MessageActivity.class);
             } else {
                 //자동로그인에 Check 하지 않았고 유지할 ID가 없는 경우

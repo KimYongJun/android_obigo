@@ -1,8 +1,5 @@
 apply plugin: 'com.android.application'
 
-// fcm apply plugin
-apply plugin: 'com.google.gms.google-services'
-
 android {
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
@@ -63,4 +60,8 @@ dependencies {
     // menu button module
     compile project(':menu')
 }
+
+// fcm apply plugin (plugin은 apply를 하단에 적용해야 함)
+apply plugin: 'com.google.gms.google-services'
+
 
