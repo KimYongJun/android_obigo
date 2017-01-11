@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.obigo.obigoproject"
-          android:versionCode="1"
-          android:versionName="1.0">
+    package="com.obigo.obigoproject"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -16,10 +16,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!-- FILE IO  -->
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 
     <application
@@ -28,10 +28,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- splash -->
         <activity
             android:name=".activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
@@ -42,15 +44,29 @@
         <!-- splash -->
         <activity
             android:name=".activity.LoginActivity"
+            android:noHistory="true"
             android:theme="@style/AppTheme.Dark" />
 
-        <activity android:name=".activity.MenuActivity" />
-        <activity android:name=".activity.CarListActivity" />
-        <activity android:name=".activity.CarDetailActivity" />
-        <activity android:name=".activity.MessageActivity" />
-        <activity android:name=".activity.MessageDetailActivity" />
-        <activity android:name=".activity.RequestActivity" />
-        <activity android:name=".activity.SettingsActivity" />
+        <activity
+            android:name=".activity.MenuActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".activity.CarListActivity"/>
+        <activity
+            android:name=".activity.CarDetailActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".activity.MessageActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".activity.MessageDetailActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".activity.RequestActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:noHistory="true" />
 
         <!-- FCM 구현 FirebaseMessagingService -->
         <service android:name=".service.FirebaseMessagingService">

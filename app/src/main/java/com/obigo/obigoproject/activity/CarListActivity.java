@@ -29,6 +29,7 @@ import java.util.TimerTask;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static com.obigo.obigoproject.util.ConstantsUtil.AUTO_USER_ID;
 import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_API_URL;
 import static com.obigo.obigoproject.util.ConstantsUtil.SERVER_VEHICLE_IMAGE_URL;
 import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
@@ -239,11 +240,9 @@ public class CarListActivity extends MenuActivity {
                 TimerTask second = new TimerTask() {
                     @Override
                     public void run() {
-                        autoSetting = getSharedPreferences("autoSetting", 0);
-                        String preferenceUserId = autoSetting.getString("ID", "");
 
                         //자동 로그인 아닌 경우 종료시 registrationId 삭제
-                        if (preferenceUserId == "") {
+                        if (AUTO_USER_ID == "") {
                             userPresenter.deleteRegistrationId(registrationId);
                         }
                         timer.cancel();
@@ -262,5 +261,14 @@ public class CarListActivity extends MenuActivity {
             }
         }
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        //자동 로그인 아닌 경우 종료시 registrationId 삭제
+        if (AUTO_USER_ID == "") {
+            userPresenter.deleteRegistrationId(registrationId);
+        }
+        super.onDestroy();
     }
 }
