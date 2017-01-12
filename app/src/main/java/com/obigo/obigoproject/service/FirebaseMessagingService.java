@@ -33,7 +33,6 @@ import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
     private static final String TAG = "FirebaseMsgService";
     SharedPreferences autoSetting;
-    SharedPreferences.Editor editor;
 
     // 서버에서 Push Message 전달시 받는 작업
     @Override
@@ -56,20 +55,28 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         // 메시지를 클릭하면 메시지 리스트로 이동
         Intent intent;
+        autoSetting = getSharedPreferences("autoSetting", 0);
 
-        if (AUTO_USER_ID != "") {
-            //자동로그인힌 경우
+        //Static한 USER_ID가 남아있는경우
+        if(USER_ID != null){
             intent = new Intent(this, MessageActivity.class);
-
-        } else {
-            if (USER_ID != null) {
-                //자동로그인에 Check 하지 않았고 유지할 ID가 있는 경우
+        }
+        //정상종료나, 프로세스 모두종료하기 한 경우
+        else{
+            //자동로그인일 경우
+            if( autoSetting.getString("ID", "")!= ""){
+                AUTO_USER_ID =  autoSetting.getString("ID", "");
+                USER_ID = AUTO_USER_ID;
                 intent = new Intent(this, MessageActivity.class);
-            } else {
-                //자동로그인에 Check 하지 않았고 유지할 ID가 없는 경우
+            }
+            //자동로그인 아닌경우
+            else{
                 intent = new Intent(this, SplashActivity.class);
             }
+
         }
+
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

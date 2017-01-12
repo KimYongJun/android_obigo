@@ -25,6 +25,7 @@ import com.obigo.menu.Types.PlaceType;
 import com.obigo.menu.Util;
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.UserPresenter;
+import com.obigo.obigoproject.util.UncaughtExceptionHandlerUtil;
 
 import butterknife.ButterKnife;
 
@@ -94,8 +95,10 @@ public class MenuActivity extends AppCompatActivity implements
 
         //로그아웃버튼
         logout = (Menu) findViewById(R.id.logoutBtn);
-
         userPresenter = new UserPresenter(this, USER_ID);
+
+        //예상치 않은 오류 처리
+        Thread.currentThread().setUncaughtExceptionHandler(new UncaughtExceptionHandlerUtil(this));
     }
 
     @Override

@@ -84,7 +84,7 @@ public class CarDetailActivity extends AppCompatActivity {
             public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
                 LogVO logVO = new LogVO(USER_ID, "잘못된 파일 : " +  model);
 
-                exceptionPresenter.errorUserVehicle(logVO);
+                exceptionPresenter.errorUserVehicle("uservehicle",logVO);
                 return false;
             }
 

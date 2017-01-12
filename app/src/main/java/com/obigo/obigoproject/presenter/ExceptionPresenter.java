@@ -6,6 +6,7 @@ import com.obigo.obigoproject.activity.CarDetailActivity;
 import com.obigo.obigoproject.activity.CarListActivity;
 import com.obigo.obigoproject.service.ExceptionService;
 import com.obigo.obigoproject.service.ServiceManager;
+import com.obigo.obigoproject.util.UncaughtExceptionHandlerUtil;
 import com.obigo.obigoproject.vo.LogVO;
 
 import retrofit2.Call;
@@ -21,6 +22,7 @@ public class ExceptionPresenter {
     private ExceptionService exceptionService;
     private CarListActivity carListActivity;
     private CarDetailActivity carDetailActivity;
+    private UncaughtExceptionHandlerUtil uncaughtExceptionHandlerUtil;
 
     public ExceptionPresenter(CarListActivity carListActivity){
         this.carListActivity =carListActivity;
@@ -30,9 +32,13 @@ public class ExceptionPresenter {
         this.carDetailActivity =carDetailActivity;
         this.exceptionService =ServiceManager.getInstance().getExceptionService();
     }
+    public ExceptionPresenter(UncaughtExceptionHandlerUtil uncaughtExceptionHandlerUtil){
+        this.uncaughtExceptionHandlerUtil =uncaughtExceptionHandlerUtil;
+        this.exceptionService =ServiceManager.getInstance().getExceptionService();
+    }
 
-    public void errorUserVehicle(LogVO logVO){
-        Call<LogVO> call = exceptionService.errorUserVehicle("uservehicle", logVO);
+    public void errorUserVehicle(String url,LogVO logVO){
+        Call<LogVO> call = exceptionService.errorUserVehicle(url, logVO);
         call.enqueue(new Callback<LogVO>() {
             @Override
             public void onResponse(Call<LogVO> call, Response<LogVO> response) {
