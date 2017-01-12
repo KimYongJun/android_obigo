@@ -24,10 +24,10 @@ public class ConstantsUtil extends AppCompatActivity {
     public static String SERVER_MESSAGE_IMAGE_URL = "image/pushmessage/";
 
     //로그인 성공시 등록될 ID
-    public static String USER_ID;
+    public static String USER_ID=null;
 
     //자동 로그인일떄 ID
-    public static String AUTO_USER_ID;
+    public static String AUTO_USER_ID=null;
 
     //Application BundleVersion
     public static String bundleVersion ="0.01";

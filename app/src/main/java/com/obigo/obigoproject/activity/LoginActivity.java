@@ -87,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
             String userPassword = passwordText.getText().toString();
             userPresenter.login(userId, userPassword);
 
-
             onResult();
         }
         _auto_login_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -102,6 +101,10 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("PW", PW);
                     editor.putBoolean("Auto_Login_enabled", true);
                     editor.commit();
+
+                    autoSetting = getSharedPreferences("autoSetting", 0);
+                    String test = autoSetting.getString("ID", "");
+                    System.out.println("onCheckedChanged 자동 : "+test);
                 } else {
                     editor.clear();
                     editor.commit();
@@ -156,15 +159,14 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         //로그인 성공시 ID EditText에 입력한 값을 Static하게 쓰기
         USER_ID = idText.getText().toString();
-
         autoSetting = getSharedPreferences("autoSetting", 0);
+
+        //자동 로그인일 경우 ID Static하게 쓰기
         if( autoSetting.getString("ID", "")!= ""){
             AUTO_USER_ID =  autoSetting.getString("ID", "");
-        }else{
-            // 사용자 registrationId 등록(자동 로그인이 아닐 경우 )
+        }
             String registrationId = FirebaseInstanceId.getInstance().getToken();
             userPresenter.insertRegistrationId(new RegistrationIdVO(USER_ID, registrationId));
-        }
 
         loginButton.setEnabled(true);
         finish();//뒤로가기 했을때 로그인 페이지는 보여주지않음

@@ -89,6 +89,7 @@ public class UserPresenter {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+
             }
         });
     }

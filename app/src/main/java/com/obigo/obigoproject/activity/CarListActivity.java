@@ -118,7 +118,7 @@ public class CarListActivity extends MenuActivity {
                                 public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
                                     LogVO logVO = new LogVO(USER_ID, "잘못된 파일 : " +  model);
 
-                                    exceptionPresenter.errorUserVehicle(logVO);
+                                    exceptionPresenter.errorUserVehicle("uservehicle",logVO);
                                     return false;
                                 }
 
@@ -212,7 +212,7 @@ public class CarListActivity extends MenuActivity {
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
                             LogVO logVO = new LogVO(USER_ID, "잘못된 파일 : " +  model);
 
-                            exceptionPresenter.errorUserVehicle(logVO);
+                            exceptionPresenter.errorUserVehicle("uservehicle",logVO);
                             return false;
                         }
 
@@ -240,9 +240,8 @@ public class CarListActivity extends MenuActivity {
                 TimerTask second = new TimerTask() {
                     @Override
                     public void run() {
-
                         //자동 로그인 아닌 경우 종료시 registrationId 삭제
-                        if (AUTO_USER_ID == "") {
+                        if (AUTO_USER_ID ==null) {
                             userPresenter.deleteRegistrationId(registrationId);
                         }
                         timer.cancel();
@@ -264,11 +263,12 @@ public class CarListActivity extends MenuActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        //자동 로그인 아닌 경우 종료시 registrationId 삭제
-        if (AUTO_USER_ID == "") {
+    protected void onStop() {
+        //자동 로그인 아닌 경우 프로세스 모두 지우기 registrationId 삭제
+        if (AUTO_USER_ID == null) {
             userPresenter.deleteRegistrationId(registrationId);
         }
-        super.onDestroy();
+        super.onStop();
     }
+
 }
