@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -19,6 +20,7 @@ import com.obigo.obigoproject.vo.RegistrationIdVO;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTouch;
 
 import static com.obigo.obigoproject.util.ConstantsUtil.AUTO_USER_ID;
 import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
@@ -45,6 +47,9 @@ public class LoginActivity extends AppCompatActivity {
     // 로그인 버튼
     @Bind(R.id.btn_login)
     Button loginButton;
+    // 아이디,페스워드 찾기
+    @Bind(R.id.find_text)
+    TextView findText;
     //체크박스
     @Bind(R.id.auto_login_check)
     CheckBox _auto_login_check;
@@ -130,6 +135,17 @@ public class LoginActivity extends AppCompatActivity {
 
         onResult();
     }
+
+    //ID,PASSWORD 찾기 클릭
+    @OnTouch(R.id.find_text)
+    public boolean find(){
+        Intent intent = new Intent(this, FindActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+
+        return true;
+    }
+
 
 
     //서버에 ID,PASSWORD 조회후 onLoginSuccess or onLoginFailed를 호출

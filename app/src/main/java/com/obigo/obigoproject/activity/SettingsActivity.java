@@ -38,6 +38,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Bind(R.id.logoutBtn)
     Button mButtonLogout;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setTitle("SETTINGS");
+        setupActionBar();
+
+        // Settings page location
+        addPreferencesFromResource(R.xml.settings);
+
+    }
+
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
@@ -56,6 +67,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                 : null);
 
             } else if (preference instanceof RingtonePreference) {
+                System.out.println("여기들어오니");
                 // For ringtone preferences, look up the correct display value
                 // using RingtoneManager.
                 if (TextUtils.isEmpty(stringValue)) {
@@ -107,15 +119,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                         .getString(preference.getKey(), ""));
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setTitle("SETTINGS");
-        setupActionBar();
 
-        // Settings page location
-        addPreferencesFromResource(R.xml.settings);
-    }
 
     //Settings Page에 Bar등록
     private void setupActionBar() {

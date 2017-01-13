@@ -21,7 +21,11 @@ public interface UserService {
     @GET("login/")
     Call<String> login(@Query("userid") String userId, @Query("password") String password);
 
-    // 특정 사용자 registrationId 저장 (서버에 저장 요청)
+    // ID,PSSWORD 찾기
+    @GET("find/")
+    Call<String> find(@Query("name")String name,@Query("email")String email);
+
+   // 특정 사용자 registrationId 저장 (서버에 저장 요청)
     @POST("registrationid/")
     Call<String> insertRegistrationId(@Body RegistrationIdVO registrationIdVO);
 
@@ -30,7 +34,7 @@ public interface UserService {
     Call<UserVO> getUser(@Path("userid") String userId);
 
     //로그아웃 버튼 누르면 registrationId (서버에 삭제 요청)
-    //DELETE 는 @Body를 쓸수 없기에 @Query를 이용
+    //DELETE 는 @Body를 쓸수 없기에 무조건 @Query를 이용
     @DELETE("logout/")
     Call<String> deleteRegistrationId(@Query("registrationId") String registrationId);
 }
