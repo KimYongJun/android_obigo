@@ -116,7 +116,7 @@ public class CarListActivity extends MenuActivity {
                             .listener(new RequestListener<String, GlideDrawable>() {
                                 @Override
                                 public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                                    LogVO logVO = new LogVO(USER_ID, "잘못된 파일 : " +  model);
+                                    LogVO logVO = new LogVO(USER_ID, "image loading failure : " +  model);
 
                                     exceptionPresenter.errorUserVehicle("uservehicle",logVO);
                                     return false;
@@ -210,7 +210,7 @@ public class CarListActivity extends MenuActivity {
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            LogVO logVO = new LogVO(USER_ID, "잘못된 파일 : " +  model);
+                            LogVO logVO = new LogVO(USER_ID, "image loading failure  : " +  model);
 
                             exceptionPresenter.errorUserVehicle("uservehicle",logVO);
                             return false;
@@ -262,6 +262,7 @@ public class CarListActivity extends MenuActivity {
         return true;
     }
 
+    //최현욱일
     @Override
     protected void onStop() {
         //자동 로그인 아닌 경우 프로세스 모두 지우기 registrationId 삭제
@@ -270,5 +271,6 @@ public class CarListActivity extends MenuActivity {
         }
         super.onStop();
     }
+
 
 }

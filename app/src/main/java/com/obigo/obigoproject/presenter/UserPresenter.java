@@ -3,6 +3,7 @@ package com.obigo.obigoproject.presenter;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.obigo.obigoproject.activity.FindActivity;
 import com.obigo.obigoproject.activity.LoginActivity;
 import com.obigo.obigoproject.activity.MenuActivity;
 import com.obigo.obigoproject.preference.UserInfoButtonPreference;
@@ -23,6 +24,7 @@ import retrofit2.Response;
 public class UserPresenter {
     private UserService userService;
     private LoginActivity loginActivity;
+    private FindActivity findActivity;
     private MenuActivity menuActivity;
     private UserInfoButtonPreference userInfoButtonPreference;
     //유저 정보
@@ -30,13 +32,19 @@ public class UserPresenter {
     private UserVO userVO;
     //로그인 성공 실패 결과
     private String loginResultFlag;
+    //이메일 조회 결과(ID,PASSWORD 찾기)
+    private String emailResultFlag;
 
     // 로그인 생성자
     public UserPresenter(LoginActivity loginActivity) {
         this.loginActivity = loginActivity;
         this.userService = ServiceManager.getInstance().getUserService();
     }
-
+    //계정 찾기
+    public  UserPresenter(FindActivity findActivity){
+        this.findActivity =findActivity;
+        this.userService = ServiceManager.getInstance().getUserService();
+    }
 
     public UserPresenter(UserInfoButtonPreference userInfoButtonPreference, String userId) {
         this.userInfoButtonPreference = userInfoButtonPreference;
@@ -74,6 +82,27 @@ public class UserPresenter {
 
     }
 
+    public void find(String name,String email){
+        Call<String> call =userService.find(name,email);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    emailResultFlag = response.body();
+                    findActivity.dispatchFindEmailResult(emailResultFlag);
+                    Log.i("success : ", emailResultFlag);
+                }else {
+                    Log.i("error : ", response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.i("error : ",t.getMessage().toString() );
+            }
+        });
+    }
+
 
     //서버 Registration 정보 넘겨주기 (서버에 registrationId 등록 요청)
     public void insertRegistrationId(RegistrationIdVO registrationIdVO) {
@@ -96,7 +125,7 @@ public class UserPresenter {
 
     // 서버에 RegistrationId 넘겨주고 (서버에 registrationId 삭제 요청)
     public void deleteRegistrationId(String registrationId){
-        Log.i("registrationId :  ", registrationId);
+        Log.i("registrationId 삭제:  ", registrationId);
         Call<String> call =userService.deleteRegistrationId(registrationId);
         call.enqueue(new Callback<String>() {
             @Override

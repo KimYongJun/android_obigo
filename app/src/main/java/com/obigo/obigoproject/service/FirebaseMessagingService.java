@@ -51,8 +51,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         // 화면이 켜지는 작업 - 10초 유지
         WakeUpScreenUtil.acquire(getApplicationContext(), 10000);
 
-
-
         // 메시지를 클릭하면 메시지 리스트로 이동
         Intent intent;
         autoSetting = getSharedPreferences("autoSetting", 0);

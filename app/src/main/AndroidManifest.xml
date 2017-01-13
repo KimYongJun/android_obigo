@@ -44,9 +44,9 @@
         <!-- splash -->
         <activity
             android:name=".activity.LoginActivity"
-            android:noHistory="true"
             android:theme="@style/AppTheme.Dark" />
-
+        <activity
+            android:name=".activity.FindActivity"/>
         <activity
             android:name=".activity.MenuActivity"
             android:noHistory="true" />

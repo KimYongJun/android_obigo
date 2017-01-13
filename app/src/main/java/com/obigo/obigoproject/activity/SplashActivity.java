@@ -91,16 +91,20 @@ public class SplashActivity extends Activity {
         public void run() {
             //서버와 접속이 되지 않았을때
             if (bundleVersionCheckFlag == "nonConnect") {
-                Toast.makeText(getBaseContext(), "서버와 연결이 되지 않습니다.", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplication(), LoginActivity.class));
-                // 로딩페이지 Activity Stack에서 제거
-                SplashActivity.this.finish();
+                finish();
+                Toast.makeText(getBaseContext(), "서버와 연결이 되지 않습니다. "
+                        + "\r\n" + "다시 실행해 주세요", Toast.LENGTH_LONG).show();
+
             }//서버와 BundleVersion이 동일할때
             else if (bundleVersionCheckFlag == "true") {
-                startActivity(new Intent(getApplication(), LoginActivity.class));
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+
                 SplashActivity.this.finish();
             } //서버와 BundleVersion이 다를때
             else {
+
                 // 서버에서 다운로드 메소드 호출
                 startDownload();
 
