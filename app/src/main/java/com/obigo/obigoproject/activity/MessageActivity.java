@@ -22,7 +22,7 @@ import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
  */
 
 public class MessageActivity extends MenuActivity implements OnItemClickListener {
-    // 메지시 리스트 뷰
+    // 메시지 리스트 뷰
     ListView listView;
     // 메시지 요청
     private MessagePresenter messagePresenter;

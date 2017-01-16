@@ -23,9 +23,9 @@ public interface UserService {
 
     // ID,PSSWORD 찾기
     @GET("find/")
-    Call<String> find(@Query("name")String name,@Query("email")String email);
+    Call<String> find(@Query("name") String name, @Query("email") String email);
 
-   // 특정 사용자 registrationId 저장 (서버에 저장 요청)
+    // 특정 사용자 registrationId 저장 (서버에 저장 요청)
     @POST("registrationid/")
     Call<String> insertRegistrationId(@Body RegistrationIdVO registrationIdVO);
 

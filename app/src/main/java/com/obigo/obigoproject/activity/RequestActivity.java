@@ -56,10 +56,8 @@ public class RequestActivity extends MenuActivity {
     //모델 이름 리스트 번호
     int modelHoldNumber;
 
-
     private List<String> modelNameList;
     private List<String> modelCodeList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,8 +102,9 @@ public class RequestActivity extends MenuActivity {
     @OnClick(R.id.sendBtn)
     public void requestUserCar() {
         if ((modelColor.getSelectedItem().toString().equals("Select")) || (location.getSelectedItem().toString().equals("Select"))) {
-            Toast.makeText(getApplicationContext(),"정확히 입력해 주세요",Toast.LENGTH_SHORT).show();
-        } if (vin.length() != 10) {
+            Toast.makeText(getApplicationContext(), "정확히 입력해 주세요", Toast.LENGTH_SHORT).show();
+        }
+        if (vin.length() != 10) {
             Toast.makeText(getApplicationContext(), "VIN 번호는 10자리를 입력해 주세요", Toast.LENGTH_SHORT).show();
         } else {
             userRequestPresenter.insertUserRequest(new UserRequestVO(USER_ID, modelCodeList.get(modelHoldNumber), modelColor.getSelectedItem().toString(),

@@ -61,7 +61,7 @@ public class UncaughtExceptionHandlerUtil implements Thread.UncaughtExceptionHan
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
-            System.out.println("error :"+e.toString());
+            System.out.println("error :" + e.toString());
         }
 
         //다시 SplashActivity 실행

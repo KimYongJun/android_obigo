@@ -57,9 +57,9 @@ public class UserRequestPresenter {
                     vehicleList = response.body();
                     Log.i("vehicleList : ", UserRequestPresenter.this.vehicleList.toString());
 
-                    if (vehicleList.size() == 0){
-                        modelNameList.add(0,"등록된 차량이 없습니다.");
-                    }else {
+                    if (vehicleList.size() == 0) {
+                        modelNameList.add(0, "등록된 차량이 없습니다.");
+                    } else {
                         for (int i = 0; i < vehicleList.size(); i++) {
                             modelNameList.add(i, vehicleList.get(i).getModelName());
                             modelCodeList.add(i, vehicleList.get(i).getModelCode());

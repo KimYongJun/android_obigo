@@ -116,9 +116,9 @@ public class CarListActivity extends MenuActivity {
                             .listener(new RequestListener<String, GlideDrawable>() {
                                 @Override
                                 public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                                    LogVO logVO = new LogVO(USER_ID, "image loading failure : " +  model);
+                                    LogVO logVO = new LogVO(USER_ID, "image loading failure : " + model);
 
-                                    exceptionPresenter.errorUserVehicle("uservehicle",logVO);
+                                    exceptionPresenter.errorUserVehicle("uservehicle", logVO);
                                     return false;
                                 }
 
@@ -210,9 +210,9 @@ public class CarListActivity extends MenuActivity {
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            LogVO logVO = new LogVO(USER_ID, "image loading failure  : " +  model);
+                            LogVO logVO = new LogVO(USER_ID, "image loading failure  : " + model);
 
-                            exceptionPresenter.errorUserVehicle("uservehicle",logVO);
+                            exceptionPresenter.errorUserVehicle("uservehicle", logVO);
                             return false;
                         }
 
@@ -241,7 +241,7 @@ public class CarListActivity extends MenuActivity {
                     @Override
                     public void run() {
                         //자동 로그인 아닌 경우 종료시 registrationId 삭제
-                        if (AUTO_USER_ID ==null) {
+                        if (AUTO_USER_ID == null) {
                             userPresenter.deleteRegistrationId(registrationId);
                         }
                         timer.cancel();

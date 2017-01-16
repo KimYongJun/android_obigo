@@ -22,7 +22,6 @@ import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
  * Created by O BI HE ROCK on 2016-12-06
  * 김용준, 최현욱
  * UserInfo Button in Setting page
- *
  * onCreateView()는 Fragment에 실제 사용할 뷰를 만드는 작업을 하는 메소드이다.
  * LayoutInflater를 인자로 받아서 layout으로 설정한 XML을 연결하거나
  * bundle에 의한 작업을 하는 메소드이다.
@@ -68,7 +67,7 @@ public class UserInfoButtonPreference extends android.preference.Preference {
         // 다이얼로그에 유저정보 띄우기
         final MaterialDialog materialDialog = new MaterialDialog(this.mContext);
         materialDialog.setMessage(
-                        "\r\n" + "\r\n" +
+                "\r\n" + "\r\n" +
                         "User Name     :    " + userVO.getName() +
                         "\r\n" + "\r\n" + "\r\n" +
                         "Email            :    " + userVO.geteMail() +

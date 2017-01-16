@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     autoSetting = getSharedPreferences("autoSetting", 0);
                     String test = autoSetting.getString("ID", "");
-                    System.out.println("onCheckedChanged 자동 : "+test);
+                    System.out.println("onCheckedChanged 자동 : " + test);
                 } else {
                     editor.clear();
                     editor.commit();
@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //ID,PASSWORD 찾기 클릭
     @OnTouch(R.id.find_text)
-    public boolean find(){
+    public boolean find() {
         Intent intent = new Intent(this, FindActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
@@ -147,9 +147,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
     //서버에 ID,PASSWORD 조회후 onLoginSuccess or onLoginFailed를 호출
-    public void onResult(){
+    public void onResult() {
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
@@ -178,11 +177,11 @@ public class LoginActivity extends AppCompatActivity {
         autoSetting = getSharedPreferences("autoSetting", 0);
 
         //자동 로그인일 경우 ID Static하게 쓰기
-        if( autoSetting.getString("ID", "")!= ""){
-            AUTO_USER_ID =  autoSetting.getString("ID", "");
+        if (autoSetting.getString("ID", "") != "") {
+            AUTO_USER_ID = autoSetting.getString("ID", "");
         }
-            String registrationId = FirebaseInstanceId.getInstance().getToken();
-            userPresenter.insertRegistrationId(new RegistrationIdVO(USER_ID, registrationId));
+        String registrationId = FirebaseInstanceId.getInstance().getToken();
+        userPresenter.insertRegistrationId(new RegistrationIdVO(USER_ID, registrationId));
 
         loginButton.setEnabled(true);
         finish();//뒤로가기 했을때 로그인 페이지는 보여주지않음
@@ -197,7 +196,6 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_LONG).show();
         loginButton.setEnabled(true);
     }
-
 
 
     // 로그인 정규식 체크
