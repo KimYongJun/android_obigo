@@ -46,9 +46,13 @@ public enum ServiceManager {
         return messageService;
     }
 
-    public BundleService getBundleService(){return  bundleService;}
+    public BundleService getBundleService() {
+        return bundleService;
+    }
 
-    public ExceptionService getExceptionService(){return exceptionService;}
+    public ExceptionService getExceptionService() {
+        return exceptionService;
+    }
 
     public static ServiceManager getInstance() {
         return INSTANCE;

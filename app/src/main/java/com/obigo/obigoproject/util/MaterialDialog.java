@@ -223,7 +223,7 @@ public class MaterialDialog {
      * already set.
      *
      * @param cancel Whether the dialog should be canceled when touched outside
-     * the window OR pressed the back key.
+     *               the window OR pressed the back key.
      */
     public MaterialDialog setCanceledOnTouchOutside(boolean cancel) {
         this.mCancel = cancel;
@@ -254,17 +254,17 @@ public class MaterialDialog {
             mAlertDialog.show();
 
             mAlertDialog.getWindow()
-                        .clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
-                                WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                    .clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+                            WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
             mAlertDialog.getWindow()
-                        .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MASK_STATE);
+                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MASK_STATE);
 
             mAlertDialogWindow = mAlertDialog.getWindow();
             mAlertDialogWindow.setBackgroundDrawable(
                     new ColorDrawable(Color.TRANSPARENT));
 
             View contentView = LayoutInflater.from(mContext)
-                                             .inflate(R.layout.material_dialog, null);
+                    .inflate(R.layout.material_dialog, null);
             contentView.setFocusable(true);
             contentView.setFocusableInTouchMode(true);
 
@@ -519,7 +519,7 @@ public class MaterialDialog {
             // Not setting this to the other content view because user has defined their own
             // layout params, and we don't want to overwrite those.
             LayoutInflater.from(mMessageContentRoot.getContext())
-                          .inflate(layoutResId, mMessageContentRoot);
+                    .inflate(layoutResId, mMessageContentRoot);
         }
 
 

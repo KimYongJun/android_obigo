@@ -32,25 +32,35 @@ import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
 
 public class CarDetailActivity extends AppCompatActivity {
     // 차량 세부사항 이미지
-    @Bind(R.id.detail_image) ImageView carDetailImage;
+    @Bind(R.id.detail_image)
+    ImageView carDetailImage;
     // 모델 이름
-    @Bind(R.id.detail_model_name) TextView modelNameTextView;
+    @Bind(R.id.detail_model_name)
+    TextView modelNameTextView;
     // 모델 코드
-    @Bind(R.id.detail_model_code) TextView modelCodeTextView;
+    @Bind(R.id.detail_model_code)
+    TextView modelCodeTextView;
     // 모델 년도
-    @Bind(R.id.detail_model_year) TextView modelYearTextView;
+    @Bind(R.id.detail_model_year)
+    TextView modelYearTextView;
     // 차량 엔진
-    @Bind(R.id.detail_engine) TextView engineTextView;
+    @Bind(R.id.detail_engine)
+    TextView engineTextView;
     // 사용자 차량 vin
-    @Bind(R.id.detail_vin) TextView vinTextView;
+    @Bind(R.id.detail_vin)
+    TextView vinTextView;
     // 차량 Color
-    @Bind(R.id.detail_model_color) TextView colorTextView;
+    @Bind(R.id.detail_model_color)
+    TextView colorTextView;
     // 차량 location
-    @Bind(R.id.detail_location) TextView locationTextView;
+    @Bind(R.id.detail_location)
+    TextView locationTextView;
     // 차량 연비
-    @Bind(R.id.detail_mileage) TextView mileageTextView;
+    @Bind(R.id.detail_mileage)
+    TextView mileageTextView;
     // 고장 코드
-    @Bind(R.id.detail_active_dtc_count) TextView activeDtcCountTextView;
+    @Bind(R.id.detail_active_dtc_count)
+    TextView activeDtcCountTextView;
     // 차량 정보 (CarListActivity에서 데이터를 Intent로 받음)
     private UserVehicleVO userVehicleVO;
     // Retrofit 에러 보내기
@@ -82,9 +92,9 @@ public class CarDetailActivity extends AppCompatActivity {
         Glide.with(this).load(SERVER_API_URL + SERVER_VEHICLE_IMAGE_URL + userVehicleVO.getDetailImage()).listener(new RequestListener<String, GlideDrawable>() {
             @Override
             public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                LogVO logVO = new LogVO(USER_ID, "잘못된 파일 : " +  model);
+                LogVO logVO = new LogVO(USER_ID, "잘못된 파일 : " + model);
 
-                exceptionPresenter.errorUserVehicle("uservehicle",logVO);
+                exceptionPresenter.errorUserVehicle("uservehicle", logVO);
                 return false;
             }
 
@@ -104,6 +114,7 @@ public class CarDetailActivity extends AppCompatActivity {
         mileageTextView.setText(userVehicleVO.getMileage());
         activeDtcCountTextView.setText(Integer.toString(userVehicleVO.getActiveDtcCount()));
     }
+
     //CarDetail Page에 Bar등록
     private void setupActionBar() {
         ActionBar actionBar = getSupportActionBar();

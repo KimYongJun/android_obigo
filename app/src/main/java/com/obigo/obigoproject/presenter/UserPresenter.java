@@ -40,9 +40,10 @@ public class UserPresenter {
         this.loginActivity = loginActivity;
         this.userService = ServiceManager.getInstance().getUserService();
     }
+
     //계정 찾기
-    public  UserPresenter(FindActivity findActivity){
-        this.findActivity =findActivity;
+    public UserPresenter(FindActivity findActivity) {
+        this.findActivity = findActivity;
         this.userService = ServiceManager.getInstance().getUserService();
     }
 
@@ -53,15 +54,15 @@ public class UserPresenter {
     }
 
 
-    public UserPresenter(MenuActivity menuActivity, String userId){
+    public UserPresenter(MenuActivity menuActivity, String userId) {
         this.userId = userId;
         this.userService = ServiceManager.getInstance().getUserService();
         this.menuActivity = menuActivity;
     }
 
     //로그인 (서버에 userId,password 조회)
-    public void login(String userId,String password){
-        Call<String> call = userService.login(userId,password);
+    public void login(String userId, String password) {
+        Call<String> call = userService.login(userId, password);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -69,7 +70,7 @@ public class UserPresenter {
                     loginResultFlag = response.body();
                     loginActivity.dispatchLoginResult(loginResultFlag);
                     Log.i("login success : ", loginResultFlag);
-                }else {
+                } else {
                     Log.i("error : ", response.errorBody().toString());
                 }
             }
@@ -82,8 +83,8 @@ public class UserPresenter {
 
     }
 
-    public void find(String name,String email){
-        Call<String> call =userService.find(name,email);
+    public void find(String name, String email) {
+        Call<String> call = userService.find(name, email);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -91,14 +92,14 @@ public class UserPresenter {
                     emailResultFlag = response.body();
                     findActivity.dispatchFindEmailResult(emailResultFlag);
                     Log.i("success : ", emailResultFlag);
-                }else {
+                } else {
                     Log.i("error : ", response.errorBody().toString());
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.i("error : ",t.getMessage().toString() );
+                Log.i("error : ", t.getMessage().toString());
             }
         });
     }
@@ -124,9 +125,9 @@ public class UserPresenter {
     }
 
     // 서버에 RegistrationId 넘겨주고 (서버에 registrationId 삭제 요청)
-    public void deleteRegistrationId(String registrationId){
+    public void deleteRegistrationId(String registrationId) {
         Log.i("registrationId 삭제:  ", registrationId);
-        Call<String> call =userService.deleteRegistrationId(registrationId);
+        Call<String> call = userService.deleteRegistrationId(registrationId);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -139,7 +140,7 @@ public class UserPresenter {
             public void onFailure(Call<String> call, Throwable t) {
             }
         });
-     }
+    }
 
     // 유저정보 요청
     public void getUser() {

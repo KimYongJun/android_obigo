@@ -87,8 +87,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         }
 
 
-
-        Uri soundUri =  Uri.parse(ConstantsUtil.ringtone);
+        Uri soundUri = Uri.parse(ConstantsUtil.ringtone);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)

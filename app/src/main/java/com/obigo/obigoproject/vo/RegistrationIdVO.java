@@ -10,7 +10,8 @@ public class RegistrationIdVO {
     private String userId;
     private String registrationId;
 
-    public RegistrationIdVO() {}
+    public RegistrationIdVO() {
+    }
 
     public RegistrationIdVO(String userId, String registrationId) {
         this.userId = userId;

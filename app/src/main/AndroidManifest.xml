@@ -45,13 +45,11 @@
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/AppTheme.Dark" />
-        <activity
-            android:name=".activity.FindActivity"/>
+        <activity android:name=".activity.FindActivity" />
         <activity
             android:name=".activity.MenuActivity"
             android:noHistory="true" />
-        <activity
-            android:name=".activity.CarListActivity"/>
+        <activity android:name=".activity.CarListActivity" />
         <activity
             android:name=".activity.CarDetailActivity"
             android:noHistory="true" />
@@ -64,9 +62,7 @@
         <activity
             android:name=".activity.RequestActivity"
             android:noHistory="true" />
-        <activity
-            android:name=".activity.SettingsActivity"
-          />
+        <activity android:name=".activity.SettingsActivity" />
 
         <!-- FCM 구현 FirebaseMessagingService -->
         <service android:name=".service.FirebaseMessagingService">

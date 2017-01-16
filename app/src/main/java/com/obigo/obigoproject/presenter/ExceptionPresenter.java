@@ -24,27 +24,29 @@ public class ExceptionPresenter {
     private CarDetailActivity carDetailActivity;
     private UncaughtExceptionHandlerUtil uncaughtExceptionHandlerUtil;
 
-    public ExceptionPresenter(CarListActivity carListActivity){
-        this.carListActivity =carListActivity;
+    public ExceptionPresenter(CarListActivity carListActivity) {
+        this.carListActivity = carListActivity;
         this.exceptionService = ServiceManager.getInstance().getExceptionService();
     }
-    public ExceptionPresenter(CarDetailActivity carDetailActivity){
-        this.carDetailActivity =carDetailActivity;
-        this.exceptionService =ServiceManager.getInstance().getExceptionService();
-    }
-    public ExceptionPresenter(UncaughtExceptionHandlerUtil uncaughtExceptionHandlerUtil){
-        this.uncaughtExceptionHandlerUtil =uncaughtExceptionHandlerUtil;
-        this.exceptionService =ServiceManager.getInstance().getExceptionService();
+
+    public ExceptionPresenter(CarDetailActivity carDetailActivity) {
+        this.carDetailActivity = carDetailActivity;
+        this.exceptionService = ServiceManager.getInstance().getExceptionService();
     }
 
-    public void errorUserVehicle(String url,LogVO logVO){
+    public ExceptionPresenter(UncaughtExceptionHandlerUtil uncaughtExceptionHandlerUtil) {
+        this.uncaughtExceptionHandlerUtil = uncaughtExceptionHandlerUtil;
+        this.exceptionService = ServiceManager.getInstance().getExceptionService();
+    }
+
+    public void errorUserVehicle(String url, LogVO logVO) {
         Call<LogVO> call = exceptionService.errorUserVehicle(url, logVO);
         call.enqueue(new Callback<LogVO>() {
             @Override
             public void onResponse(Call<LogVO> call, Response<LogVO> response) {
                 if (response.isSuccessful()) {
 
-                }else {
+                } else {
                     Log.i("error : ", response.errorBody().toString());
                 }
             }
