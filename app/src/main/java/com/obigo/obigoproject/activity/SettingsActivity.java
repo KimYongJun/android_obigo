@@ -7,19 +7,15 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.preference.AppCompatPreferenceActivity;
-
-import butterknife.Bind;
+import com.obigo.obigoproject.util.ConstantsUtil;
 
 /**
  * Created by O BI HE ROCK on 2016-12-06
@@ -30,14 +26,6 @@ import butterknife.Bind;
  */
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
-    /**
-     * A preference value change listener that updates the preference's summary
-     * to reflect its new value.
-     */
-
-    @Bind(R.id.logoutBtn)
-    Button mButtonLogout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,80 +34,60 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
         // Settings page location
         addPreferencesFromResource(R.xml.settings);
+        setOnPreferenceChange(findPreference("notifications_new_message_ringtone"));
 
     }
 
-    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
+    private void setOnPreferenceChange(Preference mPreference) {
+        mPreference.setOnPreferenceChangeListener(onPreferenceChangeListener);
+
+        onPreferenceChangeListener.onPreferenceChange(
+                mPreference,
+                PreferenceManager.getDefaultSharedPreferences(
+                        mPreference.getContext()).getString(
+                        mPreference.getKey(), ""));
+    }
+
+    private Preference.OnPreferenceChangeListener onPreferenceChangeListener = new Preference.OnPreferenceChangeListener() {
+        /**
+         * RingtonePreference의 경우 stringValue가
+         * content://media/internal/audio/media의 형식이기 때문에
+         * RingtoneManager을 사용하여 Summary를 적용한다
+         *
+         * 무음일경우 ""이다
+         */
         @Override
-        public boolean onPreferenceChange(Preference preference, Object value) {
-            String stringValue = value.toString();
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            String stringValue = newValue.toString();
 
-            if (preference instanceof ListPreference) {
-                // For list preferences, look up the correct display value in
-                // the preference's 'entries' list.
-                ListPreference listPreference = (ListPreference) preference;
-                int index = listPreference.findIndexOfValue(stringValue);
+            ConstantsUtil.ringtone = stringValue;
 
-                // Set the summary to reflect the new value.
-                preference.setSummary(
-                        index >= 0
-                                ? listPreference.getEntries()[index]
-                                : null);
+            if (TextUtils.isEmpty(stringValue)) {
+                preference.setSummary("무음으로 설정됨");
+            } else {
+                Ringtone ringtone = RingtoneManager.getRingtone(
+                        preference.getContext(), Uri.parse(stringValue));
 
-            } else if (preference instanceof RingtonePreference) {
-                System.out.println("여기들어오니");
-                // For ringtone preferences, look up the correct display value
-                // using RingtoneManager.
-                if (TextUtils.isEmpty(stringValue)) {
-                    // Empty values correspond to 'silent' (no ringtone).
-                    preference.setSummary(R.string.pref_ringtone_silent);
+                if (ringtone == null) {
+                    preference.setSummary(null);
 
                 } else {
-                    Ringtone ringtone = RingtoneManager.getRingtone(
-                            preference.getContext(), Uri.parse(stringValue));
-
-                    if (ringtone == null) {
-                        // Clear the summary if there was a lookup error.
-                        preference.setSummary(null);
-                    } else {
-                        // Set the summary to reflect the new ringtone display
-                        // name.
-                        String name = ringtone.getTitle(preference.getContext());
-                        preference.setSummary(name);
-                    }
+                    String name = ringtone
+                            .getTitle(preference.getContext());
+                    preference.setSummary(name);
                 }
-
-            } else {
-                // For all other preferences, set the summary to the value's
-                // simple string representation.
-                preference.setSummary(stringValue);
             }
+
+
             return true;
         }
+
     };
 
-    /**
-     * Helper method to determine if the device has an extra-large screen. For
-     * example, 10" tablets are extra-large.
-     */
     private static boolean isXLargeTablet(Context context) {
         return (context.getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
     }
-
-    private static void bindPreferenceSummaryToValue(Preference preference) {
-        // Set the listener to watch for value changes.
-        preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
-
-        // Trigger the listener immediately with the preference's
-        // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
-    }
-
-
 
     //Settings Page에 Bar등록
     private void setupActionBar() {

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
@@ -56,19 +55,19 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         autoSetting = getSharedPreferences("autoSetting", 0);
 
         //Static한 USER_ID가 남아있는경우
-        if(USER_ID != null){
+        if (USER_ID != null) {
             intent = new Intent(this, MessageActivity.class);
         }
         //정상종료나, 프로세스 모두종료하기 한 경우
-        else{
+        else {
             //자동로그인일 경우
-            if( autoSetting.getString("ID", "")!= ""){
-                AUTO_USER_ID =  autoSetting.getString("ID", "");
+            if (autoSetting.getString("ID", "") != "") {
+                AUTO_USER_ID = autoSetting.getString("ID", "");
                 USER_ID = AUTO_USER_ID;
                 intent = new Intent(this, MessageActivity.class);
             }
             //자동로그인 아닌경우
-            else{
+            else {
                 intent = new Intent(this, SplashActivity.class);
             }
 
@@ -87,13 +86,15 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             e.printStackTrace();
         }
 
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+
+        Uri soundUri =  Uri.parse(ConstantsUtil.ringtone);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(content)
                 .setAutoCancel(true)
-                .setSound(defaultSoundUri)
+                .setSound(soundUri)
                 .setContentIntent(pendingIntent);
 
         if (upload != null) {
