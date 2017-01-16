@@ -1,69 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--
-    Created by O BI HE ROCK on 2016-12-06
-    김용준, 최현욱
-    auto login, logout, user info, bundle, message
--->
+    <!--
+        Created by O BI HE ROCK on 2016-12-06
+        김용준, 최현욱
+        auto login, logout, user info, bundle, message
+    -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:layout="@layout/preference_category"
-        android:title="User">
+<PreferenceCategory
+    android:layout="@layout/preference_category"
+    android:title="User">
 
-        <com.obigo.obigoproject.preference.UserInfoButtonPreference
-            android:defaultValue="false"
-            android:key="userinfo"
-            android:title="UserInfo" />
-    </PreferenceCategory>
+    <com.obigo.obigoproject.preference.UserInfoButtonPreference
+        android:defaultValue="false"
+        android:key="userinfo"
+        android:title="UserInfo"/>
+</PreferenceCategory>
 
-    <PreferenceCategory
-        android:layout="@layout/preference_category"
-        android:title="SOFTWARE INFO">
+<PreferenceCategory
+    android:layout="@layout/preference_category"
+    android:title="SOFTWARE INFO">
 
-        <Preference
-            android:title="Bundle Version"
-            android:summary="1.0"/>
+    <Preference
+        android:summary="1.0"
+        android:title="Bundle Version"/>
 
-        <Preference
-            android:title="Bundle Name"
-            android:summary="Obigo_First"
-           />
-        <Preference
-            android:summary="Obigo"
-            android:title="Bundle Developer" />
-    </PreferenceCategory>
-
-
-    <PreferenceCategory
-        android:layout="@layout/preference_category"
-        android:title="Notification">
-        <SwitchPreference
-            android:defaultValue="true"
-            android:key="notifications_new_message"
-            android:title="@string/pref_title_new_message_notifications" />
-
-        <!-- Allows the user to choose a ringtone in the 'notification' category. -->
-        <!-- NOTE: This preference will be enabled only when the checkbox above is checked. -->
-        <!-- NOTE: RingtonePreference's summary should be set to its value by the activity code. -->
-        <RingtonePreference
-            android:id="@+id/ringtone"
-            android:defaultValue="content://settings/system/notification_sound"
-            android:dependency="notifications_new_message"
-            android:key="notifications_new_message_ringtone"
-            android:ringtoneType="notification"
-            android:title="@string/pref_title_ringtone" />
-
-        <!-- NOTE: This preference will be enabled only when the checkbox above is checked. -->
-        <SwitchPreference
-            android:defaultValue="true"
-            android:dependency="notifications_new_message"
-            android:key="notifications_new_message_vibrate"
-            android:title="@string/pref_title_vibrate" />
-    </PreferenceCategory>
+    <Preference
+        android:summary="Obigo_First"
+        android:title="Bundle Name"
+        />
+    <Preference
+        android:summary="Obigo"
+        android:title="Bundle Developer"/>
+</PreferenceCategory>
 
 
+<PreferenceCategory
+    android:layout="@layout/preference_category"
+    android:title="Notification">
+
+    <RingtonePreference
+        android:id="@+id/ringtone"
+        android:defaultValue="content://settings/system/notification_sound"
+        android:key="notifications_new_message_ringtone"
+        android:ringtoneType="notification"
+        android:showSilent="true"
+        android:title="@string/pref_title_ringtone"/>
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="notifications_new_message_vibrate"
+        android:title="@string/pref_title_vibrate"/>
+</PreferenceCategory>
 
 
 </PreferenceScreen>

@@ -226,7 +226,6 @@ public class MenuActivity extends AppCompatActivity implements
                 break;
             case 3:
                 intent = new Intent(this, SettingsActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 break;
         }
