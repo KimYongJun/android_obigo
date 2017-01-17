@@ -262,15 +262,4 @@ public class CarListActivity extends MenuActivity {
         return true;
     }
 
-    //최현욱일
-    @Override
-    protected void onStop() {
-        //자동 로그인 아닌 경우 프로세스 모두 지우기 registrationId 삭제
-        if (AUTO_USER_ID == null) {
-            userPresenter.deleteRegistrationId(registrationId);
-        }
-        super.onStop();
-    }
-
-
 }
