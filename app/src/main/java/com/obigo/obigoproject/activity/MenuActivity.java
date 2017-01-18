@@ -146,7 +146,7 @@ public class MenuActivity extends AppCompatActivity implements
 
         //Button 모양
         //Version 변경시 Type 바꿔주기
-        ButtonType buttonType = ButtonType.HAM;
+        ButtonType buttonType = ButtonType.CIRCLE;
 
         // 우측 하단 버튼 적용
         new BoomMenuButton.Builder()
@@ -182,7 +182,7 @@ public class MenuActivity extends AppCompatActivity implements
     // 버튼 모양 조정
     //Version 변경시 Type 바꿔주기
     private PlaceType getPlaceType() {
-        return PlaceType.HAM_4_1;
+        return PlaceType.CIRCLE_4_1;
     }
 
     // 메뉴 색 지정 메소드
