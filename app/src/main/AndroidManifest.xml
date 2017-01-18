@@ -63,6 +63,10 @@
             android:name=".activity.RequestActivity"
             android:noHistory="true" />
         <activity android:name=".activity.SettingsActivity" />
+        <activity
+            android:name=".PasswordModifyActivity"
+            android:noHistory="true"/>
+
 
         <!-- FCM 구현 FirebaseMessagingService -->
         <service android:name=".service.FirebaseMessagingService">

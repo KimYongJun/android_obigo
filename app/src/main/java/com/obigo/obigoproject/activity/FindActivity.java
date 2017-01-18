@@ -33,8 +33,9 @@ public class FindActivity extends AppCompatActivity {
     //보내기 버튼
     @Bind(R.id.btn_send)
     Button btnSend;
-
+    //에메일 전송 결과
     String findEmailResultFlag = "false";
+
     UserPresenter userPresenter;
 
     @Override
@@ -49,13 +50,13 @@ public class FindActivity extends AppCompatActivity {
         userPresenter = new UserPresenter(this);
     }
 
+
     @OnClick(R.id.btn_send)
     public void sendEmailAddress() {
         String name = userName.getText().toString();
         String email = userEmail.getText().toString();
         //이름,이메일 조회 요청
         userPresenter.find(name, email);
-
         onResult();
     }
 
@@ -79,7 +80,7 @@ public class FindActivity extends AppCompatActivity {
                 }, 6000);
     }
 
-    //CarDetail Page에 Bar등록
+    // Page에 Bar등록
     private void setupActionBar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

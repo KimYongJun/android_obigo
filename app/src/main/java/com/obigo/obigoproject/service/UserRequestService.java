@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by O BI HE ROCK on 2016-12-14
@@ -21,6 +22,6 @@ public interface UserRequestService {
     Call<String> insertUserRequest(@Body UserRequestVO userRequestVO);
 
     //차량 정보 요청
-    @GET("vehicle/")
-    Call<List<VehicleVO>> getVehicleList();
+    @GET("vehicle/{userid}")
+    Call<List<VehicleVO>> getVehicleList(@Path("userid") String userId);
 }

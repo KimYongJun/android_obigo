@@ -1,54 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <!--
-        Created by O BI HE ROCK on 2016-12-06
-        김용준, 최현욱
-        auto login, logout, user info, bundle, message
-    -->
+<!--
+    Created by O BI HE ROCK on 2016-12-06
+    김용준, 최현욱
+    auto login, logout, user info, bundle, message
+-->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-<PreferenceCategory
-    android:layout="@layout/preference_category"
-    android:title="User">
+    <PreferenceCategory
+        android:layout="@layout/preference_category"
+        android:title="User">
 
-    <com.obigo.obigoproject.preference.UserInfoButtonPreference
-        android:defaultValue="false"
-        android:key="userinfo"
-        android:title="UserInfo"/>
-</PreferenceCategory>
+        <com.obigo.obigoproject.preference.UserInfoButtonPreference
+            android:defaultValue="false"
+            android:key="userinfo"
+            android:title="UserInfo"/>
+        <Preference
+            android:title="Password Modify">
+            <intent
+                android:targetClass="com.obigo.obigoproject.PasswordModifyActivity"
+                android:targetPackage="com.obigo.obigoproject"/>
+        </Preference>
 
-<PreferenceCategory
-    android:layout="@layout/preference_category"
-    android:title="SOFTWARE INFO">
+    </PreferenceCategory>
 
-    <Preference
-        android:summary="1.0"
-        android:title="Bundle Version"/>
+    <!--Version 변경시 SOFTWARE INFO 수정해주기   -->
+    <PreferenceCategory
+        android:layout="@layout/preference_category"
+        android:title="SOFTWARE INFO">
 
-    <Preference
-        android:summary="Obigo_First"
-        android:title="Bundle Name"
-        />
-    <Preference
-        android:summary="Obigo"
-        android:title="Bundle Developer"/>
-</PreferenceCategory>
+        <Preference
+            android:summary="0.01"
+            android:title="Bundle Version"/>
+
+        <Preference
+            android:summary="Obigo_First"
+            android:title="Bundle Name"
+            />
+        <Preference
+            android:summary="Obigo"
+            android:title="Bundle Developer"/>
+    </PreferenceCategory>
 
 
-<PreferenceCategory
-    android:layout="@layout/preference_category"
-    android:title="Notification">
+    <PreferenceCategory
+        android:layout="@layout/preference_category"
+        android:title="Notification">
 
-    <RingtonePreference
-        android:id="@+id/ringtone"
-        android:defaultValue="content://settings/system/notification_sound"
-        android:key="notifications_new_message_ringtone"
-        android:ringtoneType="notification"
-        android:showSilent="true"
-        android:title="@string/pref_title_ringtone"/>
+        <RingtonePreference
+            android:id="@+id/ringtone"
+            android:defaultValue="content://settings/system/notification_sound"
+            android:key="notifications_new_message_ringtone"
+            android:ringtoneType="notification"
+            android:showSilent="true"
+            android:title="@string/pref_title_ringtone"/>
 
-</PreferenceCategory>
+    </PreferenceCategory>
 
 
 </PreferenceScreen>

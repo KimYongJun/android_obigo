@@ -65,7 +65,6 @@ public class MessageDetailActivity extends AppCompatActivity {
         _message_detail_content.setText(messageVO.getContent());
         _message_detail_date.setText(messageVO.getSendDate());
 
-        // 최현욱일 - 버전에 따른 이미지 변경
         if (messageVO.getUploadFile().equals("")) {
             Glide.with(this).load(R.drawable.logo).into(_message_detail_image);
         } else {
