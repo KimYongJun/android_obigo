@@ -98,15 +98,13 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-
             android:text="VIN"/>
 
         <EditText
             android:layout_gravity="center_vertical"
             android:id="@+id/vin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="10"/>
+            android:layout_height="wrap_content"/>
 
 
     </LinearLayout>
