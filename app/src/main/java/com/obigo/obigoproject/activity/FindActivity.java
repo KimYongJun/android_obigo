@@ -50,14 +50,38 @@ public class FindActivity extends AppCompatActivity {
         userPresenter = new UserPresenter(this);
     }
 
-
     @OnClick(R.id.btn_send)
     public void sendEmailAddress() {
+
+        if (!validate()) {
+            return;
+        }
+
         String name = userName.getText().toString();
         String email = userEmail.getText().toString();
         //이름,이메일 조회 요청
         userPresenter.find(name, email);
         onResult();
+    }
+
+    //정규식 체크
+    public boolean validate() {
+        String name = userName.getText().toString();
+        String email = userEmail.getText().toString();
+
+        String pattern = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
+
+        if (name.isEmpty()) {
+            userName.setError("Enter a valid name");
+            return false;
+        }
+
+        if (email.isEmpty() || !email.matches(pattern)) {
+            userEmail.setError("Enter a valid Password");
+            return false;
+        }
+
+        return true;
     }
 
     public void onResult() {
@@ -102,6 +126,4 @@ public class FindActivity extends AppCompatActivity {
     public void dispatchFindEmailResult(String findEmailResultFlag) {
         this.findEmailResultFlag = findEmailResultFlag;
     }
-
-
 }

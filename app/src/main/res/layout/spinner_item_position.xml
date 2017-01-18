@@ -7,6 +7,6 @@
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
+    android:padding="12dp"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:textColor="#0d0d0d"
-    android:padding="12dp" />
+    android:textColor="#0d0d0d"/>

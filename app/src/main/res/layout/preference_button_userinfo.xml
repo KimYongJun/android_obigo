@@ -5,23 +5,24 @@
                 android:gravity="center"
                 android:padding="10dip"
     >
+
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:text="User Info"
-              android:layout_marginLeft="10dp"
-              android:textStyle="bold"
-              android:textSize="15dp"
+              style="Preference.Information"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              style="Preference.Information"
+              android:layout_marginLeft="10dp"
+              android:text="User Info"
+              android:textSize="15dp"
+              android:textStyle="bold"
         />
 
-        <Button
-             android:textColor="#ffffff"
-             android:background="@drawable/button_event"
-             android:text="User Info"
-             android:layout_width="100dp"
-             android:layout_height="60dp"
-             android:id="@+id/userInfoBtn"
-             android:layout_alignParentRight="true"
+    <Button
+        android:id="@+id/userInfoBtn"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_event"
+        android:text="User Info"
+        android:textColor="#ffffff"
         />
 </RelativeLayout>

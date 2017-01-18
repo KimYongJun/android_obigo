@@ -11,15 +11,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <TextView android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
+    <TextView
         android:id="@+id/message_text"
-        android:textSize="20dp"
-        android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="top|left"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="350dp"
-        android:textColor="#808080"/>
+        android:gravity="center"
+        android:textColor="#808080"
+        android:textSize="20dp"/>
 
 </FrameLayout>

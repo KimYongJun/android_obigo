@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
     <TextView
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="80dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="80dp"
         android:text="계정에 등록되어 있는 이름,이메일을 입력해 주세요"/>
 
     <EditText
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="40dp"
-        android:inputType="text"
-        android:hint="Name"/>
+        android:hint="Name"
+        android:inputType="text"/>
 
     <EditText
         android:id="@+id/user_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
         android:layout_marginBottom="40dp"
+        android:layout_marginLeft="30dp"
         android:hint="Email"
         android:inputType="textEmailAddress"/>
 
     <android.support.v7.widget.AppCompatButton
-        android:layout_gravity="center"
         android:id="@+id/btn_send"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="24dp"
         android:layout_marginTop="24dp"
         android:padding="12dp"

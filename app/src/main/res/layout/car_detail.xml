@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:weightSum="1">
 
     <ImageView
         android:id="@+id/detail_image"
@@ -28,11 +28,11 @@
             android:text="model_name"/>
 
         <TextView
-            android:layout_gravity="right"
+            android:id="@+id/detail_model_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="asdasdasdasd"
-            android:id="@+id/detail_model_name"/>
+            android:layout_gravity="right"
+            android:text="asdasdasdasd"/>
     </LinearLayout>
 
     <LinearLayout
@@ -50,10 +50,10 @@
             android:text="model_code"/>
 
         <TextView
+            android:id="@+id/detail_model_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="asdfadfsasdf"
-            android:id="@+id/detail_model_code"
             />
     </LinearLayout>
 
@@ -72,10 +72,10 @@
             android:text="model_year"/>
 
         <TextView
+            android:id="@+id/detail_model_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="asdfadfsasdf"
-            android:id="@+id/detail_model_year"/>
+            android:text="asdfadfsasdf"/>
     </LinearLayout>
 
     <LinearLayout
@@ -93,10 +93,10 @@
             android:text="engine"/>
 
         <TextView
+            android:id="@+id/detail_engine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="asdfadfsasdf"
-            android:id="@+id/detail_engine"/>
+            android:text="asdfadfsasdf"/>
     </LinearLayout>
 
     <LinearLayout
@@ -114,10 +114,10 @@
             android:text="vin"/>
 
         <TextView
+            android:id="@+id/detail_vin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="asdfadfsasdf"
-            android:id="@+id/detail_vin"/>
+            android:text="asdfadfsasdf"/>
     </LinearLayout>
 
     <LinearLayout
@@ -135,10 +135,10 @@
             android:text="color"/>
 
         <TextView
+            android:id="@+id/detail_model_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="asdfadfsasdf"
-            android:id="@+id/detail_model_color"/>
+            android:text="asdfadfsasdf"/>
     </LinearLayout>
 
     <LinearLayout
@@ -156,10 +156,10 @@
             android:text="location"/>
 
         <TextView
+            android:id="@+id/detail_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="asdfadfsasdf"
-            android:id="@+id/detail_location"/>
+            android:text="asdfadfsasdf"/>
     </LinearLayout>
 
     <LinearLayout
@@ -177,10 +177,10 @@
             android:text="mileage"/>
 
         <TextView
+            android:id="@+id/detail_mileage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="asdfadfsasdf"
-            android:id="@+id/detail_mileage"/>
+            android:text="asdfadfsasdf"/>
     </LinearLayout>
 
     <LinearLayout
@@ -198,11 +198,10 @@
             android:text="active_dtc_count"/>
 
         <TextView
+            android:id="@+id/detail_active_dtc_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="asdfadfsasdf"
-            android:id="@+id/detail_active_dtc_count"/>
+            android:text="asdfadfsasdf"/>
     </LinearLayout>
-
 
 </LinearLayout>

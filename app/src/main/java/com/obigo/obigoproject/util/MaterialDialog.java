@@ -32,7 +32,6 @@ import com.obigo.obigoproject.R;
 
 //UserInfo Dialog에 필요한 클래스
 public class MaterialDialog {
-
     private final static int BUTTON_BOTTOM = 9;
     private final static int BUTTON_TOP = 9;
 
@@ -58,11 +57,9 @@ public class MaterialDialog {
     private String pText, nText;
     View.OnClickListener pListener, nListener;
 
-
     public MaterialDialog(Context context) {
         this.mContext = context;
     }
-
 
     public void show() {
         if (!mHasShow) {
@@ -73,7 +70,6 @@ public class MaterialDialog {
         mHasShow = true;
     }
 
-
     public MaterialDialog setView(View view) {
         mView = view;
         if (mBuilder != null) {
@@ -81,7 +77,6 @@ public class MaterialDialog {
         }
         return this;
     }
-
 
     public MaterialDialog setContentView(View view) {
         mMessageContentView = view;
@@ -92,12 +87,6 @@ public class MaterialDialog {
         return this;
     }
 
-
-    /**
-     * Set a custom view resource to be the contents of the dialog.
-     *
-     * @param layoutResId resource ID to be inflated
-     */
     public MaterialDialog setContentView(int layoutResId) {
         mMessageContentViewResId = layoutResId;
         mMessageContentView = null;
@@ -107,7 +96,6 @@ public class MaterialDialog {
         return this;
     }
 
-
     public MaterialDialog setBackground(Drawable drawable) {
         mBackgroundDrawable = drawable;
         if (mBuilder != null) {
@@ -115,7 +103,6 @@ public class MaterialDialog {
         }
         return this;
     }
-
 
     public MaterialDialog setBackgroundResource(int resId) {
         mBackgroundResId = resId;
@@ -125,22 +112,18 @@ public class MaterialDialog {
         return this;
     }
 
-
     public void dismiss() {
         mAlertDialog.dismiss();
     }
-
 
     private int dip2px(float dpValue) {
         final float scale = mContext.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
-
     private static boolean isLollipop() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
-
 
     public MaterialDialog setTitle(int resId) {
         mTitleResId = resId;
@@ -150,7 +133,6 @@ public class MaterialDialog {
         return this;
     }
 
-
     public MaterialDialog setTitle(CharSequence title) {
         mTitle = title;
         if (mBuilder != null) {
@@ -158,7 +140,6 @@ public class MaterialDialog {
         }
         return this;
     }
-
 
     public MaterialDialog setMessage(int resId) {
         mMessageResId = resId;
@@ -168,7 +149,6 @@ public class MaterialDialog {
         return this;
     }
 
-
     public MaterialDialog setMessage(CharSequence message) {
         mMessage = message;
         if (mBuilder != null) {
@@ -177,23 +157,19 @@ public class MaterialDialog {
         return this;
     }
 
-
     public MaterialDialog setPositiveButton(int resId, final View.OnClickListener listener) {
         this.pId = resId;
         this.pListener = listener;
         return this;
     }
 
-
     public Button getPositiveButton() {
         return mPositiveButton;
     }
 
-
     public Button getNegativeButton() {
         return mNegativeButton;
     }
-
 
     public MaterialDialog setPositiveButton(String text, final View.OnClickListener listener) {
         this.pText = text;
@@ -201,13 +177,11 @@ public class MaterialDialog {
         return this;
     }
 
-
     public MaterialDialog setNegativeButton(int resId, final View.OnClickListener listener) {
         this.nId = resId;
         this.nListener = listener;
         return this;
     }
-
 
     public MaterialDialog setNegativeButton(String text, final View.OnClickListener listener) {
         this.nText = text;
@@ -215,16 +189,6 @@ public class MaterialDialog {
         return this;
     }
 
-
-    /**
-     * Sets whether this dialog is canceled when touched outside the window's
-     * bounds OR pressed the back key. If setting to true, the dialog is
-     * set to be cancelable if not
-     * already set.
-     *
-     * @param cancel Whether the dialog should be canceled when touched outside
-     *               the window OR pressed the back key.
-     */
     public MaterialDialog setCanceledOnTouchOutside(boolean cancel) {
         this.mCancel = cancel;
         if (mBuilder != null) {
@@ -233,21 +197,17 @@ public class MaterialDialog {
         return this;
     }
 
-
     public MaterialDialog setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
         this.mOnDismissListener = onDismissListener;
         return this;
     }
 
-
     private class Builder {
-
         private TextView mTitleView;
         private ViewGroup mMessageContentRoot;
         private TextView mMessageView;
         private Window mAlertDialogWindow;
         private LinearLayout mButtonLayout;
-
 
         private Builder() {
             mAlertDialog = new AlertDialog.Builder(mContext).create();
@@ -362,16 +322,13 @@ public class MaterialDialog {
             }
         }
 
-
         public void setTitle(int resId) {
             mTitleView.setText(resId);
         }
 
-
         public void setTitle(CharSequence title) {
             mTitleView.setText(title);
         }
-
 
         public void setMessage(int resId) {
             if (mMessageView != null) {
@@ -379,19 +336,12 @@ public class MaterialDialog {
             }
         }
 
-
         public void setMessage(CharSequence message) {
             if (mMessageView != null) {
                 mMessageView.setText(message);
             }
         }
 
-
-        /**
-         * set positive button
-         *
-         * @param text the name of button
-         */
         public void setPositiveButton(String text, final View.OnClickListener listener) {
             Button button = new Button(mContext);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -407,12 +357,6 @@ public class MaterialDialog {
             mButtonLayout.addView(button);
         }
 
-
-        /**
-         * set negative button
-         *
-         * @param text the name of button
-         */
         public void setNegativeButton(String text, final View.OnClickListener listener) {
             Button button = new Button(mContext);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -434,7 +378,6 @@ public class MaterialDialog {
                 mButtonLayout.addView(button);
             }
         }
-
 
         public void setView(View view) {
             LinearLayout l = (LinearLayout) mAlertDialogWindow.findViewById(R.id.contentView);
@@ -482,7 +425,6 @@ public class MaterialDialog {
             }
         }
 
-
         public void setContentView(View contentView) {
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -507,13 +449,6 @@ public class MaterialDialog {
             }
         }
 
-
-        /**
-         * Set a custom view resource to be the contents of the dialog. The
-         * resource will be inflated into a ScrollView.
-         *
-         * @param layoutResId resource ID to be inflated
-         */
         public void setContentView(int layoutResId) {
             mMessageContentRoot.removeAllViews();
             // Not setting this to the other content view because user has defined their own
@@ -522,13 +457,11 @@ public class MaterialDialog {
                     .inflate(layoutResId, mMessageContentRoot);
         }
 
-
         public void setBackground(Drawable drawable) {
             LinearLayout linearLayout = (LinearLayout) mAlertDialogWindow.findViewById(
                     R.id.material_background);
             linearLayout.setBackground(drawable);
         }
-
 
         public void setBackgroundResource(int resId) {
             LinearLayout linearLayout = (LinearLayout) mAlertDialogWindow.findViewById(
@@ -536,18 +469,15 @@ public class MaterialDialog {
             linearLayout.setBackgroundResource(resId);
         }
 
-
         public void setCanceledOnTouchOutside(boolean canceledOnTouchOutside) {
             mAlertDialog.setCanceledOnTouchOutside(canceledOnTouchOutside);
             mAlertDialog.setCancelable(canceledOnTouchOutside);
         }
     }
 
-
     private boolean isNullOrEmpty(String nText) {
         return nText == null || nText.isEmpty();
     }
-
 
     private void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
@@ -568,4 +498,3 @@ public class MaterialDialog {
         listView.setLayoutParams(params);
     }
 }
-
