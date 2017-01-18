@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView findText;
     //체크박스
     @Bind(R.id.auto_login_check)
-    CheckBox _auto_login_check;
+    CheckBox autoLoginCheck;
     //id,password 저장
     SharedPreferences autoSetting;
     SharedPreferences.Editor editor;
@@ -77,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
         autoLoginSettings();
     }
 
-
     //자동 로그인(id,password 저장 )
     public void autoLoginSettings() {
         autoSetting = getSharedPreferences("autoSetting", 0);
@@ -86,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
         if (autoSetting.getBoolean("Auto_Login_enabled", false)) {
             idText.setText(autoSetting.getString("ID", ""));
             passwordText.setText(autoSetting.getString("PW", ""));
-            _auto_login_check.setChecked(true);
+            autoLoginCheck.setChecked(true);
 
             //userId, userPassword 서버에 조회 요청
             String userId = idText.getText().toString();
@@ -95,28 +93,6 @@ public class LoginActivity extends AppCompatActivity {
 
             onResult();
         }
-        _auto_login_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    //Check 되면 ID,PW Shared Preference에 저장
-                    String ID = idText.getText().toString();
-                    String PW = passwordText.getText().toString();
-
-                    editor.putString("ID", ID);
-                    editor.putString("PW", PW);
-                    editor.putBoolean("Auto_Login_enabled", true);
-                    editor.commit();
-
-                    autoSetting = getSharedPreferences("autoSetting", 0);
-                    String test = autoSetting.getString("ID", "");
-                    System.out.println("onCheckedChanged 자동 : " + test);
-                } else {
-                    editor.clear();
-                    editor.commit();
-                }
-            }
-        });
     }
 
     // 로그인 버튼 클릭
@@ -147,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-
     //서버에 ID,PASSWORD 조회후 onLoginSuccess or onLoginFailed를 호출
     public void onResult() {
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
@@ -155,7 +130,6 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Logging in to your account...");
         progressDialog.show();
-
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -178,10 +152,20 @@ public class LoginActivity extends AppCompatActivity {
         USER_PASSWORD = passwordText.getText().toString();
         autoSetting = getSharedPreferences("autoSetting", 0);
 
-        //자동 로그인일 경우 ID Static하게 쓰기
-        if (autoSetting.getString("ID", "") != "") {
+        //자동로그인 Check하면 ID,PASSWORD 저장
+        if (autoLoginCheck.isChecked()) {
+            //Check 되면 ID,PW Shared Preference에 저장
+            String ID = idText.getText().toString();
+            String PW = passwordText.getText().toString();
+
+            editor.putString("ID", ID);
+            editor.putString("PW", PW);
+            editor.putBoolean("Auto_Login_enabled", true);
+            editor.commit();
+
             AUTO_USER_ID = autoSetting.getString("ID", "");
         }
+
         String registrationId = FirebaseInstanceId.getInstance().getToken();
         userPresenter.insertRegistrationId(new RegistrationIdVO(USER_ID, registrationId));
 
