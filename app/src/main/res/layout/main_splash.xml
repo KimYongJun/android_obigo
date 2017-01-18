@@ -7,10 +7,10 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:weightSum="1">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="center"
+              android:weightSum="1">
 
     <ImageView
         android:id="@+id/imageView1"
@@ -19,6 +19,6 @@
         android:layout_weight="1"
         android:gravity="center"
         android:scaleType="center"
-        android:src="@drawable/obigo_logo_main" />
+        android:src="@drawable/obigo_logo_main"/>
 
 </LinearLayout>

@@ -20,7 +20,8 @@
             android:title="Password Modify">
             <intent
                 android:targetClass="com.obigo.obigoproject.PasswordModifyActivity"
-                android:targetPackage="com.obigo.obigoproject"/>
+                android:targetPackage="com.obigo.obigoproject"
+                />
         </Preference>
 
     </PreferenceCategory>

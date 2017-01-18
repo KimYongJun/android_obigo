@@ -5,7 +5,6 @@
     김용준, 최현욱
     request page @+id naming 변경
     model_code, model_color, location, vin
-
 -->
 
 <LinearLayout
@@ -26,18 +25,17 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_gravity="center_vertical"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp"
             android:text="Model Name"/>
 
         <Spinner
-            android:layout_gravity="center_vertical"
             android:id="@+id/model_name"
             android:layout_width="200dp"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
         </Spinner>
     </LinearLayout>
 
@@ -48,19 +46,18 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_gravity="center_vertical"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp"
             android:text="Model Color"/>
 
         <Spinner
-            android:layout_gravity="center_vertical"
             android:id="@+id/model_color"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:entries="@array/color">
-
         </Spinner>
     </LinearLayout>
 
@@ -71,19 +68,18 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_gravity="center_vertical"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp"
             android:text="Location"/>
 
         <Spinner
-            android:layout_gravity="center_vertical"
             android:id="@+id/location"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:entries="@array/location">
-
         </Spinner>
     </LinearLayout>
 
@@ -94,21 +90,20 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_gravity="center_vertical"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="30dp"
             android:text="VIN"/>
 
         <EditText
-            android:layout_gravity="center_vertical"
             android:id="@+id/vin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:maxLength="10"/>
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -131,6 +126,5 @@
             android:text="Send"
             />
     </LinearLayout>
-
 
 </LinearLayout>

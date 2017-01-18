@@ -54,7 +54,6 @@ public class AutoInstaller extends Handler {
         return mAutoInstaller;
     }
 
-
     public interface OnStateChangedListener {
         void onStart();
 
@@ -175,7 +174,6 @@ public class AutoInstaller extends Handler {
         install(file.getAbsolutePath());
     }
 
-
     public void installFromUrl(final String httpUrl) {
         new Thread(new Runnable() {
             @Override
@@ -259,7 +257,5 @@ public class AutoInstaller extends Handler {
             autoInstaller.mTempPath = directory;
             return autoInstaller;
         }
-
     }
-
 }

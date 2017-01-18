@@ -46,14 +46,12 @@
             android:hint="PASSWORD"
             android:inputType="textPassword"/>
 
-
         <CheckBox
             android:id="@+id/auto_login_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="Auto Login"/>
-
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
@@ -63,11 +61,12 @@
             android:layout_marginTop="24dp"
             android:padding="12dp"
             android:text="Login"/>
+
         <TextView
             android:id="@+id/find_text"
-            android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="forget ID/PASSWORD"/>
 
         <TextView

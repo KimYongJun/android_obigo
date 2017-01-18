@@ -62,7 +62,7 @@
         <activity
             android:name=".activity.RequestActivity"
             android:noHistory="true" />
-        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.SettingsActivity"/>
         <activity
             android:name=".PasswordModifyActivity"
             android:noHistory="true"/>

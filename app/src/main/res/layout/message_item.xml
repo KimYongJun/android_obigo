@@ -10,7 +10,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/list_bg" >
+                android:background="@drawable/list_bg">
 
     <ImageView
         android:id="@+id/message_image"
@@ -19,7 +19,7 @@
         android:layout_centerVertical="true"
         android:layout_margin="5dp"
         android:background="#444"
-        android:padding="3dp" />
+        android:padding="3dp"/>
 
     <TextView
         android:id="@+id/message_title"
@@ -28,12 +28,12 @@
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/message_date"
         android:layout_toRightOf="@+id/message_image"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:maxLines="1"
         android:text="[titleasdasdsadsadasdasdasdasdasdasa]"
         android:textColor="@android:color/black"
         android:textSize="15dip"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/message_content"
@@ -46,28 +46,28 @@
         android:maxLines="3"
         android:text="desc"
         android:textColor="@android:color/black"
-        android:textSize="13dip" />
+        android:textSize="13dip"/>
 
     <ProgressBar
         android:id="@+id/message_bar"
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="31dp"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/message_image"
         android:layout_alignEnd="@+id/message_image"
-        android:layout_marginEnd="31dp" />
+        android:layout_alignRight="@+id/message_image"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="31dp"
+        android:layout_marginRight="31dp"/>
 
     <TextView
         android:id="@+id/message_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/message_image"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:text="date"
         android:textColor="@android:color/black"
-        android:textSize="8dp"
-        android:layout_alignBottom="@+id/message_image"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:textSize="8dp"/>
 
 </RelativeLayout>

@@ -23,7 +23,8 @@ import static com.obigo.obigoproject.util.ConstantsUtil.USER_PASSWORD;
 /**
  * Created by O BI HE ROCK on 2017-01-18
  * 김용준, 최현욱
- * 비밀번호 변경
+ * 비밀번호 변경 - 현재 비밀번호, 새로운 비밀번호를 보냄
+ * API : /api/passwordmodify
  */
 
 public class PasswordModifyActivity extends AppCompatActivity {
@@ -38,7 +39,6 @@ public class PasswordModifyActivity extends AppCompatActivity {
     Button btnOK;
     //비밀번호 변경 결과
     String passwordModifyResultFlag;
-
     UserPresenter userPresenter;
 
     @Override
@@ -54,27 +54,37 @@ public class PasswordModifyActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_ok)
-    public void modifyPassword(){
-
-        String passowrd = modifyPassword.getText().toString();
-        String newPassword= modifyNewPassword.getText().toString();
-        String pattern = "^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$";
-
-        if (passowrd != USER_PASSWORD){
-            Toast.makeText(getBaseContext(),"현재 비밀번호와 일치하지 않습니다.", Toast.LENGTH_LONG).show();
-        }else if(newPassword.matches(pattern) == false){
-            Toast.makeText(getBaseContext(),"비밀번호는 영문,숫자를 혼합하여"+"\r\n"
-                    +"6~20자 이내이어야 합니다.", Toast.LENGTH_LONG).show();
-        }else{
-            //비밀번호 변경 요청
-            userPresenter.passwordModify(USER_ID,passowrd,newPassword);
-            onResult();
+    public void modifyPassword() {
+        if (!validate()) {
+            return;
         }
+        String passowrd = modifyPassword.getText().toString();
+        String newPassword = modifyNewPassword.getText().toString();
 
-
+        userPresenter.passwordModify(USER_ID, passowrd, newPassword);
+        onResult();
     }
 
-    public void onResult(){
+    //정규식 체크
+    public boolean validate() {
+        String passowrd = modifyPassword.getText().toString();
+        String newPassword = modifyNewPassword.getText().toString();
+        String pattern = "^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$";
+
+        if (passowrd.isEmpty() || !passowrd.equals(USER_PASSWORD)) {
+            modifyPassword.setError("현재 비밀번호와 일치하지 않습니다.");
+            return false;
+        }
+
+        if (newPassword.isEmpty() || !newPassword.matches(pattern)) {
+            modifyNewPassword.setError("비밀번호는 영문,숫자를 혼합하여" + "\r\n"
+                    + "6~20자 이내이어야 합니다.");
+            return false;
+        }
+        return true;
+    }
+
+    public void onResult() {
         final ProgressDialog progressDialog = new ProgressDialog(PasswordModifyActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
@@ -93,9 +103,6 @@ public class PasswordModifyActivity extends AppCompatActivity {
                     }
                 }, 3000);
     }
-
-
-
 
     // Page에 Bar등록
     private void setupActionBar() {
@@ -116,7 +123,7 @@ public class PasswordModifyActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void dispatchPassword(String passwordModifyResultFlag){
-        this.passwordModifyResultFlag =passwordModifyResultFlag;
+    public void dispatchPassword(String passwordModifyResultFlag) {
+        this.passwordModifyResultFlag = passwordModifyResultFlag;
     }
 }
