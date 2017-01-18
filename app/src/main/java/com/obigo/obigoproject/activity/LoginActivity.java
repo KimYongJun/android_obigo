@@ -24,6 +24,7 @@ import butterknife.OnTouch;
 
 import static com.obigo.obigoproject.util.ConstantsUtil.AUTO_USER_ID;
 import static com.obigo.obigoproject.util.ConstantsUtil.USER_ID;
+import static com.obigo.obigoproject.util.ConstantsUtil.USER_PASSWORD;
 
 /**
  * Created by O BI HE ROCK on 2016-11-28
@@ -174,6 +175,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         //로그인 성공시 ID EditText에 입력한 값을 Static하게 쓰기
         USER_ID = idText.getText().toString();
+        USER_PASSWORD = passwordText.getText().toString();
         autoSetting = getSharedPreferences("autoSetting", 0);
 
         //자동 로그인일 경우 ID Static하게 쓰기

@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -32,6 +33,10 @@ public interface UserService {
     //유저정보 호출
     @GET("user/{userid}")
     Call<UserVO> getUser(@Path("userid") String userId);
+
+    //비밀번호 변경
+    @PUT("passwordmodify/")
+    Call<String> passwordModify(@Query("userid") String userId, @Query("password") String password, @Query("newpassword") String newPassword);
 
     //로그아웃 버튼 누르면 registrationId (서버에 삭제 요청)
     //DELETE 는 @Body를 쓸수 없기에 무조건 @Query를 이용

@@ -3,6 +3,7 @@ package com.obigo.obigoproject.presenter;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.obigo.obigoproject.PasswordModifyActivity;
 import com.obigo.obigoproject.activity.FindActivity;
 import com.obigo.obigoproject.activity.LoginActivity;
 import com.obigo.obigoproject.activity.MenuActivity;
@@ -27,6 +28,7 @@ public class UserPresenter {
     private FindActivity findActivity;
     private MenuActivity menuActivity;
     private UserInfoButtonPreference userInfoButtonPreference;
+    private PasswordModifyActivity passwordModifyActivity;
     //유저 정보
     private String userId;
     private UserVO userVO;
@@ -34,6 +36,8 @@ public class UserPresenter {
     private String loginResultFlag;
     //이메일 조회 결과(ID,PASSWORD 찾기)
     private String emailResultFlag;
+    //비밀번호 수정 성공 실패 결과
+    private String passwordModifyResultFlag;
 
     // 로그인 생성자
     public UserPresenter(LoginActivity loginActivity) {
@@ -47,13 +51,20 @@ public class UserPresenter {
         this.userService = ServiceManager.getInstance().getUserService();
     }
 
+    //User Info 버튼
     public UserPresenter(UserInfoButtonPreference userInfoButtonPreference, String userId) {
         this.userInfoButtonPreference = userInfoButtonPreference;
         this.userId = userId;
         this.userService = ServiceManager.getInstance().getUserService();
     }
 
+    //비밀번호 수정
+    public UserPresenter( PasswordModifyActivity passwordModifyActivity){
+        this.passwordModifyActivity = passwordModifyActivity;
+        this.userService = ServiceManager.getInstance().getUserService();
+    }
 
+    //로그아웃 버튼
     public UserPresenter(MenuActivity menuActivity, String userId) {
         this.userId = userId;
         this.userService = ServiceManager.getInstance().getUserService();
@@ -102,6 +113,28 @@ public class UserPresenter {
                 Log.i("error : ", t.getMessage().toString());
             }
         });
+    }
+
+    public void passwordModify(String id, String password,String newPassword){
+        Call<String> call = userService.passwordModify(id, password, newPassword);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    passwordModifyResultFlag = response.body();
+                    passwordModifyActivity.dispatchPassword(passwordModifyResultFlag);
+                    Log.i("success : ", passwordModifyResultFlag);
+                } else {
+                    Log.i("error : ", response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.i("error : ", t.getMessage().toString());
+            }
+        });
+
     }
 
 

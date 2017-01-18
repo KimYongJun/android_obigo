@@ -144,7 +144,9 @@ public class MenuActivity extends AppCompatActivity implements
         // 색상 조절
         int[][] colors = settingMenuColor(number);
 
-        ButtonType buttonType = ButtonType.CIRCLE; //버튼 모양 동그라미
+        //Button 모양
+        //Version 변경시 Type 바꿔주기
+        ButtonType buttonType = ButtonType.HAM;
 
         // 우측 하단 버튼 적용
         new BoomMenuButton.Builder()
@@ -170,15 +172,17 @@ public class MenuActivity extends AppCompatActivity implements
                 .init(boomMenuButtonInActionBar);
     }
 
-    // 최현욱일 - 버전에 따른 이미지 변경
+
     // 버튼 BoomType 조정
+    //Version 변경시 Type 바꿔주기
     private BoomType getBoomType() {
         return BoomType.PARABOLA;
     }
 
     // 버튼 모양 조정
+    //Version 변경시 Type 바꿔주기
     private PlaceType getPlaceType() {
-        return PlaceType.CIRCLE_4_1;
+        return PlaceType.HAM_4_1;
     }
 
     // 메뉴 색 지정 메소드

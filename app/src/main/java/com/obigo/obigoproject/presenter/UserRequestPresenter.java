@@ -48,8 +48,8 @@ public class UserRequestPresenter {
     }
 
     //차량리스트 정보 요청
-    public void getVehicleList() {
-        Call<List<VehicleVO>> call = userRequestService.getVehicleList();
+    public void getVehicleList(String userId) {
+        Call<List<VehicleVO>> call = userRequestService.getVehicleList(userId);
         call.enqueue(new Callback<List<VehicleVO>>() {
             @Override
             public void onResponse(Call<List<VehicleVO>> call, Response<List<VehicleVO>> response) {

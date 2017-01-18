@@ -73,7 +73,7 @@ public class RequestActivity extends MenuActivity {
 
     // Spiner view (모델 이름 리스트)
     public void initModelCode() {
-        userRequestPresenter.getVehicleList();
+        userRequestPresenter.getVehicleList(USER_ID);
 
         modelName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
