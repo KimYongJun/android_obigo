@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -64,6 +65,8 @@ public class MessageDetailActivity extends AppCompatActivity {
         _message_detail_title.setText(messageVO.getTitle());
         _message_detail_content.setText(messageVO.getContent());
         _message_detail_date.setText(messageVO.getSendDate());
+        //메시지 내용중 URL을 하이퍼링크 처리
+        _message_detail_content.setMovementMethod(LinkMovementMethod.getInstance());
 
         if (messageVO.getUploadFile().equals("")) {
             Glide.with(this).load(R.drawable.logo).into(_message_detail_image);
