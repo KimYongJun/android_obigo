@@ -44,7 +44,9 @@
             android:id="@+id/message_detail_content"
             android:layout_width="330dp"
             android:layout_height="400dp"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:linksClickable="true"
+            android:autoLink="all"/>
     </ScrollView>
 
     <TextView
