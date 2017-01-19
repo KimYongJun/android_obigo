@@ -215,7 +215,7 @@ public class MenuActivity extends AppCompatActivity implements
         switch (buttonIndex) {
             case 0:
                 intent = new Intent(this, CarListActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
             case 1:
