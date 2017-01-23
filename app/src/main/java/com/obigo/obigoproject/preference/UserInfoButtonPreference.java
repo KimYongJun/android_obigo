@@ -68,11 +68,11 @@ public class UserInfoButtonPreference extends android.preference.Preference {
         final MaterialDialog materialDialog = new MaterialDialog(this.mContext);
         materialDialog.setMessage(
                 "\r\n" + "\r\n" +
-                        "User Name     :    " + userVO.getName() +
+                        "User Name" + "\r\n" +"\r\n" +"      "+ userVO.getName() +
                         "\r\n" + "\r\n" + "\r\n" +
-                        "Email            :    " + userVO.geteMail() +
+                        "Email" +"\r\n" +"\r\n" +"      "+ userVO.geteMail() +
                         "\r\n" + "\r\n" + "\r\n" +
-                        "Phone            :    " + userVO.getPhone() +
+                        "Phone" +"\r\n" +"\r\n" +"      "+ userVO.getPhone() +
                         "\r\n" + "\r\n"
 
         )
