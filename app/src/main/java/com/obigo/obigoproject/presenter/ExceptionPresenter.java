@@ -16,6 +16,7 @@ import retrofit2.Response;
 /**
  * Created by O BI HE ROCK on 2017-01-09
  * 김용준, 최현욱
+ * 자동차 이미지 예외처리
  */
 
 public class ExceptionPresenter {
