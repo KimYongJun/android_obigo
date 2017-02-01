@@ -224,38 +224,4 @@ public class AutoInstaller extends Handler {
         return file;
     }
 
-    public static class Builder {
-
-        private MODE mode = MODE.BOTH;
-        private Context context;
-        private OnStateChangedListener onStateChangedListener;
-        private String directory = Environment.getExternalStorageDirectory().getAbsolutePath();
-
-        public Builder(Context c) {
-            context = c;
-        }
-
-        public Builder setMode(MODE m) {
-            mode = m;
-            return this;
-        }
-
-        public Builder setOnStateChangedListener(OnStateChangedListener o) {
-            onStateChangedListener = o;
-            return this;
-        }
-
-        public Builder setCacheDirectory(String path) {
-            directory = path;
-            return this;
-        }
-
-        public AutoInstaller build() {
-            AutoInstaller autoInstaller = new AutoInstaller(context);
-            autoInstaller.mMode = mode;
-            autoInstaller.mOnStateChangedListener = onStateChangedListener;
-            autoInstaller.mTempPath = directory;
-            return autoInstaller;
-        }
-    }
 }
