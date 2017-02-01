@@ -58,8 +58,6 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     // 유저 요청
     private UserPresenter userPresenter;
-    // registrationId 등록 결과
-    private boolean registrationIdResult;
     //로그인 성공 실패 결과
     private String loginResultFlag;
 
@@ -69,7 +67,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         ButterKnife.bind(this);
 
-        registrationIdResult = false;
         loginResultFlag = "false";
         userPresenter = new UserPresenter(this);
 

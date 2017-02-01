@@ -2,7 +2,7 @@ package com.obigo.obigoproject.service;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 /**
  * Created by O BI HE ROCK on 2016-12-22
@@ -11,6 +11,6 @@ import retrofit2.http.Query;
 
 public interface BundleService {
     // Bundle Version Check
-    @GET("bundleversioncheck/")
-    Call<String> bundleVersionCheck(@Query("bundleVersion") String bundleVersion);
+    @GET("bundleversioncheck/{bundleVersion}")
+    Call<String> bundleVersionCheck(@Path("bundleVersion") String bundleVersion);
 }
