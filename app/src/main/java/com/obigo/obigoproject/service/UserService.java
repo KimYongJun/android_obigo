@@ -19,12 +19,12 @@ import retrofit2.http.Query;
 
 public interface UserService {
     // 로그인
-    @GET("login/")
-    Call<String> login(@Query("userid") String userId, @Query("password") String password);
+    @GET("login/{userid}/{password}")
+    Call<String> login(@Path("userid") String userId, @Path("password") String password);
 
     // ID,PSSWORD 찾기
-    @GET("find/")
-    Call<String> find(@Query("name") String name, @Query("email") String email);
+    @GET("find/{name}/{email}")
+    Call<String> find(@Path("name") String name, @Path("email") String email);
 
     // 특정 사용자 registrationId 저장 (서버에 저장 요청)
     @POST("registrationid/")

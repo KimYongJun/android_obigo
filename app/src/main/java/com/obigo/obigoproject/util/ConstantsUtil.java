@@ -10,10 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 
 public class ConstantsUtil extends AppCompatActivity {
     // 서버 경로
-    public static String SERVER_API_URL = //"http://192.168.1.14/obigoProject/api/";//유현
+    public static String SERVER_API_URL = "http://192.168.1.14/obigoProject/api/"; //유현
                                          //   "http://192.168.1.7/obigoProject/api/";//경우형
                                          //   "http://192.168.1.2/obigoProject/api/";//성현
-                                        "http://52.78.201.143:8080/obigoProject/api/";
+                                         // "http://52.78.201.143:8080/obigoProject/api/";
 
     // APK File 경로
     public static final String APK_URL = SERVER_API_URL + "bundledown";
