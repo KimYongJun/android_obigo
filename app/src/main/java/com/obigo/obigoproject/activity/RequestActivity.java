@@ -136,6 +136,7 @@ public class RequestActivity extends MenuActivity {
             resultFlag = "Try Again";
         } else {
             resultFlag = "Success Request";
+            resetData();
         }
         Toast.makeText(getApplicationContext(), resultFlag, Toast.LENGTH_SHORT).show();
     }
