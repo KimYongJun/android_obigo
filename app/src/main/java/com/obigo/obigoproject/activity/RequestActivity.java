@@ -14,6 +14,7 @@ import com.obigo.obigoproject.presenter.UserRequestPresenter;
 import com.obigo.obigoproject.vo.UserRequestVO;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -106,6 +107,8 @@ public class RequestActivity extends MenuActivity {
         }
         if (vin.length() != 10) {
             Toast.makeText(getApplicationContext(), "VIN 번호는 10자리를 입력해 주세요", Toast.LENGTH_SHORT).show();
+        } else if (!Pattern.matches("^[0-9]*$", vin.getText())) {
+            Toast.makeText(getApplicationContext(), "VIN 번호는 숫자만 입력가능합니다.", Toast.LENGTH_SHORT).show();
         } else {
             userRequestPresenter.insertUserRequest(new UserRequestVO(USER_ID, modelCodeList.get(modelHoldNumber), modelColor.getSelectedItem().toString(),
                     location.getSelectedItem().toString(), vin.getText().toString()));
