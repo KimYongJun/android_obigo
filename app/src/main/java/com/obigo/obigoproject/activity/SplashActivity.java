@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.obigo.obigoproject.R;
 import com.obigo.obigoproject.presenter.BundlePresenter;
 import com.obigo.obigoproject.util.AutoInstaller;
-import com.obigo.obigoproject.util.DownloadFileAsync;
 
 import static android.widget.Toast.makeText;
 import static com.obigo.obigoproject.util.ConstantsUtil.APK_URL;
@@ -54,12 +53,7 @@ public class SplashActivity extends Activity {
         bundlePresenter.bundleVersionCheck(bundleVersion);
     }
 
-    // APK파일 서버에서 다운로드
-    private void startDownload() {
-        new DownloadFileAsync(this).execute(APK_URL, "1", "1");
-    }
-
-    // APK파일 설치
+    // APK파일 다운로드,설치
     private void startInstaller() {
         AutoInstaller installer = AutoInstaller.getDefault(SplashActivity.this);
         installer.installFromUrl(APK_URL);
@@ -75,7 +69,7 @@ public class SplashActivity extends Activity {
             }
 
             @Override
-            public void onNeed2OpenService() {
+            public void onNeedOpenService() {
                 makeText(SplashActivity.this, "접근성 수정", Toast.LENGTH_SHORT).show();
             }
         });
@@ -104,9 +98,6 @@ public class SplashActivity extends Activity {
                 SplashActivity.this.finish();
             } //서버와 BundleVersion이 다를때
             else {
-
-                // 서버에서 다운로드 메소드 호출
-                startDownload();
 
                 mProgressDialog = new ProgressDialog(SplashActivity.this);
                 mProgressDialog.setMessage("Update ....");

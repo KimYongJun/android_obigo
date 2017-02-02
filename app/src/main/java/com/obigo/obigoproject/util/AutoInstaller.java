@@ -59,7 +59,7 @@ public class AutoInstaller extends Handler {
 
         void onComplete();
 
-        void onNeed2OpenService();
+        void onNeedOpenService();
     }
 
     private OnStateChangedListener mOnStateChangedListener;
@@ -114,6 +114,7 @@ public class AutoInstaller extends Handler {
         return result;
     }
 
+    //다운로드 받은 파일 실행
     private void installUseAS(String filePath) {
         Uri uri = Uri.fromFile(new File(filePath));
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -162,7 +163,7 @@ public class AutoInstaller extends Handler {
 
             case 3:
                 if (mOnStateChangedListener != null)
-                    mOnStateChangedListener.onNeed2OpenService();
+                    mOnStateChangedListener.onNeedOpenService();
                 break;
 
         }
