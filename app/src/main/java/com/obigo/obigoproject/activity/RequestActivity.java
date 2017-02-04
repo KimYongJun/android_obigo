@@ -99,17 +99,32 @@ public class RequestActivity extends MenuActivity {
         vin.setText("");
     }
 
-    //UserRequest 요청 버튼
-    @OnClick(R.id.sendBtn)
-    public void requestUserCar() {
+    //정규식 체크
+    public boolean validate(){
+
         if ((modelColor.getSelectedItem().toString().equals("Select")) || (location.getSelectedItem().toString().equals("Select"))) {
-            Toast.makeText(getApplicationContext(), "정확히 입력해 주세요", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "정보를 선택해주세요", Toast.LENGTH_SHORT).show();
+            return false;
         }
         if (vin.length() != 10) {
             Toast.makeText(getApplicationContext(), "VIN 번호는 10자리를 입력해 주세요", Toast.LENGTH_SHORT).show();
-        } else if (!Pattern.matches("^[0-9]*$", vin.getText())) {
+            return  false;
+        }if (!Pattern.matches("^[0-9]*$", vin.getText())) {
             Toast.makeText(getApplicationContext(), "VIN 번호는 숫자만 입력가능합니다.", Toast.LENGTH_SHORT).show();
-        } else {
+            return  false;
+        }
+
+        return true;
+    }
+
+    //UserRequest 요청 버튼
+    @OnClick(R.id.sendBtn)
+    public void requestUserCar() {
+
+        if (!validate()) {
+            return;
+        }
+
             userRequestPresenter.insertUserRequest(new UserRequestVO(USER_ID, modelCodeList.get(modelHoldNumber), modelColor.getSelectedItem().toString(),
                     location.getSelectedItem().toString(), vin.getText().toString()));
 
@@ -128,7 +143,7 @@ public class RequestActivity extends MenuActivity {
                             progressDialog.dismiss();
                         }
                     }, 3000);
-        }
+
     }
 
     public void requestResult() {
