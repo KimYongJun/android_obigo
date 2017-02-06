@@ -11,6 +11,6 @@ import retrofit2.http.Path;
 
 public interface BundleService {
     // Bundle Version Check
-    @GET("bundleversioncheck/{bundleVersion}")
+    @GET("bundle/check/{bundleVersion}")
     Call<String> bundleVersionCheck(@Path("bundleVersion") String bundleVersion);
 }

@@ -19,11 +19,11 @@ import retrofit2.http.Query;
 
 public interface UserService {
     // 로그인
-    @GET("login/{userid}/{password}")
+    @GET("user/login/{userid}/{password}")
     Call<String> login(@Path("userid") String userId, @Path("password") String password);
 
     // ID,PSSWORD 찾기
-    @GET("find/{name}/{email}")
+    @GET("user/find/{name}/{email}")
     Call<String> find(@Path("name") String name, @Path("email") String email);
 
     // 특정 사용자 registrationId 저장 (서버에 저장 요청)
@@ -35,11 +35,11 @@ public interface UserService {
     Call<UserVO> getUser(@Path("userid") String userId);
 
     //비밀번호 변경
-    @PUT("passwordmodify/")
+    @PUT("user/password/")
     Call<String> passwordModify(@Query("userid") String userId, @Query("password") String password, @Query("newpassword") String newPassword);
 
     //로그아웃 버튼 누르면 registrationId (서버에 삭제 요청)
     //DELETE 는 @Body를 쓸수 없기에 무조건 @Query를 이용
-    @DELETE("logout/")
+    @DELETE("registrationid/")
     Call<String> deleteRegistrationId(@Query("registrationId") String registrationId);
 }
