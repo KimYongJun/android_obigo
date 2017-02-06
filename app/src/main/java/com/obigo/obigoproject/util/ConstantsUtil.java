@@ -16,7 +16,7 @@ public class ConstantsUtil extends AppCompatActivity {
                                             "http://52.78.201.143:8080/obigoProject/api/";
 
     // APK File 경로
-    public static final String APK_URL = SERVER_API_URL + "bundledown";
+    public static final String APK_URL = SERVER_API_URL + "bundle/down";
 
     // Vehicle Image File 경로
     public static String SERVER_VEHICLE_IMAGE_URL = "image/vehicle/";
